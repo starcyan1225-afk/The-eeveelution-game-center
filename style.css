@@ -20,7 +20,7 @@ body {
     width: 20px;
     height: 20px;
     pointer-events: none;
-    z-index: 1;
+    z-index: 9998;
     opacity: 0.8;
     
     /* Create petal shape using SVG background */
