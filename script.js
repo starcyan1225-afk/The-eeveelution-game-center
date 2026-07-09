@@ -26,7 +26,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 class FallingPetal {
     constructor() {
         this.x = Math.random() * window.innerWidth;
-        this.y = -50; // Start higher, above the top of screen
+        this.y = 0; // Start at the very top of screen
         this.element = document.createElement('div');
         this.element.className = 'falling-petal';
         this.element.style.left = this.x + 'px';
