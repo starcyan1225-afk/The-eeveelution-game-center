@@ -22,8 +22,65 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// ===== FALLING CHERRY BLOSSOM PETALS - Rain from the sky =====
+class FallingPetal {
+    constructor() {
+        this.x = Math.random() * window.innerWidth;
+        this.y = -20;
+        this.element = document.createElement('div');
+        this.element.className = 'falling-petal';
+        this.element.style.left = this.x + 'px';
+        this.element.style.top = this.y + 'px';
+        
+        // Random rotation and size
+        this.rotation = Math.random() * 360;
+        this.size = 0.7 + Math.random() * 0.6;
+        this.element.style.transform = `scale(${this.size})`;
+        
+        document.body.appendChild(this.element);
+        
+        this.life = 1;
+        this.vx = (Math.random() - 0.5) * 1.5; // Slow horizontal drift
+        this.vy = 0.5 + Math.random() * 1; // Slow fall speed
+        this.animate();
+    }
+    
+    animate() {
+        this.life -= 0.0008;
+        this.element.style.opacity = this.life;
+        
+        // Move the petal
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        // Gentle rotation
+        this.rotation += 2;
+        
+        this.element.style.left = this.x + 'px';
+        this.element.style.top = this.y + 'px';
+        this.element.style.transform = `scale(${this.size}) rotate(${this.rotation}deg)`;
+        
+        if (this.life > 0 && this.y < window.innerHeight) {
+            requestAnimationFrame(() => this.animate());
+        } else {
+            this.element.remove();
+        }
+    }
+}
+
+// Create falling petals periodically (one every 2-3 seconds)
+function startFallingPetals() {
+    setInterval(() => {
+        new FallingPetal();
+    }, 2000 + Math.random() * 1000);
+}
+
+// Start the falling petals when page loads
+window.addEventListener('load', startFallingPetals);
+if (document.readyState === 'complete') startFallingPetals();
+
 // ===== CHERRY BLOSSOM PETAL TRAIL - Follows your cursor and fades away =====
-class CherryBlossomPetal {
+class CursorBlossomPetal {
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -72,7 +129,7 @@ document.addEventListener('mousemove', (e) => {
     const now = Date.now();
     // Create a new petal every 30 milliseconds for a nice trail
     if (now - lastTime > 30) {
-        new CherryBlossomPetal(e.clientX, e.clientY);
+        new CursorBlossomPetal(e.clientX, e.clientY);
         lastTime = now;
     }
 });
@@ -141,3 +198,4 @@ contactButtons.forEach(button => {
 console.log('%c🌟 Welcome to my website! 🌟', 'font-size: 20px; color: #c084d0; font-weight: bold;');
 console.log('%cI love Pokemon and coding! 🐾💻', 'font-size: 16px; color: #ffb3d9;');
 console.log('%cMove your cursor to see cherry blossom petals! 🌸', 'font-size: 14px; color: #c084d0;');
+console.log('%cWatch as petals fall from the sky! 🌸✨', 'font-size: 14px; color: #c084d0;');
