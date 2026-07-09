@@ -1,4 +1,4 @@
-/* ===== MAIN STYLES - Colors and fonts for the whole website ===== */
+/* ===== MAIN STYLES - Soft pastel colors for the whole website ===== */
 * {
     margin: 0;
     padding: 0;
@@ -7,54 +7,108 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #fce7f3 0%, #e0d4f7 100%);
     color: #333;
     line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ===== CHERRY BLOSSOM ANIMATION - Falling petals trail ===== */
+@keyframes fall {
+    0% {
+        top: -10px;
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        top: 100vh;
+        opacity: 0;
+        transform: translateX(100px) rotateZ(360deg);
+    }
+}
+
+@keyframes sway {
+    0%, 100% {
+        transform: translateX(0px) rotateZ(0deg);
+    }
+    50% {
+        transform: translateX(30px) rotateZ(180deg);
+    }
+}
+
+/* Create falling cherry blossoms */
+.cherry-blossom {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #ffb3d9 0%, #ff99cc 100%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.7;
+    box-shadow: 0 0 10px rgba(255, 179, 217, 0.5);
+}
+
+.cherry-blossom::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: inherit;
+    filter: blur(1px);
 }
 
 /* ===== HERO SECTION - Big welcome banner at the top ===== */
 .hero {
-    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
-    color: white;
+    background: linear-gradient(135deg, #ffd1e8 0%, #c5b9e8 100%);
+    color: #5a4a7a;
     padding: 60px 20px;
     text-align: center;
-    border-bottom: 5px solid #c0392b;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-bottom: 5px solid #ffb3d9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
 }
 
 .hero h1 {
     font-size: 3em;
     margin-bottom: 15px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
     font-weight: bold;
 }
 
 .intro-text {
     font-size: 1.3em;
     margin-bottom: 10px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 .tagline {
     font-size: 1.1em;
     font-weight: bold;
-    color: #ffd89b;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    color: #8b6ba8;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 /* ===== GENERAL SECTION STYLES - Used for all main sections ===== */
 section {
-    background: white;
+    background: linear-gradient(135deg, #fff5f9 0%, #f0e6f6 100%);
     margin: 20px;
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    border-left: 5px solid #764ba2;
+    box-shadow: 0 5px 20px rgba(255, 179, 217, 0.15);
+    border-left: 5px solid #ffb3d9;
+    position: relative;
+    z-index: 2;
 }
 
 section h2 {
     font-size: 2.2em;
-    color: #764ba2;
+    color: #c084d0;
     margin-bottom: 30px;
     text-align: center;
     text-transform: uppercase;
@@ -71,7 +125,7 @@ section h2 {
 
 .about-content p {
     margin-bottom: 15px;
-    color: #555;
+    color: #6b5b7a;
 }
 
 /* ===== INTERESTS SECTION - Show what you love ===== */
@@ -83,17 +137,19 @@ section h2 {
 }
 
 .interest-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, #ffd1e8 0%, #ffdbf0 100%);
+    color: #6b5b7a;
     padding: 25px;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(255, 179, 217, 0.2);
     transition: transform 0.3s ease;
+    border: 2px solid #ffb3d9;
 }
 
 .interest-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(255, 179, 217, 0.3);
 }
 
 .interest-icon {
@@ -105,11 +161,13 @@ section h2 {
 .interest-card h3 {
     font-size: 1.3em;
     margin-bottom: 10px;
+    color: #c084d0;
 }
 
 .interest-card p {
     font-size: 0.95em;
     line-height: 1.5;
+    color: #8b6ba8;
 }
 
 /* ===== PROJECTS SECTION - Show what you've built ===== */
@@ -121,16 +179,18 @@ section h2 {
 }
 
 .project-card {
-    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
-    color: white;
+    background: linear-gradient(135deg, #fef0f5 0%, #e8dff0 100%);
+    color: #6b5b7a;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(197, 185, 232, 0.2);
     transition: transform 0.3s ease;
+    border: 2px solid #c5b9e8;
 }
 
 .project-card:hover {
     transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(197, 185, 232, 0.3);
 }
 
 .project-icon {
@@ -141,44 +201,48 @@ section h2 {
 .project-card h3 {
     font-size: 1.4em;
     margin-bottom: 10px;
+    color: #c084d0;
 }
 
 .project-card p {
     margin-bottom: 15px;
     font-size: 0.95em;
+    color: #8b6ba8;
 }
 
 .status {
-    background: rgba(255, 255, 255, 0.3);
+    background: linear-gradient(135deg, #ffc0e0 0%, #d5c5eb 100%);
     padding: 5px 15px;
     border-radius: 20px;
     font-size: 0.9em;
     font-weight: bold;
+    color: #6b5b7a;
 }
 
 /* ===== LEARNING JOURNAL SECTION - Track your progress ===== */
 .journal-entry {
-    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    background: linear-gradient(135deg, #fff0f7 0%, #f0e6f6 100%);
     padding: 25px;
     margin-bottom: 20px;
     border-radius: 10px;
-    border-left: 5px solid #667eea;
+    border-left: 5px solid #ffb3d9;
+    box-shadow: 0 3px 10px rgba(255, 179, 217, 0.15);
 }
 
 .journal-entry h3 {
-    color: #333;
+    color: #c084d0;
     margin-bottom: 10px;
     font-size: 1.3em;
 }
 
 .journal-entry p {
-    color: #555;
+    color: #8b6ba8;
     line-height: 1.7;
     margin-bottom: 10px;
 }
 
 .date {
-    color: #666;
+    color: #a89bc4;
     font-size: 0.9em;
     font-style: italic;
 }
@@ -193,7 +257,7 @@ section h2 {
 .contact-content p {
     font-size: 1.1em;
     margin-bottom: 15px;
-    color: #555;
+    color: #6b5b7a;
 }
 
 .contact-links {
@@ -204,8 +268,8 @@ section h2 {
 }
 
 .contact-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, #ffd1e8 0%, #c5b9e8 100%);
+    color: #6b5b7a;
     padding: 15px 30px;
     border-radius: 8px;
     text-decoration: none;
@@ -213,31 +277,34 @@ section h2 {
     font-weight: bold;
     transition: transform 0.3s ease;
     display: inline-block;
+    border: 2px solid #ffb3d9;
 }
 
 .contact-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(255, 179, 217, 0.3);
 }
 
 .safety-note {
-    background: #fff3cd;
+    background: linear-gradient(135deg, #fffacd 0%, #fff8dc 100%);
     padding: 15px;
     border-radius: 8px;
     margin-top: 20px;
-    border-left: 5px solid #ffc107;
-    color: #856404;
+    border-left: 5px solid #ffd700;
+    color: #8b7700;
 }
 
 /* ===== FOOTER - Bottom of the page ===== */
 footer {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, #ffd1e8 0%, #c5b9e8 100%);
+    color: #6b5b7a;
     text-align: center;
     padding: 25px;
     margin-top: 30px;
     font-size: 1.1em;
-    border-top: 5px solid #c0392b;
+    border-top: 5px solid #ffb3d9;
+    position: relative;
+    z-index: 2;
 }
 
 /* ===== MOBILE RESPONSIVE - Makes website work on phones ===== */
