@@ -14,6 +14,23 @@ body {
     overflow-x: hidden;
 }
 
+/* ===== FALLING CHERRY BLOSSOM PETALS - Petals falling from sky ===== */
+.falling-petal {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.8;
+    
+    /* Create petal shape using SVG background */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,10 Q30,30 25,50 Q30,70 50,85 Q70,70 75,50 Q70,30 50,10 Z" fill="%23ffb3d9" stroke="%23ff99cc" stroke-width="1"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: drop-shadow(0 0 4px rgba(255, 179, 217, 0.5));
+}
+
 /* ===== CHERRY BLOSSOM PETAL CURSOR TRAIL - Actual petal shapes ===== */
 .cursor-blossom-petal {
     position: fixed;
