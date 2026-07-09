@@ -14,17 +14,21 @@ body {
     overflow-x: hidden;
 }
 
-/* ===== CHERRY BLOSSOM CURSOR TRAIL - Pink petals that follow mouse ===== */
-.cursor-blossom {
+/* ===== CHERRY BLOSSOM PETAL CURSOR TRAIL - Actual petal shapes ===== */
+.cursor-blossom-petal {
     position: fixed;
-    width: 15px;
-    height: 15px;
-    background: radial-gradient(circle, #ffb3d9 0%, #ff99cc 100%);
-    border-radius: 50%;
+    width: 20px;
+    height: 20px;
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.8;
-    box-shadow: 0 0 8px rgba(255, 179, 217, 0.6);
+    opacity: 0.9;
+    
+    /* Create petal shape using SVG background */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,10 Q30,30 25,50 Q30,70 50,85 Q70,70 75,50 Q70,30 50,10 Z" fill="%23ffb3d9" stroke="%23ff99cc" stroke-width="1"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: drop-shadow(0 0 4px rgba(255, 179, 217, 0.5));
 }
 
 /* ===== HERO SECTION - Big welcome banner at the top ===== */
