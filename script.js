@@ -26,7 +26,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 class FallingPetal {
     constructor() {
         this.x = Math.random() * window.innerWidth;
-        this.y = -20;
+        this.y = -50; // Start higher, above the top of screen
         this.element = document.createElement('div');
         this.element.className = 'falling-petal';
         this.element.style.left = this.x + 'px';
@@ -68,11 +68,11 @@ class FallingPetal {
     }
 }
 
-// Create falling petals periodically (one every 2-3 seconds)
+// Create falling petals more frequently (one every 0.8-1.2 seconds)
 function startFallingPetals() {
     setInterval(() => {
         new FallingPetal();
-    }, 2000 + Math.random() * 1000);
+    }, 800 + Math.random() * 400);
 }
 
 // Start the falling petals when page loads
