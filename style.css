@@ -1,0 +1,294 @@
+/* ===== MAIN STYLES - Colors and fonts for the whole website ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ===== HERO SECTION - Big welcome banner at the top ===== */
+.hero {
+    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+    border-bottom: 5px solid #c0392b;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+}
+
+.intro-text {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.tagline {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #ffd89b;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== GENERAL SECTION STYLES - Used for all main sections ===== */
+section {
+    background: white;
+    margin: 20px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #764ba2;
+}
+
+section h2 {
+    font-size: 2.2em;
+    color: #764ba2;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* ===== ABOUT ME SECTION - Tell your story ===== */
+.about-content {
+    font-size: 1.1em;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.about-content p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* ===== INTERESTS SECTION - Show what you love ===== */
+.interests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.interest-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.interest-card:hover {
+    transform: translateY(-10px);
+}
+
+.interest-icon {
+    font-size: 3em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.interest-card h3 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
+.interest-card p {
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+/* ===== PROJECTS SECTION - Show what you've built ===== */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.project-card {
+    background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+}
+
+.project-icon {
+    font-size: 3.5em;
+    margin-bottom: 15px;
+}
+
+.project-card h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    margin-bottom: 15px;
+    font-size: 0.95em;
+}
+
+.status {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+/* ===== LEARNING JOURNAL SECTION - Track your progress ===== */
+.journal-entry {
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border-left: 5px solid #667eea;
+}
+
+.journal-entry h3 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.journal-entry p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+.date {
+    color: #666;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+/* ===== CONTACT SECTION - How to reach you safely ===== */
+.contact-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-content p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.contact-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.contact-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.safety-note {
+    background: #fff3cd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border-left: 5px solid #ffc107;
+    color: #856404;
+}
+
+/* ===== FOOTER - Bottom of the page ===== */
+footer {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 30px;
+    font-size: 1.1em;
+    border-top: 5px solid #c0392b;
+}
+
+/* ===== MOBILE RESPONSIVE - Makes website work on phones ===== */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2em;
+    }
+
+    .intro-text {
+        font-size: 1em;
+    }
+
+    section {
+        margin: 10px;
+        padding: 20px;
+    }
+
+    section h2 {
+        font-size: 1.8em;
+    }
+
+    .interests-grid,
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-links {
+        flex-direction: column;
+    }
+
+    .contact-btn {
+        width: 100%;
+    }
+}
+
+/* ===== MOBILE EXTRA SMALL - For very small phones ===== */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.5em;
+    }
+
+    .intro-text {
+        font-size: 0.9em;
+    }
+
+    section h2 {
+        font-size: 1.5em;
+    }
+
+    .interest-icon,
+    .project-icon {
+        font-size: 2.5em;
+    }
+}
