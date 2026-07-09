@@ -22,26 +22,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ===== CHERRY BLOSSOM TRAIL - Follows your cursor and fades away =====
-class CherryBlossom {
+// ===== CHERRY BLOSSOM PETAL TRAIL - Follows your cursor and fades away =====
+class CherryBlossomPetal {
     constructor(x, y) {
         this.x = x;
         this.y = y;
         this.element = document.createElement('div');
-        this.element.className = 'cursor-blossom';
+        this.element.className = 'cursor-blossom-petal';
         this.element.style.left = x + 'px';
         this.element.style.top = y + 'px';
+        
+        // Random rotation for variety
+        this.rotation = Math.random() * 360;
+        this.element.style.transform = `translate(-50%, -50%) rotate(${this.rotation}deg)`;
+        
         document.body.appendChild(this.element);
         
         this.life = 1; // 1 = fully visible, 0 = invisible
+        this.vx = (Math.random() - 0.5) * 2; // Random horizontal drift
+        this.vy = Math.random() * 2; // Downward movement
         this.animate();
     }
     
     animate() {
-        this.life -= 0.02;
+        this.life -= 0.015;
         this.element.style.opacity = this.life;
-        this.y -= 2; // Move up slowly
-        this.element.style.transform = `translate(-50%, -50%) translateY(-${(1 - this.life) * 50}px) rotate(${(1 - this.life) * 360}deg)`;
+        
+        // Move the petal
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        // Rotate as it falls
+        this.rotation += 5;
+        this.element.style.transform = `translate(calc(-50% + ${this.x - this.x}px), calc(-50% + ${this.y - this.y}px)) rotate(${this.rotation}deg)`;
+        this.element.style.left = this.x + 'px';
+        this.element.style.top = this.y + 'px';
         
         if (this.life > 0) {
             requestAnimationFrame(() => this.animate());
@@ -51,13 +66,13 @@ class CherryBlossom {
     }
 }
 
-// Track cursor position and create blossoms
+// Track cursor position and create petal blossoms
 let lastTime = 0;
 document.addEventListener('mousemove', (e) => {
     const now = Date.now();
-    // Create a new blossom every 30 milliseconds for a nice trail
+    // Create a new petal every 30 milliseconds for a nice trail
     if (now - lastTime > 30) {
-        new CherryBlossom(e.clientX, e.clientY);
+        new CherryBlossomPetal(e.clientX, e.clientY);
         lastTime = now;
     }
 });
@@ -125,4 +140,4 @@ contactButtons.forEach(button => {
 // ===== CONSOLE EASTER EGG - Fun message in developer console =====
 console.log('%c🌟 Welcome to my website! 🌟', 'font-size: 20px; color: #c084d0; font-weight: bold;');
 console.log('%cI love Pokemon and coding! 🐾💻', 'font-size: 16px; color: #ffb3d9;');
-console.log('%cMove your cursor to see cherry blossoms! 🌸', 'font-size: 14px; color: #c084d0;');
+console.log('%cMove your cursor to see cherry blossom petals! 🌸', 'font-size: 14px; color: #c084d0;');
