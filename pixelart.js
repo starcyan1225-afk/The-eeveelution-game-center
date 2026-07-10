@@ -275,8 +275,14 @@ function setupOtherListeners() {
     
     if (eeveelutionBtn) {
         eeveelutionBtn.addEventListener('click', () => {
-            document.getElementById('eeveelutionGallery').classList.add('active');
-            renderEeveelutionGallery();
+            console.log('Eeveelution button clicked');
+            const gallery = document.getElementById('eeveelutionGallery');
+            if (gallery) {
+                gallery.classList.add('active');
+                renderEeveelutionGallery();
+            } else {
+                console.error('Gallery not found');
+            }
         });
     }
     
@@ -331,265 +337,210 @@ function setupOtherListeners() {
 
 // ===== EEVEELUTION GALLERY =====
 function createEeveelutionPatterns() {
-    return {
-        'Eevee': {
-            width: 16,
-            height: 16,
-            data: [
-                'white','white','white','brown','brown','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','brown','brown','brown','brown','white','white','white','white','white','white','white','white','white','white',
-                'white','brown','brown','tan','tan','brown','brown','white','white','white','white','white','white','white','white','white',
-                'white','brown','tan','tan','tan','tan','brown','white','white','white','white','white','white','white','white','white',
-                'brown','brown','tan','black','black','tan','brown','brown','white','white','white','white','white','white','white','white',
-                'brown','tan','tan','black','black','tan','tan','brown','white','white','white','white','white','white','white','white',
-                'white','brown','tan','tan','tan','tan','brown','white','white','white','brown','brown','white','white','white','white',
-                'white','brown','brown','tan','tan','brown','brown','white','white','brown','brown','brown','brown','white','white','white',
-                'white','white','brown','brown','brown','brown','white','white','brown','brown','tan','tan','brown','brown','white','white',
-                'white','white','white','brown','brown','white','white','white','brown','tan','tan','tan','tan','brown','white','white',
-                'white','white','white','white','white','white','white','white','brown','tan','tan','tan','tan','brown','white','white',
-                'white','white','white','white','white','white','white','white','brown','brown','tan','tan','brown','brown','white','white',
-                'white','white','white','white','white','white','white','white','white','brown','brown','brown','brown','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','brown','brown','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white'
-            ],
-            colors: {
-                'white': 'rgb(255, 255, 255)',
-                'brown': 'rgb(165, 105, 65)',
-                'tan': 'rgb(220, 180, 130)',
-                'black': 'rgb(0, 0, 0)'
-            }
-        },
-        'Vaporeon': {
-            width: 16,
-            height: 16,
-            data: [
-                'white','white','white','cyan','cyan','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','cyan','cyan','cyan','cyan','white','white','white','white','white','white','white','white','white','white',
-                'white','cyan','cyan','lightblue','lightblue','cyan','cyan','white','white','white','white','white','white','white','white','white',
-                'white','cyan','lightblue','lightblue','lightblue','lightblue','cyan','white','white','white','white','white','white','white','white','white',
-                'cyan','cyan','lightblue','black','black','lightblue','cyan','cyan','white','white','white','white','white','white','white','white',
-                'cyan','lightblue','lightblue','black','black','lightblue','lightblue','cyan','white','white','white','white','white','white','white','white',
-                'white','cyan','lightblue','lightblue','lightblue','lightblue','cyan','white','white','white','cyan','cyan','white','white','white','white',
-                'white','cyan','cyan','lightblue','lightblue','cyan','cyan','white','white','cyan','cyan','cyan','cyan','white','white','white',
-                'white','white','cyan','cyan','cyan','cyan','white','white','cyan','cyan','lightblue','lightblue','cyan','cyan','white','white',
-                'white','white','white','cyan','cyan','white','white','white','cyan','lightblue','lightblue','lightblue','lightblue','cyan','white','white',
-                'white','white','white','white','white','white','white','white','cyan','lightblue','lightblue','lightblue','lightblue','cyan','white','white',
-                'white','white','white','white','white','white','white','white','cyan','cyan','lightblue','lightblue','cyan','cyan','white','white',
-                'white','white','white','white','white','white','white','white','white','cyan','cyan','cyan','cyan','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','cyan','cyan','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white'
-            ],
-            colors: {
-                'white': 'rgb(255, 255, 255)',
-                'cyan': 'rgb(100, 200, 220)',
-                'lightblue': 'rgb(150, 220, 240)',
-                'black': 'rgb(0, 0, 0)'
-            }
-        },
-        'Jolteon': {
-            width: 16,
-            height: 16,
-            data: [
-                'white','white','white','yellow','yellow','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','yellow','yellow','yellow','yellow','white','white','white','white','white','white','white','white','white','white',
-                'white','yellow','yellow','lightyellow','lightyellow','yellow','yellow','white','white','white','white','white','white','white','white','white',
-                'white','yellow','lightyellow','lightyellow','lightyellow','lightyellow','yellow','white','white','white','white','white','white','white','white','white',
-                'yellow','yellow','lightyellow','black','black','lightyellow','yellow','yellow','white','white','white','white','white','white','white','white',
-                'yellow','lightyellow','lightyellow','black','black','lightyellow','lightyellow','yellow','white','white','white','white','white','white','white','white',
-                'white','yellow','lightyellow','lightyellow','lightyellow','lightyellow','yellow','white','white','white','yellow','yellow','white','white','white','white',
-                'white','yellow','yellow','lightyellow','lightyellow','yellow','yellow','white','white','yellow','yellow','yellow','yellow','white','white','white',
-                'white','white','yellow','yellow','yellow','yellow','white','white','yellow','yellow','lightyellow','lightyellow','yellow','yellow','white','white',
-                'white','white','white','yellow','yellow','white','white','white','yellow','lightyellow','lightyellow','lightyellow','lightyellow','yellow','white','white',
-                'white','white','white','white','white','white','white','white','yellow','lightyellow','lightyellow','lightyellow','lightyellow','yellow','white','white',
-                'white','white','white','white','white','white','white','white','yellow','yellow','lightyellow','lightyellow','yellow','yellow','white','white',
-                'white','white','white','white','white','white','white','white','white','yellow','yellow','yellow','yellow','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','yellow','yellow','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white'
-            ],
-            colors: {
-                'white': 'rgb(255, 255, 255)',
-                'yellow': 'rgb(255, 220, 0)',
-                'lightyellow': 'rgb(255, 240, 100)',
-                'black': 'rgb(0, 0, 0)'
-            }
-        },
-        'Flareon': {
-            width: 16,
-            height: 16,
-            data: [
-                'white','white','white','orange','orange','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','orange','orange','orange','orange','white','white','white','white','white','white','white','white','white','white',
-                'white','orange','orange','lightorange','lightorange','orange','orange','white','white','white','white','white','white','white','white','white',
-                'white','orange','lightorange','lightorange','lightorange','lightorange','orange','white','white','white','white','white','white','white','white','white',
-                'orange','orange','lightorange','black','black','lightorange','orange','orange','white','white','white','white','white','white','white','white',
-                'orange','lightorange','lightorange','black','black','lightorange','lightorange','orange','white','white','white','white','white','white','white','white',
-                'white','orange','lightorange','lightorange','lightorange','lightorange','orange','white','white','white','orange','orange','white','white','white','white',
-                'white','orange','orange','lightorange','lightorange','orange','orange','white','white','orange','orange','orange','orange','white','white','white',
-                'white','white','orange','orange','orange','orange','white','white','orange','orange','lightorange','lightorange','orange','orange','white','white',
-                'white','white','white','orange','orange','white','white','white','orange','lightorange','lightorange','lightorange','lightorange','orange','white','white',
-                'white','white','white','white','white','white','white','white','orange','lightorange','lightorange','lightorange','lightorange','orange','white','white',
-                'white','white','white','white','white','white','white','white','orange','orange','lightorange','lightorange','orange','orange','white','white',
-                'white','white','white','white','white','white','white','white','white','orange','orange','orange','orange','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','orange','orange','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white'
-            ],
-            colors: {
-                'white': 'rgb(255, 255, 255)',
-                'orange': 'rgb(255, 140, 0)',
-                'lightorange': 'rgb(255, 180, 80)',
-                'black': 'rgb(0, 0, 0)'
-            }
-        },
-        'Espeon': {
-            width: 16,
-            height: 16,
-            data: [
-                'white','white','white','purple','purple','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','purple','purple','purple','purple','white','white','white','white','white','white','white','white','white','white',
-                'white','purple','purple','lightpurple','lightpurple','purple','purple','white','white','white','white','white','white','white','white','white',
-                'white','purple','lightpurple','lightpurple','lightpurple','lightpurple','purple','white','white','white','white','white','white','white','white','white',
-                'purple','purple','lightpurple','black','black','lightpurple','purple','purple','white','white','white','white','white','white','white','white',
-                'purple','lightpurple','lightpurple','black','black','lightpurple','lightpurple','purple','white','white','white','white','white','white','white','white',
-                'white','purple','lightpurple','lightpurple','lightpurple','lightpurple','purple','white','white','white','purple','purple','white','white','white','white',
-                'white','purple','purple','lightpurple','lightpurple','purple','purple','white','white','purple','purple','purple','purple','white','white','white',
-                'white','white','purple','purple','purple','purple','white','white','purple','purple','lightpurple','lightpurple','purple','purple','white','white',
-                'white','white','white','purple','purple','white','white','white','purple','lightpurple','lightpurple','lightpurple','lightpurple','purple','white','white',
-                'white','white','white','white','white','white','white','white','purple','lightpurple','lightpurple','lightpurple','lightpurple','purple','white','white',
-                'white','white','white','white','white','white','white','white','purple','purple','lightpurple','lightpurple','purple','purple','white','white',
-                'white','white','white','white','white','white','white','white','white','purple','purple','purple','purple','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','purple','purple','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white'
-            ],
-            colors: {
-                'white': 'rgb(255, 255, 255)',
-                'purple': 'rgb(180, 100, 200)',
-                'lightpurple': 'rgb(220, 150, 240)',
-                'black': 'rgb(0, 0, 0)'
-            }
-        },
-        'Umbreon': {
-            width: 16,
-            height: 16,
-            data: [
-                'white','white','white','black','black','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','black','black','black','black','white','white','white','white','white','white','white','white','white','white',
-                'white','black','black','darkgray','darkgray','black','black','white','white','white','white','white','white','white','white','white',
-                'white','black','darkgray','darkgray','darkgray','darkgray','black','white','white','white','white','white','white','white','white','white',
-                'black','black','darkgray','yellow','yellow','darkgray','black','black','white','white','white','white','white','white','white','white',
-                'black','darkgray','darkgray','yellow','yellow','darkgray','darkgray','black','white','white','white','white','white','white','white','white',
-                'white','black','darkgray','darkgray','darkgray','darkgray','black','white','white','white','black','black','white','white','white','white',
-                'white','black','black','darkgray','darkgray','black','black','white','white','black','black','black','black','white','white','white',
-                'white','white','black','black','black','black','white','white','black','black','darkgray','darkgray','black','black','white','white',
-                'white','white','white','black','black','white','white','white','black','darkgray','darkgray','darkgray','darkgray','black','white','white',
-                'white','white','white','white','white','white','white','white','black','darkgray','darkgray','darkgray','darkgray','black','white','white',
-                'white','white','white','white','white','white','white','white','black','black','darkgray','darkgray','black','black','white','white',
-                'white','white','white','white','white','white','white','white','white','black','black','black','black','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','black','black','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white'
-            ],
-            colors: {
-                'white': 'rgb(255, 255, 255)',
-                'black': 'rgb(40, 40, 50)',
-                'darkgray': 'rgb(100, 100, 120)',
-                'yellow': 'rgb(255, 220, 0)'
-            }
-        },
-        'Leafeon': {
-            width: 16,
-            height: 16,
-            data: [
-                'white','white','white','green','green','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','green','green','green','green','white','white','white','white','white','white','white','white','white','white',
-                'white','green','green','lightgreen','lightgreen','green','green','white','white','white','white','white','white','white','white','white',
-                'white','green','lightgreen','lightgreen','lightgreen','lightgreen','green','white','white','white','white','white','white','white','white','white',
-                'green','green','lightgreen','black','black','lightgreen','green','green','white','white','white','white','white','white','white','white',
-                'green','lightgreen','lightgreen','black','black','lightgreen','lightgreen','green','white','white','white','white','white','white','white','white',
-                'white','green','lightgreen','lightgreen','lightgreen','lightgreen','green','white','white','white','green','green','white','white','white','white',
-                'white','green','green','lightgreen','lightgreen','green','green','white','white','green','green','green','green','white','white','white',
-                'white','white','green','green','green','green','white','white','green','green','lightgreen','lightgreen','green','green','white','white',
-                'white','white','white','green','green','white','white','white','green','lightgreen','lightgreen','lightgreen','lightgreen','green','white','white',
-                'white','white','white','white','white','white','white','white','green','lightgreen','lightgreen','lightgreen','lightgreen','green','white','white',
-                'white','white','white','white','white','white','white','white','green','green','lightgreen','lightgreen','green','green','white','white',
-                'white','white','white','white','white','white','white','white','white','green','green','green','green','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','green','green','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white'
-            ],
-            colors: {
-                'white': 'rgb(255, 255, 255)',
-                'green': 'rgb(100, 180, 80)',
-                'lightgreen': 'rgb(150, 220, 120)',
-                'black': 'rgb(0, 0, 0)'
-            }
-        },
-        'Glaceon': {
-            width: 16,
-            height: 16,
-            data: [
-                'white','white','white','ice','ice','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','ice','ice','ice','ice','white','white','white','white','white','white','white','white','white','white',
-                'white','ice','ice','lightice','lightice','ice','ice','white','white','white','white','white','white','white','white','white',
-                'white','ice','lightice','lightice','lightice','lightice','ice','white','white','white','white','white','white','white','white','white',
-                'ice','ice','lightice','black','black','lightice','ice','ice','white','white','white','white','white','white','white','white',
-                'ice','lightice','lightice','black','black','lightice','lightice','ice','white','white','white','white','white','white','white','white',
-                'white','ice','lightice','lightice','lightice','lightice','ice','white','white','white','ice','ice','white','white','white','white',
-                'white','ice','ice','lightice','lightice','ice','ice','white','white','ice','ice','ice','ice','white','white','white',
-                'white','white','ice','ice','ice','ice','white','white','ice','ice','lightice','lightice','ice','ice','white','white',
-                'white','white','white','ice','ice','white','white','white','ice','lightice','lightice','lightice','lightice','ice','white','white',
-                'white','white','white','white','white','white','white','white','ice','lightice','lightice','lightice','lightice','ice','white','white',
-                'white','white','white','white','white','white','white','white','ice','ice','lightice','lightice','ice','ice','white','white',
-                'white','white','white','white','white','white','white','white','white','ice','ice','ice','ice','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','ice','ice','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white'
-            ],
-            colors: {
-                'white': 'rgb(255, 255, 255)',
-                'ice': 'rgb(150, 220, 240)',
-                'lightice': 'rgb(200, 240, 255)',
-                'black': 'rgb(0, 0, 0)'
-            }
-        },
-        'Sylveon': {
-            width: 16,
-            height: 16,
-            data: [
-                'white','white','white','pink','pink','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','pink','pink','pink','pink','white','white','white','white','white','white','white','white','white','white',
-                'white','pink','pink','lightpink','lightpink','pink','pink','white','white','white','white','white','white','white','white','white',
-                'white','pink','lightpink','lightpink','lightpink','lightpink','pink','white','white','white','white','white','white','white','white','white',
-                'pink','pink','lightpink','black','black','lightpink','pink','pink','white','white','white','white','white','white','white','white',
-                'pink','lightpink','lightpink','black','black','lightpink','lightpink','pink','white','white','white','white','white','white','white','white',
-                'white','pink','lightpink','lightpink','lightpink','lightpink','pink','white','white','white','pink','pink','white','white','white','white',
-                'white','pink','pink','lightpink','lightpink','pink','pink','white','white','pink','pink','pink','pink','white','white','white',
-                'white','white','pink','pink','pink','pink','white','white','pink','pink','lightpink','lightpink','pink','pink','white','white',
-                'white','white','white','pink','pink','white','white','white','pink','lightpink','lightpink','lightpink','lightpink','pink','white','white',
-                'white','white','white','white','white','white','white','white','pink','lightpink','lightpink','lightpink','lightpink','pink','white','white',
-                'white','white','white','white','white','white','white','white','pink','pink','lightpink','lightpink','pink','pink','white','white',
-                'white','white','white','white','white','white','white','white','white','pink','pink','pink','pink','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','pink','pink','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white',
-                'white','white','white','white','white','white','white','white','white','white','white','white','white','white','white','white'
-            ],
-            colors: {
-                'white': 'rgb(255, 255, 255)',
-                'pink': 'rgb(220, 100, 180)',
-                'lightpink': 'rgb(240, 150, 220)',
-                'black': 'rgb(0, 0, 0)'
-            }
-        }
+    const patterns = {};
+    
+    // Simple 12x12 designs for better visibility
+    
+    // EEVEE - Brown furry design
+    patterns['Eevee'] = {
+        width: 12,
+        height: 12,
+        pixels: [
+            [0,0,0,1,1,1,0,0,0,0,0,0],
+            [0,0,1,1,2,1,1,0,0,0,0,0],
+            [0,1,1,2,2,2,1,1,0,0,0,0],
+            [0,1,2,2,3,2,2,1,0,1,1,0],
+            [1,1,2,3,3,3,2,1,1,1,2,1],
+            [1,2,2,3,3,3,2,2,1,2,2,1],
+            [1,2,2,2,2,2,2,2,1,2,2,1],
+            [0,1,2,2,2,2,2,1,0,1,2,1],
+            [0,1,2,2,2,2,2,1,0,0,1,0],
+            [0,0,1,1,1,1,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0]
+        ],
+        colors: ['white', 'rgb(165, 105, 65)', 'rgb(200, 140, 90)', 'rgb(0,0,0)']
     };
+    
+    // VAPOREON - Blue water bubble
+    patterns['Vaporeon'] = {
+        width: 12,
+        height: 12,
+        pixels: [
+            [0,0,0,1,1,1,1,0,0,0,0,0],
+            [0,0,1,1,2,2,1,1,0,0,0,0],
+            [0,1,1,2,2,2,2,1,1,0,0,0],
+            [0,1,2,2,3,2,2,2,1,0,1,1],
+            [1,1,2,3,3,3,2,2,1,1,1,2],
+            [1,2,2,3,3,3,2,2,1,2,2,1],
+            [1,2,2,2,2,2,2,2,1,2,2,1],
+            [0,1,2,2,2,2,2,1,0,1,2,1],
+            [0,1,2,2,2,2,2,1,0,0,1,0],
+            [0,0,1,1,1,1,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0]
+        ],
+        colors: ['white', 'rgb(100, 180, 220)', 'rgb(150, 220, 240)', 'rgb(0,0,0)']
+    };
+    
+    // JOLTEON - Spiky yellow
+    patterns['Jolteon'] = {
+        width: 12,
+        height: 12,
+        pixels: [
+            [0,0,1,1,1,1,1,1,0,0,0,0],
+            [0,1,1,2,2,2,2,1,1,0,0,0],
+            [1,1,2,2,2,2,2,2,1,1,0,0],
+            [1,2,2,2,3,2,2,2,2,1,1,1],
+            [1,2,2,3,3,3,2,2,2,1,1,1],
+            [1,2,2,3,3,3,2,2,2,1,1,1],
+            [1,2,2,2,2,2,2,2,2,1,1,1],
+            [0,1,2,2,2,2,2,2,1,0,1,1],
+            [0,1,2,2,2,2,2,2,1,0,1,0],
+            [0,0,1,1,1,1,1,1,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0]
+        ],
+        colors: ['white', 'rgb(255, 220, 0)', 'rgb(255, 240, 100)', 'rgb(0,0,0)']
+    };
+    
+    // FLAREON - Fluffy orange
+    patterns['Flareon'] = {
+        width: 12,
+        height: 12,
+        pixels: [
+            [0,0,0,1,1,1,0,0,0,0,0,0],
+            [0,0,1,1,2,1,1,0,0,0,0,0],
+            [0,1,1,2,2,2,1,1,0,0,0,0],
+            [0,1,2,2,3,2,2,1,0,1,1,0],
+            [1,1,2,3,3,3,2,1,1,1,2,1],
+            [1,2,2,3,3,3,2,2,1,2,2,1],
+            [1,2,2,2,2,2,2,2,1,2,2,1],
+            [0,1,2,2,2,2,2,1,0,1,2,1],
+            [0,1,2,2,2,2,2,1,0,0,1,0],
+            [0,0,1,1,1,1,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0]
+        ],
+        colors: ['white', 'rgb(255, 140, 0)', 'rgb(255, 180, 80)', 'rgb(0,0,0)']
+    };
+    
+    // ESPEON - Purple psychic
+    patterns['Espeon'] = {
+        width: 12,
+        height: 12,
+        pixels: [
+            [0,0,0,1,1,1,0,0,0,0,0,0],
+            [0,0,1,1,2,1,1,0,0,0,0,0],
+            [0,1,1,2,2,2,1,1,0,0,0,0],
+            [0,1,2,2,3,2,2,1,0,1,1,0],
+            [1,1,2,3,3,3,2,1,1,1,2,1],
+            [1,2,2,3,3,3,2,2,1,2,2,1],
+            [1,2,2,2,2,2,2,2,1,2,2,1],
+            [0,1,2,2,2,2,2,1,0,1,2,1],
+            [0,1,2,2,2,2,2,1,0,0,1,0],
+            [0,0,1,1,1,1,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0]
+        ],
+        colors: ['white', 'rgb(180, 100, 200)', 'rgb(220, 150, 240)', 'rgb(0,0,0)']
+    };
+    
+    // UMBREON - Dark moon
+    patterns['Umbreon'] = {
+        width: 12,
+        height: 12,
+        pixels: [
+            [0,0,0,1,1,1,0,0,0,0,0,0],
+            [0,0,1,1,2,1,1,0,0,0,0,0],
+            [0,1,1,2,2,2,1,1,0,0,0,0],
+            [0,1,2,2,3,2,2,1,0,1,1,0],
+            [1,1,2,3,3,3,2,1,1,1,4,1],
+            [1,2,2,3,3,3,2,2,1,2,2,1],
+            [1,2,2,2,2,2,2,2,1,2,2,1],
+            [0,1,2,2,2,2,2,1,0,1,4,1],
+            [0,1,2,2,2,2,2,1,0,0,1,0],
+            [0,0,1,1,1,1,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0]
+        ],
+        colors: ['white', 'rgb(40, 40, 50)', 'rgb(100, 100, 120)', 'rgb(0,0,0)', 'rgb(255, 220, 0)']
+    };
+    
+    // LEAFEON - Green nature
+    patterns['Leafeon'] = {
+        width: 12,
+        height: 12,
+        pixels: [
+            [0,0,0,1,1,1,0,0,0,0,0,0],
+            [0,0,1,1,2,1,1,0,0,0,0,0],
+            [0,1,1,2,2,2,1,1,0,0,0,0],
+            [0,1,2,2,3,2,2,1,0,1,1,0],
+            [1,1,2,3,3,3,2,1,1,1,2,1],
+            [1,2,2,3,3,3,2,2,1,2,2,1],
+            [1,2,2,2,2,2,2,2,1,2,2,1],
+            [0,1,2,2,2,2,2,1,0,1,2,1],
+            [0,1,2,2,2,2,2,1,0,0,1,0],
+            [0,0,1,1,1,1,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0]
+        ],
+        colors: ['white', 'rgb(100, 180, 80)', 'rgb(150, 220, 120)', 'rgb(0,0,0)']
+    };
+    
+    // GLACEON - Ice crystal
+    patterns['Glaceon'] = {
+        width: 12,
+        height: 12,
+        pixels: [
+            [0,0,0,1,1,1,0,0,0,0,0,0],
+            [0,0,1,1,2,1,1,0,0,0,0,0],
+            [0,1,1,2,2,2,1,1,0,0,0,0],
+            [0,1,2,2,3,2,2,1,0,1,1,0],
+            [1,1,2,3,3,3,2,1,1,1,2,1],
+            [1,2,2,3,3,3,2,2,1,2,2,1],
+            [1,2,2,2,2,2,2,2,1,2,2,1],
+            [0,1,2,2,2,2,2,1,0,1,2,1],
+            [0,1,2,2,2,2,2,1,0,0,1,0],
+            [0,0,1,1,1,1,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0]
+        ],
+        colors: ['white', 'rgb(150, 220, 240)', 'rgb(200, 240, 255)', 'rgb(0,0,0)']
+    };
+    
+    // SYLVEON - Pink ribbons
+    patterns['Sylveon'] = {
+        width: 12,
+        height: 12,
+        pixels: [
+            [0,0,0,1,1,1,0,0,0,0,0,0],
+            [0,0,1,1,2,1,1,0,0,0,0,0],
+            [0,1,1,2,2,2,1,1,0,0,0,0],
+            [0,1,2,2,3,2,2,1,0,1,1,0],
+            [1,1,2,3,3,3,2,1,1,1,2,1],
+            [1,2,2,3,3,3,2,2,1,2,2,1],
+            [1,2,2,2,2,2,2,2,1,2,2,1],
+            [0,1,2,2,2,2,2,1,0,1,2,1],
+            [0,1,2,2,2,2,2,1,0,0,1,0],
+            [0,0,1,1,1,1,1,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0]
+        ],
+        colors: ['white', 'rgb(220, 100, 180)', 'rgb(240, 150, 220)', 'rgb(0,0,0)']
+    };
+    
+    return patterns;
 }
 
 function renderEeveelutionGallery() {
     const patterns = createEeveelutionPatterns();
     const grid = document.getElementById('eeveelutionGrid');
+    if (!grid) {
+        console.error('eeveelutionGrid not found');
+        return;
+    }
+    
     grid.innerHTML = '';
     
     Object.entries(patterns).forEach(([name, pattern]) => {
@@ -597,19 +548,17 @@ function renderEeveelutionGallery() {
         card.className = 'eeveelution-card';
         
         const canvas = document.createElement('canvas');
-        canvas.width = pattern.width * 10;
-        canvas.height = pattern.height * 10;
+        canvas.width = pattern.width * 15;
+        canvas.height = pattern.height * 15;
         const ctx = canvas.getContext('2d');
         
         // Draw the pixel art
-        let pixelIndex = 0;
         for (let y = 0; y < pattern.height; y++) {
             for (let x = 0; x < pattern.width; x++) {
-                const colorKey = pattern.data[pixelIndex];
-                const color = pattern.colors[colorKey];
+                const colorIndex = pattern.pixels[y][x];
+                const color = pattern.colors[colorIndex];
                 ctx.fillStyle = color;
-                ctx.fillRect(x * 10, y * 10, 10, 10);
-                pixelIndex++;
+                ctx.fillRect(x * 15, y * 15, 15, 15);
             }
         }
         
@@ -619,7 +568,7 @@ function renderEeveelutionGallery() {
         card.appendChild(label);
         
         card.addEventListener('click', () => {
-            loadEeveelutionPattern(pattern);
+            loadEeveelutionPattern(name, pattern);
             document.getElementById('eeveelutionGallery').classList.remove('active');
         });
         
@@ -627,21 +576,19 @@ function renderEeveelutionGallery() {
     });
 }
 
-function loadEeveelutionPattern(pattern) {
+function loadEeveelutionPattern(name, pattern) {
     state.history.push({...state.pixelData});
     state.pixelData = [];
     
-    let pixelIndex = 0;
     for (let y = 0; y < pattern.height; y++) {
         for (let x = 0; x < pattern.width; x++) {
-            const colorKey = pattern.data[pixelIndex];
-            const color = pattern.colors[colorKey];
-            if (colorKey !== 'white') {
+            const colorIndex = pattern.pixels[y][x];
+            const color = pattern.colors[colorIndex];
+            if (colorIndex !== 0) {
                 state.pixelData.push(color);
             } else {
                 state.pixelData.push(null);
             }
-            pixelIndex++;
         }
     }
     
@@ -651,6 +598,8 @@ function loadEeveelutionPattern(pattern) {
 
 function loadSavedArtworks() {
     const container = document.getElementById('savedArtworksList');
+    if (!container) return;
+    
     container.innerHTML = '';
     
     if (Object.keys(state.savedArtworks).length === 0) {
