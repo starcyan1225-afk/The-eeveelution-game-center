@@ -7,6 +7,7 @@ const state = {
     pixelData: [],
     history: [],
     currentColor: 'rgb(255, 100, 200)',
+    currentBrush: 'normal',
     savedArtworks: {}
 };
 
@@ -88,13 +89,17 @@ function createPixelCanvas() {
             pixel.style.background = state.pixelData[i];
         }
         
-        pixel.addEventListener('click', () => paintPixel(i, pixel));
+        pixel.addEventListener('click', () => onPixelClick(i, pixel));
         pixel.addEventListener('mouseenter', (e) => {
-            if (e.buttons === 1) paintPixel(i, pixel);
+            if (e.buttons === 1) onPixelClick(i, pixel);
         });
         
         canvas.appendChild(pixel);
     }
+}
+
+function getPixelIndex(row, col) {
+    return row * state.gridSize + col;
 }
 
 function paintPixel(index, pixelElement) {
@@ -106,6 +111,88 @@ function paintPixel(index, pixelElement) {
         state.pixelData[index] = newColor;
         pixelElement.style.background = newColor;
     }
+}
+
+function onPixelClick(index, pixelElement) {
+    if (state.currentBrush === 'normal') {
+        paintPixel(index, pixelElement);
+    } else if (state.currentBrush === 'sparkle') {
+        paintSparkle(index);
+    } else if (state.currentBrush === 'heart') {
+        paintHeart(index);
+    }
+}
+
+// ===== SPARKLE BRUSH =====
+function paintSparkle(centerIndex) {
+    state.history.push({...state.pixelData});
+    const row = Math.floor(centerIndex / state.gridSize);
+    const col = centerIndex % state.gridSize;
+    
+    // Yellow/gold sparkle colors
+    const sparkleColors = [
+        state.currentColor, // Main color
+        'rgb(255, 255, 150)', // Light yellow
+        'rgb(255, 240, 100)'  // Gold
+    ];
+    
+    // Paint sparkle pattern (star-like)
+    const offsets = [
+        {r: 0, c: 0, color: sparkleColors[0]},   // Center
+        {r: -1, c: 0, color: sparkleColors[1]},  // Top
+        {r: 1, c: 0, color: sparkleColors[1]},   // Bottom
+        {r: 0, c: -1, color: sparkleColors[1]},  // Left
+        {r: 0, c: 1, color: sparkleColors[1]},   // Right
+        {r: -1, c: -1, color: sparkleColors[2]}, // Diagonals
+        {r: -1, c: 1, color: sparkleColors[2]},
+        {r: 1, c: -1, color: sparkleColors[2]},
+        {r: 1, c: 1, color: sparkleColors[2]}
+    ];
+    
+    offsets.forEach(offset => {
+        const newRow = row + offset.r;
+        const newCol = col + offset.c;
+        
+        if (newRow >= 0 && newRow < state.gridSize && newCol >= 0 && newCol < state.gridSize) {
+            const idx = getPixelIndex(newRow, newCol);
+            state.pixelData[idx] = offset.color;
+            const pixel = document.querySelector(`[data-index="${idx}"]`);
+            if (pixel) pixel.style.background = offset.color;
+        }
+    });
+}
+
+// ===== HEART BRUSH =====
+function paintHeart(centerIndex) {
+    state.history.push({...state.pixelData});
+    const row = Math.floor(centerIndex / state.gridSize);
+    const col = centerIndex % state.gridSize;
+    
+    // Heart pattern
+    const heartPattern = [
+        {r: 0, c: 0},
+        {r: -1, c: -1}, {r: -1, c: 0}, {r: -1, c: 1},
+        {r: 0, c: -1}, {r: 0, c: 1},
+        {r: 1, c: -1}, {r: 1, c: 0}, {r: 1, c: 1}
+    ];
+    
+    const heartColors = [
+        state.currentColor,
+        'rgb(255, 200, 220)', // Light pink
+    ];
+    
+    heartPattern.forEach((offset, idx) => {
+        const newRow = row + offset.r;
+        const newCol = col + offset.c;
+        
+        if (newRow >= 0 && newRow < state.gridSize && newCol >= 0 && newCol < state.gridSize) {
+            const pixelIdx = getPixelIndex(newRow, newCol);
+            const color = idx === 0 ? heartColors[0] : heartColors[1];
+            state.pixelData[pixelIdx] = color;
+            const pixel = document.querySelector(`[data-index="${pixelIdx}"]`);
+            if (pixel) pixel.style.background = color;
+        }
+    });
 }
 
 // ===== COLOR PICKER =====
@@ -125,6 +212,11 @@ function updateColorPreview() {
 document.getElementById('redSlider').addEventListener('input', updateColorPreview);
 document.getElementById('greenSlider').addEventListener('input', updateColorPreview);
 document.getElementById('blueSlider').addEventListener('input', updateColorPreview);
+
+// ===== BRUSH MODE =====
+document.getElementById('brushMode').addEventListener('change', (e) => {
+    state.currentBrush = e.target.value;
+});
 
 // ===== GRID SIZE CHANGE =====
 document.getElementById('gridSizeSelect').addEventListener('change', (e) => {
