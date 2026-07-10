@@ -15,7 +15,7 @@
             
             <div class="login-form">
                 <input type="text" id="usernameInput" placeholder="Enter username" maxlength="20">
-                <button id="loginBtn" class="btn-primary">Login / Create Account</button>
+                <button type="button" id="loginBtn" class="btn-primary">Login / Create Account</button>
                 <p class="info-text">✨ No password needed - just pick a username!</p>
             </div>
         </div>
@@ -30,7 +30,7 @@
                 <span id="userDisplay" class="user-display"></span>
             </div>
             <div class="header-right">
-                <button id="logoutBtn" class="btn-secondary">Logout</button>
+                <button type="button" id="logoutBtn" class="btn-secondary">Logout</button>
                 <a href="index.html" class="btn-secondary">Back to Home</a>
             </div>
         </header>
@@ -81,15 +81,15 @@
                 
                 <div class="tool-section">
                     <h3>🎮 Tools</h3>
-                    <button id="clearBtn" class="btn-warning">🗑️ Clear</button>
-                    <button id="undoBtn" class="btn-secondary">↶ Undo</button>
-                    <button id="eeveelutionBtn" class="btn-primary">🐹 Eeveelutions</button>
+                    <button type="button" id="clearBtn" class="btn-warning">🗑️ Clear</button>
+                    <button type="button" id="undoBtn" class="btn-secondary">↶ Undo</button>
+                    <button type="button" id="eeveelutionBtn" class="btn-primary">🐹 Eeveelutions</button>
                 </div>
                 
                 <div class="tool-section">
                     <h3>💾 Save/Load</h3>
-                    <button id="saveBtn" class="btn-primary">💾 Save Artwork</button>
-                    <button id="loadBtn" class="btn-secondary">📂 Load Artwork</button>
+                    <button type="button" id="saveBtn" class="btn-primary">💾 Save Artwork</button>
+                    <button type="button" id="loadBtn" class="btn-secondary">📂 Load Artwork</button>
                 </div>
             </div>
             
@@ -113,7 +113,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2>🐹 Choose an Eeveelution to Copy</h2>
-                <button id="closeGalleryBtn" class="btn-close">✕</button>
+                <button type="button" id="closeGalleryBtn" class="btn-close">✕</button>
             </div>
             <div id="eeveelutionGrid" class="eeveelution-grid">
                 <!-- Eeveelutions will be generated here -->
@@ -126,12 +126,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2>💾 Save Your Artwork</h2>
-                <button id="closeSaveDialogBtn" class="btn-close">✕</button>
+                <button type="button" id="closeSaveDialogBtn" class="btn-close">✕</button>
             </div>
             <input type="text" id="artworkNameInput" placeholder="Give your artwork a name..." maxlength="30">
             <div class="modal-buttons">
-                <button id="confirmSaveBtn" class="btn-primary">Save</button>
-                <button id="cancelSaveBtn" class="btn-secondary">Cancel</button>
+                <button type="button" id="confirmSaveBtn" class="btn-primary">Save</button>
+                <button type="button" id="cancelSaveBtn" class="btn-secondary">Cancel</button>
             </div>
         </div>
     </div>
