@@ -8,8 +8,279 @@ const state = {
     history: [],
     currentColor: 'rgb(255, 100, 200)',
     currentBrush: 'normal',
-    savedArtworks: {}
+    savedArtworks: {},
+    currentTab: 'creator' // 'creator' or 'eeveelution'
 };
+
+// Eeveelution pixel art patterns (24x24 grid)
+const eeveelutionPatterns = {
+    'Eevee': [
+        '........................',
+        '........................',
+        '........LLLLLL..........',
+        '.......LLLLLLLLL........',
+        '.....LLLLMMMMMLLL.......',
+        '....LLLMMMWWMMMLL......',
+        '....LLMMWWBBWWMMLL......',
+        '....LLMMWWWWMMLL.......',
+        '....LLLMMMMMMLLL.......',
+        '.....LLLLMMLLLL........',
+        '......LLLMMLL.........',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................'
+    ],
+    'Vaporeon': [
+        '........................',
+        '........................',
+        '........LLLLLL..........',
+        '.......LLLLLLLLL........',
+        '.....LLLLBBBBLLLL.......',
+        '....LLLBBWWBBBBLL......',
+        '....LLBBWWKKWWBBLL......',
+        '....LLBBWWWWBBLL.......',
+        '....LLLBBBBBBLLL.......',
+        '.....LLLLBBLLL.........',
+        '......LLLBLL.........',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................'
+    ],
+    'Jolteon': [
+        '........................',
+        '........................',
+        '........YYYYYY..........',
+        '.......YYYYYYYYY........',
+        '.....YYYYGGGGYYYYY......',
+        '....YYYGGWWGGGGYYY......',
+        '....YYGGWWKKWWGGYYY......',
+        '....YYGGWWWWGGYYY.......',
+        '....YYYGGGGGGYYY.......',
+        '.....YYYYGGYYYY.........',
+        '......YYYGYY.........',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................'
+    ],
+    'Flareon': [
+        '........................',
+        '........................',
+        '........RRRRRR..........',
+        '.......RRRRRRRRR........',
+        '.....RRRROOOORRRR.......',
+        '....RRROOOWWOORRRR......',
+        '....RROOWWKKWWOORRR......',
+        '....RROOWWWWOORR.......',
+        '....RRRROOOOORRR.......',
+        '.....RRRROORRR.........',
+        '......RRRROR.........',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................'
+    ],
+    'Espeon': [
+        '........................',
+        '........................',
+        '........PPPPPP..........',
+        '.......PPPPPPPP........',
+        '.....PPPPVVVVPPPP.......',
+        '....PPPVVWWVVVPPP......',
+        '....PPVVWWKKWWVVPP......',
+        '....PPVVWWWWVVPP.......',
+        '....PPPVVVVVVPPP.......',
+        '.....PPPPPVVPPP.........',
+        '......PPPPVP.........',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................'
+    ],
+    'Umbreon': [
+        '........................',
+        '........................',
+        '........DDDDDD..........',
+        '.......DDDDDDDD........',
+        '.....DDDDUUUUDDDD.......',
+        '....DDDUURRUUURRD......',
+        '....DDUURRKKRRUUDD......',
+        '....DDUURRRRUURDD.......',
+        '....DDDDUURUUDDD.......',
+        '.....DDDDUUUDD.........',
+        '......DDDUU.........',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................'
+    ],
+    'Leafeon': [
+        '........................',
+        '........................',
+        '........GGGGGG..........',
+        '.......GGGGGGGG........',
+        '.....GGGGEEEGGGG.......',
+        '....GGGEEEWWEEEGG......',
+        '....GGEEEWWKKWWEGG......',
+        '....GGEEEWWWWEGG.......',
+        '....GGGEEEEEEGG.......',
+        '.....GGGGGEEGG.........',
+        '......GGGGEE.........',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................'
+    ],
+    'Glaceon': [
+        '........................',
+        '........................',
+        '........CCCCCC..........',
+        '.......CCCCCCCC........',
+        '.....CCCCTTTCCCC.......',
+        '....CCCTTWTTTTTCC......',
+        '....CCTTWTTKTWTTCC......',
+        '....CCTTWTTWTTCC.......',
+        '....CCCCTTTTTCC.......',
+        '.....CCCCCCTTCC.........',
+        '......CCCCTC.........',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................'
+    ],
+    'Sylveon': [
+        '........................',
+        '........................',
+        '........FFFFFF..........',
+        '.......FFFFFFFF........',
+        '.....FFFFEEEFFF.......',
+        '....FFFEEWWEEFFFF......',
+        '....FFEEWWKKWWEEFF......',
+        '....FFEEWWWWEEEFF.......',
+        '....FFFEEEEEEEFF.......',
+        '.....FFFFFEEFFF.........',
+        '......FFFFEF.........',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................',
+        '........................'
+    ]
+};
+
+const colorMap = {
+    'L': 'rgb(200, 150, 100)',  // Light brown
+    'M': 'rgb(180, 120, 80)',   // Medium brown
+    'D': 'rgb(100, 50, 30)',    // Dark brown
+    'B': 'rgb(100, 150, 220)',  // Blue
+    'G': 'rgb(100, 200, 100)',  // Green
+    'E': 'rgb(150, 230, 150)',  // Light green
+    'Y': 'rgb(255, 220, 100)',  // Yellow
+    'R': 'rgb(255, 150, 100)',  // Red/Orange
+    'O': 'rgb(255, 180, 100)',  // Orange
+    'P': 'rgb(200, 150, 255)',  // Purple
+    'V': 'rgb(220, 180, 255)',  // Light purple
+    'U': 'rgb(50, 50, 100)',    // Dark blue
+    'C': 'rgb(150, 200, 255)',  // Cyan/Light blue
+    'T': 'rgb(180, 230, 255)',  // Turquoise
+    'F': 'rgb(255, 150, 200)',  // Pink
+    'W': 'rgb(255, 255, 255)',  // White
+    'K': 'rgb(0, 0, 0)'         // Black
+};
+
+const eeveelutions = [
+    { name: 'Eevee', emoji: '🐹' },
+    { name: 'Vaporeon', emoji: '💧' },
+    { name: 'Jolteon', emoji: '⚡' },
+    { name: 'Flareon', emoji: '🔥' },
+    { name: 'Espeon', emoji: '✨' },
+    { name: 'Umbreon', emoji: '🌙' },
+    { name: 'Leafeon', emoji: '🍃' },
+    { name: 'Glaceon', emoji: '❄️' },
+    { name: 'Sylveon', emoji: '🎀' }
+];
 
 // Initialize application when page loads
 document.addEventListener('DOMContentLoaded', function() {
@@ -33,7 +304,7 @@ function updateLoginUI() {
     if (state.currentUser) {
         document.getElementById('loginScreen').classList.remove('active');
         document.getElementById('creatorScreen').classList.add('active');
-        document.getElementById('userDisplay').textContent = `👤 ${state.currentUser}`;
+        document.getElementById('userDisplay').textContent = '👤 ' + state.currentUser;
         initializeCreator();
         loadSavedArtworks();
     } else {
@@ -129,16 +400,17 @@ function setupAllListeners() {
     const eeveelutionBtn = document.getElementById('eeveelutionBtn');
     if (eeveelutionBtn) {
         eeveelutionBtn.addEventListener('click', function() {
-            document.getElementById('eeveelutionGallery').classList.add('active');
-            renderEeveelutionGallery();
+            state.currentTab = 'eeveelution';
+            switchTab('eeveelution');
         });
     }
 
-    // CLOSE GALLERY
-    const closeGalleryBtn = document.getElementById('closeGalleryBtn');
-    if (closeGalleryBtn) {
-        closeGalleryBtn.addEventListener('click', function() {
-            document.getElementById('eeveelutionGallery').classList.remove('active');
+    // CLOSE EEVEELUTION TAB
+    const closeEeveeBtn = document.getElementById('closeEeveeBtn');
+    if (closeEeveeBtn) {
+        closeEeveeBtn.addEventListener('click', function() {
+            state.currentTab = 'creator';
+            switchTab('creator');
         });
     }
 
@@ -189,6 +461,18 @@ function setupAllListeners() {
     }
 }
 
+// ===== TAB SWITCHING =====
+function switchTab(tabName) {
+    if (tabName === 'creator') {
+        document.getElementById('creatorTab').classList.add('active');
+        document.getElementById('eeveelutionTab').classList.remove('active');
+    } else if (tabName === 'eeveelution') {
+        document.getElementById('creatorTab').classList.remove('active');
+        document.getElementById('eeveelutionTab').classList.add('active');
+        renderEeveelutionGallery();
+    }
+}
+
 // ===== CREATOR INITIALIZATION =====
 function initializeCreator() {
     createPixelCanvas();
@@ -199,8 +483,8 @@ function createPixelCanvas() {
     const canvas = document.getElementById('pixelCanvas');
     canvas.innerHTML = '';
     const size = state.gridSize;
-    canvas.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
-    canvas.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+    canvas.style.gridTemplateColumns = 'repeat(' + size + ', 1fr)';
+    canvas.style.gridTemplateRows = 'repeat(' + size + ', 1fr)';
     
     const pixelSize = Math.max(8, Math.floor(400 / size));
     
@@ -335,30 +619,6 @@ function updateColorPreview() {
 }
 
 // ===== EEVEELUTION GALLERY =====
-const eeveelutions = [
-    { name: 'Eevee', emoji: '🐹' },
-    { name: 'Vaporeon', emoji: '💧' },
-    { name: 'Jolteon', emoji: '⚡' },
-    { name: 'Flareon', emoji: '🔥' },
-    { name: 'Espeon', emoji: '✨' },
-    { name: 'Umbreon', emoji: '🌙' },
-    { name: 'Leafeon', emoji: '🍃' },
-    { name: 'Glaceon', emoji: '❄️' },
-    { name: 'Sylveon', emoji: '🎀' }
-];
-
-const eeveelutionColors = {
-    'Eevee': 'rgb(200, 150, 100)',
-    'Vaporeon': 'rgb(100, 150, 220)',
-    'Jolteon': 'rgb(255, 220, 100)',
-    'Flareon': 'rgb(255, 150, 100)',
-    'Espeon': 'rgb(200, 150, 255)',
-    'Umbreon': 'rgb(50, 50, 100)',
-    'Leafeon': 'rgb(100, 200, 100)',
-    'Glaceon': 'rgb(150, 200, 255)',
-    'Sylveon': 'rgb(255, 150, 200)'
-};
-
 function renderEeveelutionGallery() {
     const grid = document.getElementById('eeveelutionGrid');
     grid.innerHTML = '';
@@ -369,7 +629,7 @@ function renderEeveelutionGallery() {
         item.innerHTML = '<div class="eeveelution-preview">' + eevee.emoji + '</div><div class="eeveelution-name">' + eevee.name + '</div>';
         item.addEventListener('click', function() {
             copyEeveelution(eevee);
-            document.getElementById('eeveelutionGallery').classList.remove('active');
+            switchTab('creator');
         });
         grid.appendChild(item);
     });
@@ -377,12 +637,21 @@ function renderEeveelutionGallery() {
 
 function copyEeveelution(eevee) {
     state.history.push({...state.pixelData});
-    const color = eeveelutionColors[eevee.name];
+    state.gridSize = 24;
     state.pixelData = [];
     
-    for (let i = 0; i < state.gridSize * state.gridSize; i++) {
-        state.pixelData[i] = color;
+    const pattern = eeveelutionPatterns[eevee.name];
+    if (pattern) {
+        for (let row = 0; row < 24; row++) {
+            for (let col = 0; col < 24; col++) {
+                const char = pattern[row].charAt(col);
+                const color = colorMap[char] || 'white';
+                state.pixelData[getPixelIndex(row, col)] = color;
+            }
+        }
     }
+    
+    document.getElementById('gridSizeSelect').value = 24;
     createPixelCanvas();
 }
 
