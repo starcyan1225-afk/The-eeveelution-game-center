@@ -430,6 +430,10 @@ body {
     border-radius: 8px;
     margin-bottom: 10px;
     background: #f9f0fd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
 }
 
 .eeveelution-name {

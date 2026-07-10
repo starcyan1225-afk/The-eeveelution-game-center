@@ -152,15 +152,15 @@ document.getElementById('undoBtn').addEventListener('click', () => {
 
 // ===== EEVEELUTION GALLERY =====
 const eeveelutions = [
-    { name: 'Eevee', emoji: '🐹', pixelData: Array(576).fill('white') },
-    { name: 'Vaporeon', emoji: '💧', pixelData: Array(576).fill('rgb(100, 150, 220)') },
-    { name: 'Jolteon', emoji: '⚡', pixelData: Array(576).fill('rgb(255, 220, 100)') },
-    { name: 'Flareon', emoji: '🔥', pixelData: Array(576).fill('rgb(255, 150, 100)') },
-    { name: 'Espeon', emoji: '✨', pixelData: Array(576).fill('rgb(200, 150, 255)') },
-    { name: 'Umbreon', emoji: '🌙', pixelData: Array(576).fill('rgb(50, 50, 100)') },
-    { name: 'Leafeon', emoji: '🍃', pixelData: Array(576).fill('rgb(100, 200, 100)') },
-    { name: 'Glaceon', emoji: '❄️', pixelData: Array(576).fill('rgb(150, 200, 255)') },
-    { name: 'Sylveon', emoji: '🎀', pixelData: Array(576).fill('rgb(255, 150, 200)') }
+    { name: 'Eevee', emoji: '🐹' },
+    { name: 'Vaporeon', emoji: '💧' },
+    { name: 'Jolteon', emoji: '⚡' },
+    { name: 'Flareon', emoji: '🔥' },
+    { name: 'Espeon', emoji: '✨' },
+    { name: 'Umbreon', emoji: '🌙' },
+    { name: 'Leafeon', emoji: '🍃' },
+    { name: 'Glaceon', emoji: '❄️' },
+    { name: 'Sylveon', emoji: '🎀' }
 ];
 
 document.getElementById('eeveelutionBtn').addEventListener('click', () => {
@@ -193,7 +193,24 @@ function renderEeveelutionGallery() {
 
 function copyEeveelution(eevee) {
     state.history.push({...state.pixelData});
-    state.pixelData = [...eevee.pixelData];
+    // Create a simple colored pattern for the selected eeveelution
+    const colorMap = {
+        'Eevee': 'rgb(200, 150, 100)',
+        'Vaporeon': 'rgb(100, 150, 220)',
+        'Jolteon': 'rgb(255, 220, 100)',
+        'Flareon': 'rgb(255, 150, 100)',
+        'Espeon': 'rgb(200, 150, 255)',
+        'Umbreon': 'rgb(50, 50, 100)',
+        'Leafeon': 'rgb(100, 200, 100)',
+        'Glaceon': 'rgb(150, 200, 255)',
+        'Sylveon': 'rgb(255, 150, 200)'
+    };
+    
+    const color = colorMap[eevee.name];
+    state.pixelData = [];
+    for (let i = 0; i < state.gridSize * state.gridSize; i++) {
+        state.pixelData[i] = color;
+    }
     createPixelCanvas();
 }
 
@@ -272,6 +289,3 @@ window.addEventListener('beforeunload', () => {
 function setupEventListeners() {
     // Additional event listeners can go here
 }
-
-// Prevent petals on this page
-document.body.classList.add('no-petals');
