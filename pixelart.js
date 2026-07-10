@@ -330,5 +330,325 @@ function setupOtherListeners() {
 }
 
 // ===== EEVEELUTION GALLERY =====
-// Create simple 24x24 pixel art patterns for each eeveelution
-function createEeveelutionPatterns() {\n    return {\n        'Eevee': {\n            colors: {\n                main: 'rgb(200, 150, 100)',    // Brown\n                light: 'rgb(230, 190, 140)',   // Light brown\n                dark: 'rgb(150, 100, 50)',     // Dark brown\n                white: 'rgb(255, 255, 255)',   // White\n                black: 'rgb(0, 0, 0)'          // Black\n            },\n            pattern: [\n                '................',\n                '..LLLLLLLLLL....',\n                '.LLLLLLLLLLLL...',\n                '.LLLMMMMMMLLL...',\n                '.LLMMMWWMMML...',\n                '.LLMMWWWWMMLL..',\n                '.LLMMWBBWMML...',\n                '.LLLMMMMMMLLL..',\n                '.LLLLMMMMLL....',\n                '..LLMMMLL......',\n                '..LLLL.........',\n                '................'\n            ]\n        },\n        'Vaporeon': {\n            colors: {\n                main: 'rgb(100, 150, 220)',     // Blue\n                light: 'rgb(150, 200, 255)',   // Light blue\n                dark: 'rgb(50, 100, 180)',     // Dark blue\n                white: 'rgb(200, 230, 255)',   // White-ish\n                black: 'rgb(0, 0, 0)'\n            },\n            pattern: [\n                '................',\n                '..LLLLLLLL......',\n                '.LLLLLLLLLLL....',\n                '.LLLMMMMMLL....',\n                '.LLMMWWMML.....',\n                '.LLMMWWMML.....',\n                '.LLLMMMMMLL....',\n                '.LLLLMMMLLL....',\n                '..LLLMMLL......',\n                '..LLLL.........',\n                '................',\n                '................'\n            ]\n        },\n        'Jolteon': {\n            colors: {\n                main: 'rgb(255, 220, 100)',     // Yellow\n                light: 'rgb(255, 240, 150)',   // Light yellow\n                dark: 'rgb(200, 170, 50)',     // Dark yellow\n                white: 'rgb(255, 255, 200)',   // White-ish\n                black: 'rgb(0, 0, 0)'\n            },\n            pattern: [\n                '................',\n                '..L.LLL.LLL....',\n                '.LL.LLLLLLL....',\n                '.LLLMMMMMLL....',\n                '.LLMMWWMML.....',\n                '.LLMMWWMML.....',\n                '.LLLMMMMLL.....',\n                '..LLMMLLLL.....',\n                '.L.LLML........',\n                '.L.LLL.........',\n                '................',\n                '................'\n            ]\n        },\n        'Flareon': {\n            colors: {\n                main: 'rgb(255, 150, 100)',     // Orange-red\n                light: 'rgb(255, 200, 150)',   // Light orange\n                dark: 'rgb(200, 100, 50)',     // Dark orange\n                white: 'rgb(255, 255, 200)',   // White-ish\n                black: 'rgb(0, 0, 0)'\n            },\n            pattern: [\n                '................',\n                '..LLLLLLLL......',\n                '.LLLLLLLLLLL....',\n                '.LLLMMMMMLL....',\n                '.LLMMWWMML.....',\n                '.LLMMWWMML.....',\n                '.LLLMMMMLL....',\n                '.LLLLMMML......',\n                '..LLLLL.........',\n                '................',\n                '................',\n                '................'\n            ]\n        },\n        'Espeon': {\n            colors: {\n                main: 'rgb(200, 150, 255)',     // Purple\n                light: 'rgb(230, 190, 255)',   // Light purple\n                dark: 'rgb(150, 100, 200)',    // Dark purple\n                white: 'rgb(255, 255, 255)',   // White\n                black: 'rgb(0, 0, 0)'\n            },\n            pattern: [\n                '................',\n                '..LLLLLLLL......',\n                '.LLLLLLLLLLL....',\n                '.LLLMMMMMLL....',\n                '.LLMMWWMML.....',\n                '.LLMMWWMML.....',\n                '.LLLMMMMLL....',\n                '.LLLLMMML......',\n                '..LLLLL.........',\n                '................',\n                '................',\n                '................'\n            ]\n        },\n        'Umbreon': {\n            colors: {\n                main: 'rgb(50, 50, 100)',       // Dark blue\n                light: 'rgb(100, 100, 150)',   // Light blue\n                dark: 'rgb(20, 20, 50)',       // Very dark\n                white: 'rgb(255, 255, 100)',   // Yellow rings\n                black: 'rgb(0, 0, 0)'\n            },\n            pattern: [\n                '................',\n                '..LLLLLLLL......',\n                '.LLLLLLLLLLL....',\n                '.LLLMMMMMLL....',\n                '.LLMMWWMML.....',\n                '.LLMMWWMML.....',\n                '.LLLMMMMLL....',\n                '.LLLLMMML......',\n                '..LLLLL.........',\n                '................',\n                '................',\n                '................'\n            ]\n        },\n        'Leafeon': {\n            colors: {\n                main: 'rgb(100, 200, 100)',     // Green\n                light: 'rgb(150, 230, 150)',   // Light green\n                dark: 'rgb(50, 150, 50)',      // Dark green\n                white: 'rgb(200, 255, 200)',   // White-ish\n                black: 'rgb(0, 0, 0)'\n            },\n            pattern: [\n                '................',\n                '..LLLLLLLL......',\n                '.LLLLLLLLLLL....',\n                '.LLLMMMMMLL....',\n                '.LLMMWWMML.....',\n                '.LLMMWWMML.....',\n                '.LLLMMMMLL....',\n                '.LLLLMMML......',\n                '..LLLLL.........',\n                '................',\n                '................',\n                '................'\n            ]\n        },\n        'Glaceon': {\n            colors: {\n                main: 'rgb(150, 200, 255)',     // Light blue\n                light: 'rgb(200, 230, 255)',   // Very light blue\n                dark: 'rgb(100, 150, 220)',    // Dark blue\n                white: 'rgb(220, 240, 255)',   // Icy white\n                black: 'rgb(0, 0, 0)'\n            },\n            pattern: [\n                '................',\n                '..LLLLLLLL......',\n                '.LLLLLLLLLLL....',\n                '.LLLMMMMMLL....',\n                '.LLMMWWMML.....',\n                '.LLMMWWMML.....',\n                '.LLLMMMMLL....',\n                '.LLLLMMML......',\n                '..LLLLL.........',\n                '................',\n                '................',\n                '................'\n            ]\n        },\n        'Sylveon': {\n            colors: {\n                main: 'rgb(255, 150, 200)',     // Pink\n                light: 'rgb(255, 200, 230)',   // Light pink\n                dark: 'rgb(200, 100, 150)',    // Dark pink\n                white: 'rgb(255, 255, 255)',   // White\n                black: 'rgb(0, 0, 0)'\n            },\n            pattern: [\n                '................',\n                '..LLLLLLLL......',\n                '.LLLLLLLLLLL....',\n                '.LLLMMMMMLL....',\n                '.LLMMWWMML.....',\n                '.LLMMWWMML.....',\n                '.LLLMMMMLL....',\n                '.LLLLMMML......',\n                '..LLLLL.........',\n                '................',\n                '................',\n                '................'\n            ]\n        }\n    };\n}\n\nconst eeveelutions = [\n    { name: 'Eevee', emoji: '🐹' },\n    { name: 'Vaporeon', emoji: '💧' },\n    { name: 'Jolteon', emoji: '⚡' },\n    { name: 'Flareon', emoji: '🔥' },\n    { name: 'Espeon', emoji: '✨' },\n    { name: 'Umbreon', emoji: '🌙' },\n    { name: 'Leafeon', emoji: '🍃' },\n    { name: 'Glaceon', emoji: '❄️' },\n    { name: 'Sylveon', emoji: '🎀' }\n];\n\nfunction renderEeveelutionGallery() {\n    const grid = document.getElementById('eeveelutionGrid');\n    grid.innerHTML = '';\n    \n    eeveelutions.forEach((eevee, index) => {\n        const item = document.createElement('div');\n        item.className = 'eeveelution-item';\n        item.innerHTML = `\n            <div class=\"eeveelution-preview\">${eevee.emoji}</div>\n            <div class=\"eeveelution-name\">${eevee.name}</div>\n        `;\n        item.addEventListener('click', () => {\n            copyEeveelution(eevee);\n            document.getElementById('eeveelutionGallery').classList.remove('active');\n        });\n        grid.appendChild(item);\n    });\n}\n\nfunction copyEeveelution(eevee) {\n    state.history.push({...state.pixelData});\n    const patterns = createEeveelutionPatterns();\n    const pattern = patterns[eevee.name];\n    \n    if (pattern) {\n        // Create pixel art from pattern\n        state.pixelData = [];\n        const colors = pattern.colors;\n        \n        for (let row = 0; row < state.gridSize; row++) {\n            for (let col = 0; col < state.gridSize; col++) {\n                if (row < pattern.pattern.length && col < pattern.pattern[0].length) {\n                    const char = pattern.pattern[row][col];\n                    let color = 'white';\n                    \n                    if (char === 'M') color = colors.main;\n                    else if (char === 'L') color = colors.light;\n                    else if (char === 'D') color = colors.dark;\n                    else if (char === 'W') color = colors.white;\n                    else if (char === 'B') color = colors.black;\n                    \n                    state.pixelData[getPixelIndex(row, col)] = color;\n                } else {\n                    state.pixelData[getPixelIndex(row, col)] = 'white';\n                }\n            }\n        }\n    }\n    createPixelCanvas();\n}\n\nfunction loadSavedArtworks() {\n    const list = document.getElementById('savedArtworksList');\n    list.innerHTML = '';\n    \n    if (Object.keys(state.savedArtworks).length === 0) {\n        list.innerHTML = '<p class=\"empty-message\">No saved artworks yet!</p>';\n        return;\n    }\n    \n    Object.entries(state.savedArtworks).forEach(([id, artwork]) => {\n        const item = document.createElement('div');\n        item.className = 'saved-artwork-item';\n        item.innerHTML = `\n            <div class=\"artwork-name\">${artwork.name}</div>\n            <div class=\"artwork-date\">${artwork.date}</div>\n        `;\n        item.addEventListener('click', () => loadArtwork(id, artwork));\n        list.appendChild(item);\n    });\n}\n\nfunction loadArtwork(id, artwork) {\n    state.gridSize = artwork.gridSize;\n    state.pixelData = [...artwork.data];\n    state.history = [];\n    document.getElementById('gridSizeSelect').value = state.gridSize;\n    createPixelCanvas();\n}\n\nfunction saveCurrentArtwork() {\n    if (state.currentUser) {\n        localStorage.setItem(`pixelart_current_${state.currentUser}`, JSON.stringify(state.pixelData));\n    }\n}\n\n// Save before leaving\nwindow.addEventListener('beforeunload', () => {\n    if (state.currentUser) {\n        saveCurrentArtwork();\n    }\n});\n\n// ===== EVENT LISTENERS =====\nfunction setupEventListeners() {\n    // Additional event listeners can go here\n}
+// Create simple pixel art patterns for each eeveelution
+function createEeveelutionPatterns() {
+    return {
+        'Eevee': {
+            colors: {
+                main: 'rgb(200, 150, 100)',    // Brown
+                light: 'rgb(230, 190, 140)',   // Light brown
+                dark: 'rgb(150, 100, 50)',     // Dark brown
+                white: 'rgb(255, 255, 255)',   // White
+                black: 'rgb(0, 0, 0)'          // Black
+            },
+            pattern: [
+                '................',
+                '..LLLLLLLLLL....',
+                '.LLLLLLLLLLLL...',
+                '.LLLMMMMMMLLL...',
+                '.LLMMMWWMMML...',
+                '.LLMMWWWWMMLL..',
+                '.LLMMWBBWMML...',
+                '.LLLMMMMMMLLL..',
+                '.LLLLMMMMLL....',
+                '..LLMMMLL......',
+                '..LLLL.........',
+                '................'
+            ]
+        },
+        'Vaporeon': {
+            colors: {
+                main: 'rgb(100, 150, 220)',     // Blue
+                light: 'rgb(150, 200, 255)',   // Light blue
+                dark: 'rgb(50, 100, 180)',     // Dark blue
+                white: 'rgb(200, 230, 255)',   // White-ish
+                black: 'rgb(0, 0, 0)'
+            },
+            pattern: [
+                '................',
+                '..LLLLLLLL......',
+                '.LLLLLLLLLLL....',
+                '.LLLMMMMMLL....',
+                '.LLMMWWMML.....',
+                '.LLMMWWMML.....',
+                '.LLLMMMMMLL....',
+                '.LLLLMMMLLL....',
+                '..LLLMMLL......',
+                '..LLLL.........',
+                '................',
+                '................'
+            ]
+        },
+        'Jolteon': {
+            colors: {
+                main: 'rgb(255, 220, 100)',     // Yellow
+                light: 'rgb(255, 240, 150)',   // Light yellow
+                dark: 'rgb(200, 170, 50)',     // Dark yellow
+                white: 'rgb(255, 255, 200)',   // White-ish
+                black: 'rgb(0, 0, 0)'
+            },
+            pattern: [
+                '................',
+                '..L.LLL.LLL....',
+                '.LL.LLLLLLL....',
+                '.LLLMMMMMLL....',
+                '.LLMMWWMML.....',
+                '.LLMMWWMML.....',
+                '.LLLMMMMLL.....',
+                '..LLMMLLLL.....',
+                '.L.LLML........',
+                '.L.LLL.........',
+                '................',
+                '................'
+            ]
+        },
+        'Flareon': {
+            colors: {
+                main: 'rgb(255, 150, 100)',     // Orange-red
+                light: 'rgb(255, 200, 150)',   // Light orange
+                dark: 'rgb(200, 100, 50)',     // Dark orange
+                white: 'rgb(255, 255, 200)',   // White-ish
+                black: 'rgb(0, 0, 0)'
+            },
+            pattern: [
+                '................',
+                '..LLLLLLLL......',
+                '.LLLLLLLLLLL....',
+                '.LLLMMMMMLL....',
+                '.LLMMWWMML.....',
+                '.LLMMWWMML.....',
+                '.LLLMMMMLL....',
+                '.LLLLMMML......',
+                '..LLLLL.........',
+                '................',
+                '................',
+                '................'
+            ]
+        },
+        'Espeon': {
+            colors: {
+                main: 'rgb(200, 150, 255)',     // Purple
+                light: 'rgb(230, 190, 255)',   // Light purple
+                dark: 'rgb(150, 100, 200)',    // Dark purple
+                white: 'rgb(255, 255, 255)',   // White
+                black: 'rgb(0, 0, 0)'
+            },
+            pattern: [
+                '................',
+                '..LLLLLLLL......',
+                '.LLLLLLLLLLL....',
+                '.LLLMMMMMLL....',
+                '.LLMMWWMML.....',
+                '.LLMMWWMML.....',
+                '.LLLMMMMLL....',
+                '.LLLLMMML......',
+                '..LLLLL.........',
+                '................',
+                '................',
+                '................'
+            ]
+        },
+        'Umbreon': {
+            colors: {
+                main: 'rgb(50, 50, 100)',       // Dark blue
+                light: 'rgb(100, 100, 150)',   // Light blue
+                dark: 'rgb(20, 20, 50)',       // Very dark
+                white: 'rgb(255, 255, 100)',   // Yellow rings
+                black: 'rgb(0, 0, 0)'
+            },
+            pattern: [
+                '................',
+                '..LLLLLLLL......',
+                '.LLLLLLLLLLL....',
+                '.LLLMMMMMLL....',
+                '.LLMMWWMML.....',
+                '.LLMMWWMML.....',
+                '.LLLMMMMLL....',
+                '.LLLLMMML......',
+                '..LLLLL.........',
+                '................',
+                '................',
+                '................'
+            ]
+        },
+        'Leafeon': {
+            colors: {
+                main: 'rgb(100, 200, 100)',     // Green
+                light: 'rgb(150, 230, 150)',   // Light green
+                dark: 'rgb(50, 150, 50)',      // Dark green
+                white: 'rgb(200, 255, 200)',   // White-ish
+                black: 'rgb(0, 0, 0)'
+            },
+            pattern: [
+                '................',
+                '..LLLLLLLL......',
+                '.LLLLLLLLLLL....',
+                '.LLLMMMMMLL....',
+                '.LLMMWWMML.....',
+                '.LLMMWWMML.....',
+                '.LLLMMMMLL....',
+                '.LLLLMMML......',
+                '..LLLLL.........',
+                '................',
+                '................',
+                '................'
+            ]
+        },
+        'Glaceon': {
+            colors: {
+                main: 'rgb(150, 200, 255)',     // Light blue
+                light: 'rgb(200, 230, 255)',   // Very light blue
+                dark: 'rgb(100, 150, 220)',    // Dark blue
+                white: 'rgb(220, 240, 255)',   // Icy white
+                black: 'rgb(0, 0, 0)'
+            },
+            pattern: [
+                '................',
+                '..LLLLLLLL......',
+                '.LLLLLLLLLLL....',
+                '.LLLMMMMMLL....',
+                '.LLMMWWMML.....',
+                '.LLMMWWMML.....',
+                '.LLLMMMMLL....',
+                '.LLLLMMML......',
+                '..LLLLL.........',
+                '................',
+                '................',
+                '................'
+            ]
+        },
+        'Sylveon': {
+            colors: {
+                main: 'rgb(255, 150, 200)',     // Pink
+                light: 'rgb(255, 200, 230)',   // Light pink
+                dark: 'rgb(200, 100, 150)',    // Dark pink
+                white: 'rgb(255, 255, 255)',   // White
+                black: 'rgb(0, 0, 0)'
+            },
+            pattern: [
+                '................',
+                '..LLLLLLLL......',
+                '.LLLLLLLLLLL....',
+                '.LLLMMMMMLL....',
+                '.LLMMWWMML.....',
+                '.LLMMWWMML.....',
+                '.LLLMMMMLL....',
+                '.LLLLMMML......',
+                '..LLLLL.........',
+                '................',
+                '................',
+                '................'
+            ]
+        }
+    };
+}
+
+const eeveelutions = [
+    { name: 'Eevee', emoji: '🐹' },
+    { name: 'Vaporeon', emoji: '💧' },
+    { name: 'Jolteon', emoji: '⚡' },
+    { name: 'Flareon', emoji: '🔥' },
+    { name: 'Espeon', emoji: '✨' },
+    { name: 'Umbreon', emoji: '🌙' },
+    { name: 'Leafeon', emoji: '🍃' },
+    { name: 'Glaceon', emoji: '❄️' },
+    { name: 'Sylveon', emoji: '🎀' }
+];
+
+function renderEeveelutionGallery() {
+    const grid = document.getElementById('eeveelutionGrid');
+    grid.innerHTML = '';
+    
+    eeveelutions.forEach((eevee, index) => {
+        const item = document.createElement('div');
+        item.className = 'eeveelution-item';
+        item.innerHTML = `
+            <div class="eeveelution-preview">${eevee.emoji}</div>
+            <div class="eeveelution-name">${eevee.name}</div>
+        `;
+        item.addEventListener('click', () => {
+            copyEeveelution(eevee);
+            document.getElementById('eeveelutionGallery').classList.remove('active');
+        });
+        grid.appendChild(item);
+    });
+}
+
+function copyEeveelution(eevee) {
+    state.history.push({...state.pixelData});
+    const patterns = createEeveelutionPatterns();
+    const pattern = patterns[eevee.name];
+    
+    if (pattern) {
+        // Create pixel art from pattern
+        state.pixelData = [];
+        const colors = pattern.colors;
+        
+        for (let row = 0; row < state.gridSize; row++) {
+            for (let col = 0; col < state.gridSize; col++) {
+                if (row < pattern.pattern.length && col < pattern.pattern[0].length) {
+                    const char = pattern.pattern[row][col];
+                    let color = 'white';
+                    
+                    if (char === 'M') color = colors.main;
+                    else if (char === 'L') color = colors.light;
+                    else if (char === 'D') color = colors.dark;
+                    else if (char === 'W') color = colors.white;
+                    else if (char === 'B') color = colors.black;
+                    
+                    state.pixelData[getPixelIndex(row, col)] = color;
+                } else {
+                    state.pixelData[getPixelIndex(row, col)] = 'white';
+                }
+            }
+        }
+    }
+    createPixelCanvas();
+}
+
+function loadSavedArtworks() {
+    const list = document.getElementById('savedArtworksList');
+    list.innerHTML = '';
+    
+    if (Object.keys(state.savedArtworks).length === 0) {
+        list.innerHTML = '<p class="empty-message">No saved artworks yet!</p>';
+        return;
+    }
+    
+    Object.entries(state.savedArtworks).forEach(([id, artwork]) => {
+        const item = document.createElement('div');
+        item.className = 'saved-artwork-item';
+        item.innerHTML = `
+            <div class="artwork-name">${artwork.name}</div>
+            <div class="artwork-date">${artwork.date}</div>
+        `;
+        item.addEventListener('click', () => loadArtwork(id, artwork));
+        list.appendChild(item);
+    });
+}
+
+function loadArtwork(id, artwork) {
+    state.gridSize = artwork.gridSize;
+    state.pixelData = [...artwork.data];
+    state.history = [];
+    document.getElementById('gridSizeSelect').value = state.gridSize;
+    createPixelCanvas();
+}
+
+function saveCurrentArtwork() {
+    if (state.currentUser) {
+        localStorage.setItem(`pixelart_current_${state.currentUser}`, JSON.stringify(state.pixelData));
+    }
+}
+
+// Save before leaving
+window.addEventListener('beforeunload', () => {
+    if (state.currentUser) {
+        saveCurrentArtwork();
+    }
+});
+
+// ===== EVENT LISTENERS =====
+function setupEventListeners() {
+    // Additional event listeners can go here
+}
