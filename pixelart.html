@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Art Creator 🌈</title>
+    <link rel="stylesheet" href="pixelart.css">
+</head>
+<body>
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen" class="screen active">
+        <div class="login-container">
+            <h1>🌈 Pixel Art Creator 🌈</h1>
+            <p>Create, save, and share your pixel art!</p>
+            
+            <div class="login-form">
+                <input type="text" id="usernameInput" placeholder="Enter username" maxlength="20">
+                <button id="loginBtn" class="btn-primary">Login / Create Account</button>
+                <p class="info-text">✨ No password needed - just pick a username!</p>
+            </div>
+        </div>
+    </body>
+    
+    <!-- MAIN PIXEL ART CREATOR -->
+    <div id="creatorScreen" class="screen">
+        <!-- HEADER -->
+        <header class="creator-header">
+            <div class="header-left">
+                <h1>🌈 Pixel Art Creator</h1>
+                <span id="userDisplay" class="user-display"></span>
+            </div>
+            <div class="header-right">
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+                <a href="index.html" class="btn-secondary">Back to Home</a>
+            </div>
+        </header>
+        
+        <div class="creator-container">
+            <!-- LEFT SIDEBAR - TOOLS -->
+            <div class="sidebar left-sidebar">
+                <div class="tool-section">
+                    <h3>🎨 Grid Size</h3>
+                    <select id="gridSizeSelect" class="tool-input">
+                        <option value="16">16x16</option>
+                        <option value="24" selected>24x24</option>
+                        <option value="32">32x32</option>
+                        <option value="48">48x48</option>
+                    </select>
+                </div>
+                
+                <div class="tool-section">
+                    <h3>🎨 Color Picker</h3>
+                    <div class="color-sliders">
+                        <div class="slider-group">
+                            <label>Red</label>
+                            <input type="range" id="redSlider" min="0" max="255" value="255">
+                            <span id="redValue">255</span>
+                        </div>
+                        <div class="slider-group">
+                            <label>Green</label>
+                            <input type="range" id="greenSlider" min="0" max="255" value="100">
+                            <span id="greenValue">100</span>
+                        </div>
+                        <div class="slider-group">
+                            <label>Blue</label>
+                            <input type="range" id="blueSlider" min="0" max="255" value="200">
+                            <span id="blueValue">200</span>
+                        </div>
+                    </div>
+                    <div id="colorPreview" class="color-preview"></div>
+                </div>
+                
+                <div class="tool-section">
+                    <h3>🎮 Tools</h3>
+                    <button id="clearBtn" class="btn-warning">🗑️ Clear</button>
+                    <button id="undoBtn" class="btn-secondary">↶ Undo</button>
+                    <button id="eeveelutionBtn" class="btn-primary">👾 Eeveelutions</button>
+                </div>
+                
+                <div class="tool-section">
+                    <h3>💾 Save/Load</h3>
+                    <button id="saveBtn" class="btn-primary">💾 Save Artwork</button>
+                    <button id="loadBtn" class="btn-secondary">📂 Load Artwork</button>
+                </div>
+            </div>
+            
+            <!-- CENTER - CANVAS -->
+            <div class="canvas-area">
+                <div id="pixelCanvas" class="pixel-canvas"></div>
+            </div>
+            
+            <!-- RIGHT SIDEBAR - SAVED ARTWORKS -->
+            <div class="sidebar right-sidebar">
+                <h3>📚 My Artworks</h3>
+                <div id="savedArtworksList" class="saved-artworks-list">
+                    <p class="empty-message">No saved artworks yet!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- EEVEELUTION GALLERY -->
+    <div id="eeveelutionGallery" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>👾 Choose an Eeveelution to Copy</h2>
+                <button id="closeGalleryBtn" class="btn-close">✕</button>
+            </div>
+            <div id="eeveelutionGrid" class="eeveelution-grid">
+                <!-- Eeveelutions will be generated here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- SAVE ARTWORK DIALOG -->
+    <div id="saveDialog" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💾 Save Your Artwork</h2>
+                <button id="closeSaveDialogBtn" class="btn-close">✕</button>
+            </div>
+            <input type="text" id="artworkNameInput" placeholder="Give your artwork a name..." maxlength="30">
+            <div class="modal-buttons">
+                <button id="confirmSaveBtn" class="btn-primary">Save</button>
+                <button id="cancelSaveBtn" class="btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="pixelart.js"></script>
+</body>
+</html>
