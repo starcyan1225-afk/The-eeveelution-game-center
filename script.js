@@ -46,7 +46,7 @@ class FallingPetal {
     }
     
     animate() {
-        this.life -= 0.0008;
+        this.life -= 0.0005;
         this.element.style.opacity = this.life;
         
         // Move the petal
@@ -68,11 +68,11 @@ class FallingPetal {
     }
 }
 
-// Create falling petals more frequently (one every 0.8-1.2 seconds)
+// Create falling petals more frequently (one every 0.6-1 second)
 function startFallingPetals() {
     setInterval(() => {
         new FallingPetal();
-    }, 800 + Math.random() * 400);
+    }, 600 + Math.random() * 400);
 }
 
 // Start the falling petals when page loads
