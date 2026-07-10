@@ -8,266 +8,312 @@ const state = {
     history: [],
     currentColor: 'rgb(255, 100, 200)',
     currentBrush: 'normal',
-    savedArtworks: {},
-    currentTab: 'creator' // 'creator' or 'eeveelution'
+    savedArtworks: {}
 };
 
-// Eeveelution pixel art patterns (24x24 grid)
+// Color palette for Eeveelutions
+const colors = {
+    tan: 'rgb(200, 150, 80)',      // Eevee body
+    brown: 'rgb(120, 80, 40)',     // Dark brown
+    white: 'rgb(255, 255, 255)',   // White
+    black: 'rgb(0, 0, 0)',         // Black
+    pink: 'rgb(255, 100, 150)',    // Pink
+    
+    // Vaporeon
+    blue: 'rgb(100, 180, 220)',    // Blue body
+    lightblue: 'rgb(150, 200, 240)',
+    
+    // Jolteon
+    yellow: 'rgb(255, 220, 80)',   // Yellow body
+    
+    // Flareon
+    red: 'rgb(240, 120, 80)',      // Red/orange body
+    orange: 'rgb(255, 160, 100)',
+    
+    // Espeon
+    purple: 'rgb(200, 150, 255)',  // Purple body
+    violet: 'rgb(180, 100, 220)',
+    
+    // Umbreon
+    darkblue: 'rgb(40, 40, 80)',   // Dark blue/black
+    gold: 'rgb(255, 200, 80)',     // Gold rings
+    
+    // Leafeon
+    green: 'rgb(100, 180, 80)',    // Green body
+    lightgreen: 'rgb(150, 220, 120)',
+    
+    // Glaceon
+    cyan: 'rgb(150, 220, 255)',    // Cyan body
+    lightcyan: 'rgb(200, 240, 255)',
+    
+    // Sylveon
+    lightpink: 'rgb(255, 200, 220)',
+    magenta: 'rgb(220, 100, 180)'
+};
+
+// Eeveelution patterns (16x16 for better detail)
 const eeveelutionPatterns = {
-    'Eevee': [
-        '........................',
-        '........................',
-        '........LLLLLL..........',
-        '.......LLLLLLLLL........',
-        '.....LLLLMMMMMLLL.......',
-        '....LLLMMMWWMMMLL......',
-        '....LLMMWWBBWWMMLL......',
-        '....LLMMWWWWMMLL.......',
-        '....LLLMMMMMMLLL.......',
-        '.....LLLLMMLLLL........',
-        '......LLLMMLL.........',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................'
-    ],
-    'Vaporeon': [
-        '........................',
-        '........................',
-        '........LLLLLL..........',
-        '.......LLLLLLLLL........',
-        '.....LLLLBBBBLLLL.......',
-        '....LLLBBWWBBBBLL......',
-        '....LLBBWWKKWWBBLL......',
-        '....LLBBWWWWBBLL.......',
-        '....LLLBBBBBBLLL.......',
-        '.....LLLLBBLLL.........',
-        '......LLLBLL.........',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................'
-    ],
-    'Jolteon': [
-        '........................',
-        '........................',
-        '........YYYYYY..........',
-        '.......YYYYYYYYY........',
-        '.....YYYYGGGGYYYYY......',
-        '....YYYGGWWGGGGYYY......',
-        '....YYGGWWKKWWGGYYY......',
-        '....YYGGWWWWGGYYY.......',
-        '....YYYGGGGGGYYY.......',
-        '.....YYYYGGYYYY.........',
-        '......YYYGYY.........',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................'
-    ],
-    'Flareon': [
-        '........................',
-        '........................',
-        '........RRRRRR..........',
-        '.......RRRRRRRRR........',
-        '.....RRRROOOORRRR.......',
-        '....RRROOOWWOORRRR......',
-        '....RROOWWKKWWOORRR......',
-        '....RROOWWWWOORR.......',
-        '....RRRROOOOORRR.......',
-        '.....RRRROORRR.........',
-        '......RRRROR.........',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................'
-    ],
-    'Espeon': [
-        '........................',
-        '........................',
-        '........PPPPPP..........',
-        '.......PPPPPPPP........',
-        '.....PPPPVVVVPPPP.......',
-        '....PPPVVWWVVVPPP......',
-        '....PPVVWWKKWWVVPP......',
-        '....PPVVWWWWVVPP.......',
-        '....PPPVVVVVVPPP.......',
-        '.....PPPPPVVPPP.........',
-        '......PPPPVP.........',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................'
-    ],
-    'Umbreon': [
-        '........................',
-        '........................',
-        '........DDDDDD..........',
-        '.......DDDDDDDD........',
-        '.....DDDDUUUUDDDD.......',
-        '....DDDUURRUUURRD......',
-        '....DDUURRKKRRUUDD......',
-        '....DDUURRRRUURDD.......',
-        '....DDDDUURUUDDD.......',
-        '.....DDDDUUUDD.........',
-        '......DDDUU.........',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................'
-    ],
-    'Leafeon': [
-        '........................',
-        '........................',
-        '........GGGGGG..........',
-        '.......GGGGGGGG........',
-        '.....GGGGEEEGGGG.......',
-        '....GGGEEEWWEEEGG......',
-        '....GGEEEWWKKWWEGG......',
-        '....GGEEEWWWWEGG.......',
-        '....GGGEEEEEEGG.......',
-        '.....GGGGGEEGG.........',
-        '......GGGGEE.........',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................'
-    ],
-    'Glaceon': [
-        '........................',
-        '........................',
-        '........CCCCCC..........',
-        '.......CCCCCCCC........',
-        '.....CCCCTTTCCCC.......',
-        '....CCCTTWTTTTTCC......',
-        '....CCTTWTTKTWTTCC......',
-        '....CCTTWTTWTTCC.......',
-        '....CCCCTTTTTCC.......',
-        '.....CCCCCCTTCC.........',
-        '......CCCCTC.........',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................'
-    ],
-    'Sylveon': [
-        '........................',
-        '........................',
-        '........FFFFFF..........',
-        '.......FFFFFFFF........',
-        '.....FFFFEEEFFF.......',
-        '....FFFEEWWEEFFFF......',
-        '....FFEEWWKKWWEEFF......',
-        '....FFEEWWWWEEEFF.......',
-        '....FFFEEEEEEEFF.......',
-        '.....FFFFFEEFFF.........',
-        '......FFFFEF.........',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................',
-        '........................'
-    ]
-};
-
-const colorMap = {
-    'L': 'rgb(200, 150, 100)',  // Light brown
-    'M': 'rgb(180, 120, 80)',   // Medium brown
-    'D': 'rgb(100, 50, 30)',    // Dark brown
-    'B': 'rgb(100, 150, 220)',  // Blue
-    'G': 'rgb(100, 200, 100)',  // Green
-    'E': 'rgb(150, 230, 150)',  // Light green
-    'Y': 'rgb(255, 220, 100)',  // Yellow
-    'R': 'rgb(255, 150, 100)',  // Red/Orange
-    'O': 'rgb(255, 180, 100)',  // Orange
-    'P': 'rgb(200, 150, 255)',  // Purple
-    'V': 'rgb(220, 180, 255)',  // Light purple
-    'U': 'rgb(50, 50, 100)',    // Dark blue
-    'C': 'rgb(150, 200, 255)',  // Cyan/Light blue
-    'T': 'rgb(180, 230, 255)',  // Turquoise
-    'F': 'rgb(255, 150, 200)',  // Pink
-    'W': 'rgb(255, 255, 255)',  // White
-    'K': 'rgb(0, 0, 0)'         // Black
+    'Eevee': {
+        width: 16,
+        height: 16,
+        data: [
+            '................',
+            '.......tt.......',
+            '....tttttttttt..',
+            '..ttttttttttttt.',
+            '.tttbbbbbbbttttt',
+            '.ttbwwbwwbwbttt.',
+            '.ttbwwbwwbwbttt.',
+            '.ttbbbbbbbbbttt.',
+            '.ttttpppptttttt.',
+            '.tttpppppppttt..',
+            '..ttpppppptt....',
+            '...tttttttt.....',
+            '...tt....tt.....',
+            '..tt......tt....',
+            '.tt........tt...',
+            'tt..........tt..'
+        ],
+        colorMap: {
+            't': colors.tan,
+            'b': colors.brown,
+            'w': colors.white,
+            'p': colors.pink,
+            '.': 'transparent'
+        }
+    },
+    'Vaporeon': {
+        width: 16,
+        height: 16,
+        data: [
+            '................',
+            '......uu........',
+            '....uuuuuuuu....',
+            '..uuuuuuuuuuuu..',
+            '.uubbbbbbbuuuuu.',
+            '.uubwwbwwbwbuuu.',
+            '.uubwwbwwbwbuuu.',
+            '.uubbbbbbbbbuuu.',
+            '.uuuutttuuuuuuu.',
+            '.uuutttttuuuu...',
+            '..uutttttuuu....',
+            '...uuuuuuu......',
+            '....uu..uu......',
+            '...uu....uu.....',
+            '..uu......uu....',
+            '.uu........uu...'
+        ],
+        colorMap: {
+            'u': colors.blue,
+            'b': colors.darkblue,
+            'w': colors.white,
+            't': colors.lightblue,
+            '.': 'transparent'
+        }
+    },
+    'Jolteon': {
+        width: 16,
+        height: 16,
+        data: [
+            '....yy..yy......',
+            '...yyyy..yyyy....',
+            '..yyyyyy..yyyy...',
+            '.yyyy..yy...yy...',
+            'yyybbbbbbbyyyyy.',
+            'yybwwbwwbwbyyyy.',
+            'yybwwbwwbwbyyyy.',
+            'yybbbbbbbbbyyy..',
+            'yyyppppppyyyyy..',
+            'yyyypppppyyyy...',
+            '..yyyppppyy.....',
+            '...yyyyyyy......',
+            '....yy..yy......',
+            '...yy....yy.....',
+            '..yy......yy....',
+            '.yy........yy...'
+        ],
+        colorMap: {
+            'y': colors.yellow,
+            'b': colors.brown,
+            'w': colors.white,
+            'p': colors.pink,
+            '.': 'transparent'
+        }
+    },
+    'Flareon': {
+        width: 16,
+        height: 16,
+        data: [
+            '................',
+            '.......rr.......',
+            '....rrrrrrrrr...',
+            '..rrrrrrrrrrrrr.',
+            '.rrrbbbbbbbrrrr.',
+            '.rrbwwbwwbwbrr..',
+            '.rrbwwbwwbwbrr..',
+            '.rrbbbbbbbbrr...',
+            '.rrrroooorrrrr..',
+            '.rrrrooooorooo..',
+            '..rrooooooro....',
+            '...rrrrrrr......',
+            '....rr..rr......',
+            '...rr....rr.....',
+            '..rr......rr....',
+            '.rr........rr...'
+        ],
+        colorMap: {
+            'r': colors.red,
+            'b': colors.brown,
+            'w': colors.white,
+            'o': colors.orange,
+            '.': 'transparent'
+        }
+    },
+    'Espeon': {
+        width: 16,
+        height: 16,
+        data: [
+            '....pp..pp......',
+            '...pppp..pppp...',
+            '..pppppp..pppp..',
+            '.pppp..pp...pp..',
+            'pppbbbbbbpppppp.',
+            'ppbwwbwwbwbpppp.',
+            'ppbwwbwwbwbpppp.',
+            'ppbbbbbbbbbppp..',
+            'pppvvvvvvpppppp.',
+            'ppppvvvvvppppp..',
+            '..ppvvvvvpp.....',
+            '...pppppp.......',
+            '....pp..pp......',
+            '...pp....pp.....',
+            '..pp......pp....',
+            '.pp........pp...'
+        ],
+        colorMap: {
+            'p': colors.purple,
+            'b': colors.brown,
+            'w': colors.white,
+            'v': colors.violet,
+            '.': 'transparent'
+        }
+    },
+    'Umbreon': {
+        width: 16,
+        height: 16,
+        data: [
+            '................',
+            '.......dd.......',
+            '....dddddddddd..',
+            '..dddddddddddddd',
+            '.dddbbbbbbddddd.',
+            '.ddbwwbwwbwbddd.',
+            '.ddbwwbwwbwbddd.',
+            '.ddbbbbbbbbbddd.',
+            '.dddggggggddddd.',
+            '.dddggggggdddd..',
+            '..dggggggddd....',
+            '...dddddddd.....',
+            '....gg..gg......',
+            '...gg....gg.....',
+            '..gg......gg....',
+            '.gg........gg...'
+        ],
+        colorMap: {
+            'd': colors.darkblue,
+            'b': colors.brown,
+            'w': colors.white,
+            'g': colors.gold,
+            '.': 'transparent'
+        }
+    },
+    'Leafeon': {
+        width: 16,
+        height: 16,
+        data: [
+            '....ll..ll......',
+            '...llll..llll...',
+            '..llllll..llll..',
+            '.llll..ll...ll..',
+            'lllbbbbbbllllll.',
+            'llbwwbwwbwbllll.',
+            'llbwwbwwbwbllll.',
+            'llbbbbbbbbblll..',
+            'llllggggggllll..',
+            'lllggggggglll...',
+            '..llggggglll....',
+            '...lllllll......',
+            '....ll..ll......',
+            '...ll....ll.....',
+            '..ll......ll....',
+            '.ll........ll...'
+        ],
+        colorMap: {
+            'l': colors.green,
+            'b': colors.brown,
+            'w': colors.white,
+            'g': colors.lightgreen,
+            '.': 'transparent'
+        }
+    },
+    'Glaceon': {
+        width: 16,
+        height: 16,
+        data: [
+            '................',
+            '.......cc.......',
+            '....cccccccccc..',
+            '..cccccccccccccc',
+            '.cccbbbbbbcccccc',
+            '.ccbwwbwwbwbccc.',
+            '.ccbwwbwwbwbccc.',
+            '.ccbbbbbbbbcccc.',
+            '.cccttttttccccc.',
+            '.ccctttttcccc...',
+            '..cctttttcc.....',
+            '...cccccccc.....',
+            '....cc..cc......',
+            '...cc....cc.....',
+            '..cc......cc....',
+            '.cc........cc...'
+        ],
+        colorMap: {
+            'c': colors.cyan,
+            'b': colors.darkblue,
+            'w': colors.white,
+            't': colors.lightcyan,
+            '.': 'transparent'
+        }
+    },
+    'Sylveon': {
+        width: 16,
+        height: 16,
+        data: [
+            '................',
+            '.......ff.......',
+            '....ffffffff....',
+            '..ffffffffff....',
+            '.fffbbbbbbffff..',
+            '.ffbwwbwwbwbff..',
+            '.ffbwwbwwbwbff..',
+            '.ffbbbbbbbbff...',
+            '.fffmmmmmmffff..',
+            '.fffmmmmmfffff..',
+            '..ffmmmmfffm....',
+            '...ffffffff.....',
+            '.mm........mm...',
+            'mm..........mm..',
+            'mm..........mm..',
+            '.mm........mm...'
+        ],
+        colorMap: {
+            'f': colors.lightpink,
+            'b': colors.brown,
+            'w': colors.white,
+            'm': colors.magenta,
+            '.': 'transparent'
+        }
+    }
 };
 
 const eeveelutions = [
@@ -282,12 +328,10 @@ const eeveelutions = [
     { name: 'Sylveon', emoji: '🎀' }
 ];
 
-// Initialize application when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Page loaded, initializing...');
+// Initialize application
+window.addEventListener('load', () => {
     loadUserData();
     updateLoginUI();
-    setupAllListeners();
 });
 
 // ===== LOGIN SYSTEM =====
@@ -304,7 +348,7 @@ function updateLoginUI() {
     if (state.currentUser) {
         document.getElementById('loginScreen').classList.remove('active');
         document.getElementById('creatorScreen').classList.add('active');
-        document.getElementById('userDisplay').textContent = '👤 ' + state.currentUser;
+        document.getElementById('userDisplay').textContent = `👤 ${state.currentUser}`;
         initializeCreator();
         loadSavedArtworks();
     } else {
@@ -313,169 +357,31 @@ function updateLoginUI() {
     }
 }
 
-function setupAllListeners() {
-    // LOGIN BUTTON
-    const loginBtn = document.getElementById('loginBtn');
-    if (loginBtn) {
-        loginBtn.addEventListener('click', function() {
-            const username = document.getElementById('usernameInput').value.trim();
-            if (username) {
-                state.currentUser = username;
-                localStorage.setItem('pixelart_currentUser', username);
-                state.savedArtworks = JSON.parse(localStorage.getItem(`pixelart_artworks_${username}`) || '{}');
-                state.pixelData = JSON.parse(localStorage.getItem(`pixelart_current_${username}`) || '[]');
-                updateLoginUI();
-                document.getElementById('usernameInput').value = '';
-            } else {
-                alert('Please enter a username!');
-            }
-        });
+document.getElementById('loginBtn').addEventListener('click', () => {
+    const username = document.getElementById('usernameInput').value.trim();
+    if (username) {
+        state.currentUser = username;
+        localStorage.setItem('pixelart_currentUser', username);
+        state.savedArtworks = JSON.parse(localStorage.getItem(`pixelart_artworks_${username}`) || '{}');
+        state.pixelData = JSON.parse(localStorage.getItem(`pixelart_current_${username}`) || '[]');
+        updateLoginUI();
+        document.getElementById('usernameInput').value = '';
     }
+});
 
-    // LOGOUT BUTTON
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            saveCurrentArtwork();
-            state.currentUser = null;
-            localStorage.removeItem('pixelart_currentUser');
-            state.pixelData = [];
-            state.history = [];
-            updateLoginUI();
-        });
-    }
-
-    // COLOR SLIDERS
-    const redSlider = document.getElementById('redSlider');
-    const greenSlider = document.getElementById('greenSlider');
-    const blueSlider = document.getElementById('blueSlider');
-    
-    if (redSlider) redSlider.addEventListener('input', updateColorPreview);
-    if (greenSlider) greenSlider.addEventListener('input', updateColorPreview);
-    if (blueSlider) blueSlider.addEventListener('input', updateColorPreview);
-
-    // BRUSH MODE
-    const brushMode = document.getElementById('brushMode');
-    if (brushMode) {
-        brushMode.addEventListener('change', function(e) {
-            state.currentBrush = e.target.value;
-        });
-    }
-
-    // GRID SIZE
-    const gridSizeSelect = document.getElementById('gridSizeSelect');
-    if (gridSizeSelect) {
-        gridSizeSelect.addEventListener('change', function(e) {
-            state.gridSize = parseInt(e.target.value);
-            state.pixelData = [];
-            state.history = [];
-            createPixelCanvas();
-        });
-    }
-
-    // CLEAR BUTTON
-    const clearBtn = document.getElementById('clearBtn');
-    if (clearBtn) {
-        clearBtn.addEventListener('click', function() {
-            if (confirm('Are you sure you want to clear the canvas?')) {
-                state.history.push({...state.pixelData});
-                state.pixelData = [];
-                createPixelCanvas();
-            }
-        });
-    }
-
-    // UNDO BUTTON
-    const undoBtn = document.getElementById('undoBtn');
-    if (undoBtn) {
-        undoBtn.addEventListener('click', function() {
-            if (state.history.length > 0) {
-                state.pixelData = state.history.pop();
-                createPixelCanvas();
-            }
-        });
-    }
-
-    // EEVEELUTION BUTTON
-    const eeveelutionBtn = document.getElementById('eeveelutionBtn');
-    if (eeveelutionBtn) {
-        eeveelutionBtn.addEventListener('click', function() {
-            state.currentTab = 'eeveelution';
-            switchTab('eeveelution');
-        });
-    }
-
-    // CLOSE EEVEELUTION TAB
-    const closeEeveeBtn = document.getElementById('closeEeveeBtn');
-    if (closeEeveeBtn) {
-        closeEeveeBtn.addEventListener('click', function() {
-            state.currentTab = 'creator';
-            switchTab('creator');
-        });
-    }
-
-    // SAVE BUTTON
-    const saveBtn = document.getElementById('saveBtn');
-    if (saveBtn) {
-        saveBtn.addEventListener('click', function() {
-            document.getElementById('saveDialog').classList.add('active');
-        });
-    }
-
-    // CLOSE SAVE DIALOG
-    const closeSaveDialogBtn = document.getElementById('closeSaveDialogBtn');
-    if (closeSaveDialogBtn) {
-        closeSaveDialogBtn.addEventListener('click', function() {
-            document.getElementById('saveDialog').classList.remove('active');
-        });
-    }
-
-    // CANCEL SAVE
-    const cancelSaveBtn = document.getElementById('cancelSaveBtn');
-    if (cancelSaveBtn) {
-        cancelSaveBtn.addEventListener('click', function() {
-            document.getElementById('saveDialog').classList.remove('active');
-        });
-    }
-
-    // CONFIRM SAVE
-    const confirmSaveBtn = document.getElementById('confirmSaveBtn');
-    if (confirmSaveBtn) {
-        confirmSaveBtn.addEventListener('click', function() {
-            const name = document.getElementById('artworkNameInput').value.trim();
-            if (name) {
-                const id = Date.now();
-                state.savedArtworks[id] = {
-                    name: name,
-                    data: [...state.pixelData],
-                    date: new Date().toLocaleDateString(),
-                    gridSize: state.gridSize
-                };
-                localStorage.setItem(`pixelart_artworks_${state.currentUser}`, JSON.stringify(state.savedArtworks));
-                loadSavedArtworks();
-                document.getElementById('saveDialog').classList.remove('active');
-                document.getElementById('artworkNameInput').value = '';
-                alert('✨ Artwork saved!');
-            }
-        });
-    }
-}
-
-// ===== TAB SWITCHING =====
-function switchTab(tabName) {
-    if (tabName === 'creator') {
-        document.getElementById('creatorTab').classList.add('active');
-        document.getElementById('eeveelutionTab').classList.remove('active');
-    } else if (tabName === 'eeveelution') {
-        document.getElementById('creatorTab').classList.remove('active');
-        document.getElementById('eeveelutionTab').classList.add('active');
-        renderEeveelutionGallery();
-    }
-}
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    saveCurrentArtwork();
+    state.currentUser = null;
+    localStorage.removeItem('pixelart_currentUser');
+    state.pixelData = [];
+    state.history = [];
+    updateLoginUI();
+});
 
 // ===== CREATOR INITIALIZATION =====
 function initializeCreator() {
     createPixelCanvas();
+    setupEventListeners();
     updateColorPreview();
 }
 
@@ -483,9 +389,10 @@ function createPixelCanvas() {
     const canvas = document.getElementById('pixelCanvas');
     canvas.innerHTML = '';
     const size = state.gridSize;
-    canvas.style.gridTemplateColumns = 'repeat(' + size + ', 1fr)';
-    canvas.style.gridTemplateRows = 'repeat(' + size + ', 1fr)';
+    canvas.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    canvas.style.gridTemplateRows = `repeat(${size}, 1fr)`;
     
+    // Calculate pixel size for 400px canvas
     const pixelSize = Math.max(8, Math.floor(400 / size));
     
     for (let i = 0; i < size * size; i++) {
@@ -499,28 +406,12 @@ function createPixelCanvas() {
             pixel.style.background = state.pixelData[i];
         }
         
-        pixel.addEventListener('click', function() {
-            onPixelClick(i, pixel);
-        });
-        pixel.addEventListener('mouseenter', function(e) {
-            if (e.buttons === 1) onPixelClick(i, pixel);
+        pixel.addEventListener('click', () => paintPixel(i, pixel));
+        pixel.addEventListener('mouseenter', (e) => {
+            if (e.buttons === 1) paintPixel(i, pixel);
         });
         
         canvas.appendChild(pixel);
-    }
-}
-
-function getPixelIndex(row, col) {
-    return row * state.gridSize + col;
-}
-
-function onPixelClick(index, pixelElement) {
-    if (state.currentBrush === 'normal') {
-        paintPixel(index, pixelElement);
-    } else if (state.currentBrush === 'sparkle') {
-        paintSparkle(index);
-    } else if (state.currentBrush === 'heart') {
-        paintHeart(index);
     }
 }
 
@@ -535,82 +426,13 @@ function paintPixel(index, pixelElement) {
     }
 }
 
-// ===== SPARKLE BRUSH =====
-function paintSparkle(centerIndex) {
-    state.history.push({...state.pixelData});
-    const row = Math.floor(centerIndex / state.gridSize);
-    const col = centerIndex % state.gridSize;
-    
-    const sparkleColors = [
-        state.currentColor,
-        'rgb(255, 255, 150)',
-        'rgb(255, 240, 100)'
-    ];
-    
-    const offsets = [
-        {r: 0, c: 0, color: sparkleColors[0]},
-        {r: -1, c: 0, color: sparkleColors[1]},
-        {r: 1, c: 0, color: sparkleColors[1]},
-        {r: 0, c: -1, color: sparkleColors[1]},
-        {r: 0, c: 1, color: sparkleColors[1]},
-        {r: -1, c: -1, color: sparkleColors[2]},
-        {r: -1, c: 1, color: sparkleColors[2]},
-        {r: 1, c: -1, color: sparkleColors[2]},
-        {r: 1, c: 1, color: sparkleColors[2]}
-    ];
-    
-    offsets.forEach(function(offset) {
-        const newRow = row + offset.r;
-        const newCol = col + offset.c;
-        
-        if (newRow >= 0 && newRow < state.gridSize && newCol >= 0 && newCol < state.gridSize) {
-            const idx = getPixelIndex(newRow, newCol);
-            state.pixelData[idx] = offset.color;
-            const pixel = document.querySelector('[data-index="' + idx + '"]');
-            if (pixel) pixel.style.background = offset.color;
-        }
-    });
-}
-
-// ===== HEART BRUSH =====
-function paintHeart(centerIndex) {
-    state.history.push({...state.pixelData});
-    const row = Math.floor(centerIndex / state.gridSize);
-    const col = centerIndex % state.gridSize;
-    
-    const heartPattern = [
-        {r: 0, c: 0},
-        {r: -1, c: -1}, {r: -1, c: 0}, {r: -1, c: 1},
-        {r: 0, c: -1}, {r: 0, c: 1},
-        {r: 1, c: -1}, {r: 1, c: 0}, {r: 1, c: 1}
-    ];
-    
-    const heartColors = [
-        state.currentColor,
-        'rgb(255, 200, 220)'
-    ];
-    
-    heartPattern.forEach(function(offset, idx) {
-        const newRow = row + offset.r;
-        const newCol = col + offset.c;
-        
-        if (newRow >= 0 && newRow < state.gridSize && newCol >= 0 && newCol < state.gridSize) {
-            const pixelIdx = getPixelIndex(newRow, newCol);
-            const color = idx === 0 ? heartColors[0] : heartColors[1];
-            state.pixelData[pixelIdx] = color;
-            const pixel = document.querySelector('[data-index="' + pixelIdx + '"]');
-            if (pixel) pixel.style.background = color;
-        }
-    });
-}
-
 // ===== COLOR PICKER =====
 function updateColorPreview() {
     const red = document.getElementById('redSlider').value;
     const green = document.getElementById('greenSlider').value;
     const blue = document.getElementById('blueSlider').value;
     
-    state.currentColor = 'rgb(' + red + ', ' + green + ', ' + blue + ')';
+    state.currentColor = `rgb(${red}, ${green}, ${blue})`;
     document.getElementById('colorPreview').style.background = state.currentColor;
     
     document.getElementById('redValue').textContent = red;
@@ -618,18 +440,58 @@ function updateColorPreview() {
     document.getElementById('blueValue').textContent = blue;
 }
 
+document.getElementById('redSlider').addEventListener('input', updateColorPreview);
+document.getElementById('greenSlider').addEventListener('input', updateColorPreview);
+document.getElementById('blueSlider').addEventListener('input', updateColorPreview);
+
+// ===== GRID SIZE CHANGE =====
+document.getElementById('gridSizeSelect').addEventListener('change', (e) => {
+    state.gridSize = parseInt(e.target.value);
+    state.pixelData = [];
+    state.history = [];
+    createPixelCanvas();
+});
+
+// ===== TOOLS =====
+document.getElementById('clearBtn').addEventListener('click', () => {
+    if (confirm('Are you sure you want to clear the canvas?')) {
+        state.history.push({...state.pixelData});
+        state.pixelData = [];
+        createPixelCanvas();
+    }
+});
+
+document.getElementById('undoBtn').addEventListener('click', () => {
+    if (state.history.length > 0) {
+        state.pixelData = state.history.pop();
+        createPixelCanvas();
+    }
+});
+
 // ===== EEVEELUTION GALLERY =====
+document.getElementById('eeveelutionBtn').addEventListener('click', () => {
+    document.getElementById('eeveelutionGallery').classList.add('active');
+    renderEeveelutionGallery();
+});
+
+document.getElementById('closeGalleryBtn').addEventListener('click', () => {
+    document.getElementById('eeveelutionGallery').classList.remove('active');
+});
+
 function renderEeveelutionGallery() {
     const grid = document.getElementById('eeveelutionGrid');
     grid.innerHTML = '';
     
-    eeveelutions.forEach(function(eevee) {
+    eeveelutions.forEach((eevee, index) => {
         const item = document.createElement('div');
         item.className = 'eeveelution-item';
-        item.innerHTML = '<div class="eeveelution-preview">' + eevee.emoji + '</div><div class="eeveelution-name">' + eevee.name + '</div>';
-        item.addEventListener('click', function() {
+        item.innerHTML = `
+            <div class="eeveelution-preview">${eevee.emoji}</div>
+            <div class="eeveelution-name">${eevee.name}</div>
+        `;
+        item.addEventListener('click', () => {
             copyEeveelution(eevee);
-            switchTab('creator');
+            document.getElementById('eeveelutionGallery').classList.remove('active');
         });
         grid.appendChild(item);
     });
@@ -637,23 +499,58 @@ function renderEeveelutionGallery() {
 
 function copyEeveelution(eevee) {
     state.history.push({...state.pixelData});
-    state.gridSize = 24;
-    state.pixelData = [];
-    
     const pattern = eeveelutionPatterns[eevee.name];
+    
     if (pattern) {
-        for (let row = 0; row < 24; row++) {
-            for (let col = 0; col < 24; col++) {
-                const char = pattern[row].charAt(col);
-                const color = colorMap[char] || 'white';
-                state.pixelData[getPixelIndex(row, col)] = color;
+        // Set grid size to 16x16 for Eeveelution patterns
+        state.gridSize = pattern.width;
+        state.pixelData = [];
+        
+        // Load pattern data
+        for (let row = 0; row < pattern.height; row++) {
+            for (let col = 0; col < pattern.width; col++) {
+                const char = pattern.data[row].charAt(col);
+                const color = pattern.colorMap[char];
+                state.pixelData[row * pattern.width + col] = color || 'white';
             }
         }
+        
+        document.getElementById('gridSizeSelect').value = state.gridSize;
     }
     
-    document.getElementById('gridSizeSelect').value = 24;
     createPixelCanvas();
 }
+
+// ===== SAVE/LOAD =====
+document.getElementById('saveBtn').addEventListener('click', () => {
+    document.getElementById('saveDialog').classList.add('active');
+});
+
+document.getElementById('closeSaveDialogBtn').addEventListener('click', () => {
+    document.getElementById('saveDialog').classList.remove('active');
+});
+
+document.getElementById('cancelSaveBtn').addEventListener('click', () => {
+    document.getElementById('saveDialog').classList.remove('active');
+});
+
+document.getElementById('confirmSaveBtn').addEventListener('click', () => {
+    const name = document.getElementById('artworkNameInput').value.trim();
+    if (name) {
+        const id = Date.now();
+        state.savedArtworks[id] = {
+            name: name,
+            data: [...state.pixelData],
+            date: new Date().toLocaleDateString(),
+            gridSize: state.gridSize
+        };
+        localStorage.setItem(`pixelart_artworks_${state.currentUser}`, JSON.stringify(state.savedArtworks));
+        loadSavedArtworks();
+        document.getElementById('saveDialog').classList.remove('active');
+        document.getElementById('artworkNameInput').value = '';
+        alert('✨ Artwork saved!');
+    }
+});
 
 function loadSavedArtworks() {
     const list = document.getElementById('savedArtworksList');
@@ -664,15 +561,14 @@ function loadSavedArtworks() {
         return;
     }
     
-    Object.entries(state.savedArtworks).forEach(function(entry) {
-        const id = entry[0];
-        const artwork = entry[1];
+    Object.entries(state.savedArtworks).forEach(([id, artwork]) => {
         const item = document.createElement('div');
         item.className = 'saved-artwork-item';
-        item.innerHTML = '<div class="artwork-name">' + artwork.name + '</div><div class="artwork-date">' + artwork.date + '</div>';
-        item.addEventListener('click', function() {
-            loadArtwork(id, artwork);
-        });
+        item.innerHTML = `
+            <div class="artwork-name">${artwork.name}</div>
+            <div class="artwork-date">${artwork.date}</div>
+        `;
+        item.addEventListener('click', () => loadArtwork(id, artwork));
         list.appendChild(item);
     });
 }
@@ -686,13 +582,17 @@ function loadArtwork(id, artwork) {
 }
 
 function saveCurrentArtwork() {
-    if (state.currentUser) {
-        localStorage.setItem('pixelart_current_' + state.currentUser, JSON.stringify(state.pixelData));
-    }
+    localStorage.setItem(`pixelart_current_${state.currentUser}`, JSON.stringify(state.pixelData));
 }
 
-window.addEventListener('beforeunload', function() {
+// Save before leaving
+window.addEventListener('beforeunload', () => {
     if (state.currentUser) {
         saveCurrentArtwork();
     }
 });
+
+// ===== EVENT LISTENERS =====
+function setupEventListeners() {
+    // Additional event listeners can go here
+}
