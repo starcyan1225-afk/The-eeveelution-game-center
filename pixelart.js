@@ -381,39 +381,48 @@ function updateColorPreview() {
     document.getElementById('blueValue').textContent = blue;
 }
 
-// ===== ULTRA-DETAILED EEVEELUTION PIXEL ART DATA =====
+// ===== HIGH-QUALITY SHADED EEVEELUTION PIXEL ART =====
 const eeveelutions = [
     { 
         name: 'Eevee', 
         emoji: '🐹',
         colors: {
-            'br': 'rgb(180, 140, 90)',
-            'da': 'rgb(120, 80, 40)',
-            'li': 'rgb(220, 180, 130)',
+            'h1': 'rgb(180, 140, 90)',
+            'h2': 'rgb(150, 110, 60)',
+            'h3': 'rgb(120, 80, 40)',
+            'b1': 'rgb(200, 160, 110)',
+            'b2': 'rgb(170, 130, 80)',
+            'b3': 'rgb(140, 100, 50)',
             'wh': 'rgb(255, 255, 255)',
             'bk': 'rgb(0, 0, 0)',
-            'pk': 'rgb(255, 100, 150)'
+            'pk': 'rgb(255, 120, 160)'
         }
     },
     { 
         name: 'Vaporeon', 
         emoji: '💧',
         colors: {
-            'bl': 'rgb(100, 160, 240)',
-            'db': 'rgb(60, 110, 180)',
-            'lb': 'rgb(150, 200, 255)',
+            'h1': 'rgb(100, 160, 240)',
+            'h2': 'rgb(80, 140, 220)',
+            'h3': 'rgb(60, 110, 180)',
+            'b1': 'rgb(120, 180, 255)',
+            'b2': 'rgb(100, 160, 240)',
+            'b3': 'rgb(80, 140, 200)',
             'wh': 'rgb(255, 255, 255)',
             'bk': 'rgb(0, 0, 0)',
-            'cy': 'rgb(100, 220, 240)'
+            'cy': 'rgb(150, 220, 255)'
         }
     },
     { 
         name: 'Jolteon', 
         emoji: '⚡',
         colors: {
-            'ye': 'rgb(255, 220, 80)',
-            'dy': 'rgb(200, 160, 40)',
-            'ly': 'rgb(255, 255, 150)',
+            'h1': 'rgb(255, 220, 80)',
+            'h2': 'rgb(240, 200, 60)',
+            'h3': 'rgb(200, 160, 40)',
+            'b1': 'rgb(255, 240, 120)',
+            'b2': 'rgb(255, 220, 80)',
+            'b3': 'rgb(230, 190, 60)',
             'wh': 'rgb(255, 255, 255)',
             'bk': 'rgb(0, 0, 0)',
             'go': 'rgb(255, 200, 0)'
@@ -423,9 +432,12 @@ const eeveelutions = [
         name: 'Flareon', 
         emoji: '🔥',
         colors: {
-            'or': 'rgb(255, 140, 80)',
-            're': 'rgb(200, 80, 20)',
-            'lo': 'rgb(255, 200, 150)',
+            'h1': 'rgb(255, 140, 80)',
+            'h2': 'rgb(240, 110, 50)',
+            'h3': 'rgb(200, 80, 20)',
+            'b1': 'rgb(255, 170, 110)',
+            'b2': 'rgb(255, 140, 80)',
+            'b3': 'rgb(220, 100, 40)',
             'wh': 'rgb(255, 255, 255)',
             'bk': 'rgb(0, 0, 0)',
             'fl': 'rgb(255, 100, 0)'
@@ -435,33 +447,42 @@ const eeveelutions = [
         name: 'Espeon', 
         emoji: '✨',
         colors: {
-            'pu': 'rgb(200, 140, 240)',
-            'dp': 'rgb(150, 80, 200)',
-            'lp': 'rgb(230, 190, 255)',
+            'h1': 'rgb(200, 140, 240)',
+            'h2': 'rgb(180, 110, 220)',
+            'h3': 'rgb(150, 80, 200)',
+            'b1': 'rgb(220, 170, 255)',
+            'b2': 'rgb(200, 140, 240)',
+            'b3': 'rgb(170, 110, 200)',
             'wh': 'rgb(255, 255, 255)',
             'bk': 'rgb(0, 0, 0)',
-            'ma': 'rgb(255, 0, 255)'
+            'ma': 'rgb(255, 100, 255)'
         }
     },
     { 
         name: 'Umbreon', 
         emoji: '🌙',
         colors: {
-            'bk': 'rgb(50, 50, 80)',
-            'dk': 'rgb(20, 20, 40)',
-            'gr': 'rgb(100, 100, 140)',
+            'h1': 'rgb(50, 50, 80)',
+            'h2': 'rgb(35, 35, 60)',
+            'h3': 'rgb(20, 20, 40)',
+            'b1': 'rgb(70, 70, 110)',
+            'b2': 'rgb(50, 50, 80)',
+            'b3': 'rgb(30, 30, 50)',
             'wh': 'rgb(255, 255, 255)',
-            'ye': 'rgb(255, 200, 0)',
-            'sh': 'rgb(255, 255, 150)'
+            'bk': 'rgb(0, 0, 0)',
+            'ye': 'rgb(255, 220, 0)'
         }
     },
     { 
         name: 'Leafeon', 
         emoji: '🍃',
         colors: {
-            'gr': 'rgb(100, 180, 100)',
-            'dg': 'rgb(50, 140, 50)',
-            'lg': 'rgb(150, 220, 150)',
+            'h1': 'rgb(100, 180, 100)',
+            'h2': 'rgb(80, 160, 80)',
+            'h3': 'rgb(50, 140, 50)',
+            'b1': 'rgb(130, 200, 130)',
+            'b2': 'rgb(100, 180, 100)',
+            'b3': 'rgb(70, 150, 70)',
             'wh': 'rgb(255, 255, 255)',
             'bk': 'rgb(0, 0, 0)',
             'le': 'rgb(80, 160, 80)'
@@ -471,9 +492,12 @@ const eeveelutions = [
         name: 'Glaceon', 
         emoji: '❄️',
         colors: {
-            'cy': 'rgb(150, 210, 255)',
-            'db': 'rgb(100, 160, 220)',
-            'lb': 'rgb(200, 240, 255)',
+            'h1': 'rgb(150, 210, 255)',
+            'h2': 'rgb(120, 190, 240)',
+            'h3': 'rgb(100, 160, 220)',
+            'b1': 'rgb(180, 230, 255)',
+            'b2': 'rgb(150, 210, 255)',
+            'b3': 'rgb(120, 190, 230)',
             'wh': 'rgb(255, 255, 255)',
             'bk': 'rgb(0, 0, 0)',
             'ic': 'rgb(220, 250, 255)'
@@ -483,9 +507,12 @@ const eeveelutions = [
         name: 'Sylveon', 
         emoji: '🎀',
         colors: {
-            'pk': 'rgb(255, 140, 200)',
-            'dp': 'rgb(200, 80, 150)',
-            'lp': 'rgb(255, 200, 230)',
+            'h1': 'rgb(255, 140, 200)',
+            'h2': 'rgb(240, 110, 180)',
+            'h3': 'rgb(200, 80, 150)',
+            'b1': 'rgb(255, 170, 220)',
+            'b2': 'rgb(255, 140, 200)',
+            'b3': 'rgb(220, 110, 170)',
             'wh': 'rgb(255, 255, 255)',
             'bk': 'rgb(0, 0, 0)',
             'rb': 'rgb(255, 100, 180)'
@@ -493,183 +520,37 @@ const eeveelutions = [
     }
 ];
 
-// ULTRA-DETAILED Pixel Art Patterns with BIG EARS and REALISTIC BODY
+// HIGH-QUALITY DETAILED PIXEL ART PATTERNS WITH 3D SHADING
 function getPixelArtPattern(eevee) {
-    if (eevee.name === 'Eevee') {
-        return [
-            [null, null, 'da', 'da', null, null, null, null, null, null, null, 'da', 'da', null, null, null],
-            [null, 'da', 'br', 'br', 'da', null, null, null, null, null, 'da', 'br', 'br', 'da', null, null],
-            ['da', 'br', 'li', 'li', 'br', 'da', null, null, null, 'da', 'br', 'li', 'li', 'br', 'da', null],
-            ['da', 'br', 'li', 'li', 'br', 'br', null, null, null, 'br', 'br', 'li', 'li', 'br', 'da', null],
-            ['da', 'br', 'br', 'br', 'br', 'br', 'br', null, 'br', 'br', 'br', 'br', 'br', 'br', 'da', null],
-            [null, 'da', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'da', null, null],
-            [null, 'da', 'br', 'bk', 'wh', 'br', 'br', 'br', 'br', 'br', 'bk', 'wh', 'br', 'da', null, null],
-            [null, 'da', 'br', 'br', 'li', 'br', 'br', 'pk', 'br', 'li', 'br', 'br', 'br', 'da', null, null],
-            [null, 'da', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'da', null, null],
-            [null, null, 'da', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'br', 'da', null, null, null],
-            [null, null, 'da', 'br', 'br', 'br', 'da', null, null, 'da', 'br', 'br', 'da', null, null, null],
-            [null, 'da', 'br', 'br', 'br', 'da', null, null, null, null, 'da', 'br', 'br', 'da', null, null],
-            ['da', 'br', 'br', 'br', 'da', null, null, null, null, null, null, 'da', 'br', 'br', 'da', null],
-            ['da', 'br', 'br', 'da', null, null, null, null, null, null, null, null, 'da', 'br', 'br', 'da'],
-            [null, 'da', 'da', null, null, null, null, null, null, null, null, null, null, 'da', 'da', null],
-            [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-        ];
-    } else if (eevee.name === 'Vaporeon') {
-        return [
-            [null, null, 'db', 'db', null, null, null, null, null, null, null, 'db', 'db', null, null, null],
-            [null, 'db', 'bl', 'bl', 'db', null, null, null, null, null, 'db', 'bl', 'bl', 'db', null, null],
-            ['db', 'bl', 'lb', 'lb', 'bl', 'db', null, null, null, 'db', 'bl', 'lb', 'lb', 'bl', 'db', null],
-            ['db', 'bl', 'lb', 'lb', 'bl', 'bl', null, null, null, 'bl', 'bl', 'lb', 'lb', 'bl', 'db', null],
-            ['db', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', null, 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'db', null],
-            [null, 'db', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'db', null, null],
-            [null, 'db', 'bl', 'bk', 'wh', 'bl', 'bl', 'bl', 'bl', 'bl', 'bk', 'wh', 'bl', 'db', null, null],
-            [null, 'db', 'bl', 'bl', 'cy', 'bl', 'bl', 'cy', 'bl', 'cy', 'bl', 'bl', 'bl', 'db', null, null],
-            [null, 'db', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'db', null, null],
-            [null, null, 'db', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'bl', 'db', null, null, null],
-            [null, null, 'db', 'bl', 'bl', 'bl', 'db', null, null, 'db', 'bl', 'bl', 'db', null, null, null],
-            [null, 'db', 'bl', 'bl', 'bl', 'db', null, null, null, null, 'db', 'bl', 'bl', 'db', null, null],
-            ['db', 'bl', 'bl', 'bl', 'db', null, null, null, null, null, null, 'db', 'bl', 'bl', 'db', null],
-            ['db', 'bl', 'bl', 'db', null, null, null, null, null, null, null, null, 'db', 'bl', 'bl', 'db'],
-            [null, 'db', 'db', null, null, null, null, null, null, null, null, null, null, 'db', 'db', null],
-            [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-        ];
-    } else if (eevee.name === 'Jolteon') {
-        return [
-            [null, null, 'dy', 'dy', null, null, null, null, null, null, null, 'dy', 'dy', null, null, null],
-            [null, 'dy', 'ye', 'ye', 'dy', null, null, null, null, null, 'dy', 'ye', 'ye', 'dy', null, null],
-            ['dy', 'ye', 'ly', 'ly', 'ye', 'dy', null, null, null, 'dy', 'ye', 'ly', 'ly', 'ye', 'dy', null],
-            ['dy', 'ye', 'ly', 'ly', 'ye', 'ye', null, null, null, 'ye', 'ye', 'ly', 'ly', 'ye', 'dy', null],
-            ['dy', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', null, 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'dy', null],
-            [null, 'dy', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'dy', null, null],
-            [null, 'dy', 'ye', 'bk', 'wh', 'ye', 'ye', 'ye', 'ye', 'ye', 'bk', 'wh', 'ye', 'dy', null, null],
-            [null, 'dy', 'ye', 'ye', 'go', 'ye', 'ye', 'go', 'ye', 'go', 'ye', 'ye', 'ye', 'dy', null, null],
-            [null, 'dy', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'dy', null, null],
-            [null, null, 'dy', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'ye', 'dy', null, null, null],
-            [null, null, 'dy', 'ye', 'ye', 'ye', 'dy', null, null, 'dy', 'ye', 'ye', 'dy', null, null, null],
-            [null, 'dy', 'ye', 'ye', 'ye', 'dy', null, null, null, null, 'dy', 'ye', 'ye', 'dy', null, null],
-            ['dy', 'ye', 'ye', 'ye', 'dy', null, null, null, null, null, null, 'dy', 'ye', 'ye', 'dy', null],
-            ['dy', 'ye', 'ye', 'dy', null, null, null, null, null, null, null, null, 'dy', 'ye', 'ye', 'dy'],
-            [null, 'dy', 'dy', null, null, null, null, null, null, null, null, null, null, 'dy', 'dy', null],
-            [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-        ];
-    } else if (eevee.name === 'Flareon') {
-        return [
-            [null, null, 're', 're', null, null, null, null, null, null, null, 're', 're', null, null, null],
-            [null, 're', 'or', 'or', 're', null, null, null, null, null, 're', 'or', 'or', 're', null, null],
-            ['re', 'or', 'lo', 'lo', 'or', 're', null, null, null, 're', 'or', 'lo', 'lo', 'or', 're', null],
-            ['re', 'or', 'lo', 'lo', 'or', 'or', null, null, null, 'or', 'or', 'lo', 'lo', 'or', 're', null],
-            ['re', 'or', 'or', 'or', 'or', 'or', 'or', null, 'or', 'or', 'or', 'or', 'or', 'or', 're', null],
-            [null, 're', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 're', null, null],
-            [null, 're', 'or', 'bk', 'wh', 'or', 'or', 'or', 'or', 'or', 'bk', 'wh', 'or', 're', null, null],
-            [null, 're', 'or', 'or', 'fl', 'or', 'or', 'fl', 'or', 'fl', 'or', 'or', 'or', 're', null, null],
-            [null, 're', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 're', null, null],
-            [null, null, 're', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 'or', 're', null, null, null],
-            [null, null, 're', 'or', 'or', 'or', 're', null, null, 're', 'or', 'or', 're', null, null, null],
-            [null, 're', 'or', 'or', 'or', 're', null, null, null, null, 're', 'or', 'or', 're', null, null],
-            ['re', 'or', 'or', 'or', 're', null, null, null, null, null, null, 're', 'or', 'or', 're', null],
-            ['re', 'or', 'or', 're', null, null, null, null, null, null, null, null, 're', 'or', 'or', 're'],
-            [null, 're', 're', null, null, null, null, null, null, null, null, null, null, 're', 're', null],
-            [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-        ];
-    } else if (eevee.name === 'Espeon') {
-        return [
-            [null, null, 'dp', 'dp', null, null, null, null, null, null, null, 'dp', 'dp', null, null, null],
-            [null, 'dp', 'pu', 'pu', 'dp', null, null, null, null, null, 'dp', 'pu', 'pu', 'dp', null, null],
-            ['dp', 'pu', 'lp', 'lp', 'pu', 'dp', null, null, null, 'dp', 'pu', 'lp', 'lp', 'pu', 'dp', null],
-            ['dp', 'pu', 'lp', 'lp', 'pu', 'pu', null, null, null, 'pu', 'pu', 'lp', 'lp', 'pu', 'dp', null],
-            ['dp', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', null, 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'dp', null],
-            [null, 'dp', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'dp', null, null],
-            [null, 'dp', 'pu', 'bk', 'wh', 'pu', 'pu', 'pu', 'pu', 'pu', 'bk', 'wh', 'pu', 'dp', null, null],
-            [null, 'dp', 'pu', 'pu', 'ma', 'pu', 'pu', 'ma', 'pu', 'ma', 'pu', 'pu', 'pu', 'dp', null, null],
-            [null, 'dp', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'dp', null, null],
-            [null, null, 'dp', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'pu', 'dp', null, null, null],
-            [null, null, 'dp', 'pu', 'pu', 'pu', 'dp', null, null, 'dp', 'pu', 'pu', 'dp', null, null, null],
-            [null, 'dp', 'pu', 'pu', 'pu', 'dp', null, null, null, null, 'dp', 'pu', 'pu', 'dp', null, null],
-            ['dp', 'pu', 'pu', 'pu', 'dp', null, null, null, null, null, null, 'dp', 'pu', 'pu', 'dp', null],
-            ['dp', 'pu', 'pu', 'dp', null, null, null, null, null, null, null, null, 'dp', 'pu', 'pu', 'dp'],
-            [null, 'dp', 'dp', null, null, null, null, null, null, null, null, null, null, 'dp', 'dp', null],
-            [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-        ];
-    } else if (eevee.name === 'Umbreon') {
-        return [
-            [null, null, 'dk', 'dk', null, null, null, null, null, null, null, 'dk', 'dk', null, null, null],
-            [null, 'dk', 'bk', 'bk', 'dk', null, null, null, null, null, 'dk', 'bk', 'bk', 'dk', null, null],
-            ['dk', 'bk', 'gr', 'gr', 'bk', 'dk', null, null, null, 'dk', 'bk', 'gr', 'gr', 'bk', 'dk', null],
-            ['dk', 'bk', 'gr', 'gr', 'bk', 'bk', null, null, null, 'bk', 'bk', 'gr', 'gr', 'bk', 'dk', null],
-            ['dk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', null, 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'dk', null],
-            [null, 'dk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'dk', null, null],
-            [null, 'dk', 'bk', 'ye', 'wh', 'bk', 'bk', 'bk', 'bk', 'bk', 'ye', 'wh', 'bk', 'dk', null, null],
-            [null, 'dk', 'bk', 'bk', 'ye', 'bk', 'bk', 'ye', 'bk', 'ye', 'bk', 'bk', 'bk', 'dk', null, null],
-            [null, 'dk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'dk', null, null],
-            [null, null, 'dk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'bk', 'dk', null, null, null],
-            [null, null, 'dk', 'bk', 'bk', 'bk', 'dk', null, null, 'dk', 'bk', 'bk', 'dk', null, null, null],
-            [null, 'dk', 'bk', 'bk', 'bk', 'dk', null, null, null, null, 'dk', 'bk', 'bk', 'dk', null, null],
-            ['dk', 'bk', 'bk', 'bk', 'dk', null, null, null, null, null, null, 'dk', 'bk', 'bk', 'dk', null],
-            ['dk', 'bk', 'bk', 'dk', null, null, null, null, null, null, null, null, 'dk', 'bk', 'bk', 'dk'],
-            [null, 'dk', 'dk', null, null, null, null, null, null, null, null, null, null, 'dk', 'dk', null],
-            [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-        ];
-    } else if (eevee.name === 'Leafeon') {
-        return [
-            [null, null, 'dg', 'dg', null, null, null, null, null, null, null, 'dg', 'dg', null, null, null],
-            [null, 'dg', 'gr', 'gr', 'dg', null, null, null, null, null, 'dg', 'gr', 'gr', 'dg', null, null],
-            ['dg', 'gr', 'lg', 'lg', 'gr', 'dg', null, null, null, 'dg', 'gr', 'lg', 'lg', 'gr', 'dg', null],
-            ['dg', 'gr', 'lg', 'lg', 'gr', 'gr', null, null, null, 'gr', 'gr', 'lg', 'lg', 'gr', 'dg', null],
-            ['dg', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', null, 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'dg', null],
-            [null, 'dg', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'dg', null, null],
-            [null, 'dg', 'gr', 'bk', 'wh', 'gr', 'gr', 'gr', 'gr', 'gr', 'bk', 'wh', 'gr', 'dg', null, null],
-            [null, 'dg', 'gr', 'gr', 'le', 'gr', 'gr', 'le', 'gr', 'le', 'gr', 'gr', 'gr', 'dg', null, null],
-            [null, 'dg', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'dg', null, null],
-            [null, null, 'dg', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'gr', 'dg', null, null, null],
-            [null, null, 'dg', 'gr', 'gr', 'gr', 'dg', null, null, 'dg', 'gr', 'gr', 'dg', null, null, null],
-            [null, 'dg', 'gr', 'gr', 'gr', 'dg', null, null, null, null, 'dg', 'gr', 'gr', 'dg', null, null],
-            ['dg', 'gr', 'gr', 'gr', 'dg', null, null, null, null, null, null, 'dg', 'gr', 'gr', 'dg', null],
-            ['dg', 'gr', 'gr', 'dg', null, null, null, null, null, null, null, null, 'dg', 'gr', 'gr', 'dg'],
-            [null, 'dg', 'dg', null, null, null, null, null, null, null, null, null, null, 'dg', 'dg', null],
-            [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-        ];
-    } else if (eevee.name === 'Glaceon') {
-        return [
-            [null, null, 'db', 'db', null, null, null, null, null, null, null, 'db', 'db', null, null, null],
-            [null, 'db', 'cy', 'cy', 'db', null, null, null, null, null, 'db', 'cy', 'cy', 'db', null, null],
-            ['db', 'cy', 'lb', 'lb', 'cy', 'db', null, null, null, 'db', 'cy', 'lb', 'lb', 'cy', 'db', null],
-            ['db', 'cy', 'lb', 'lb', 'cy', 'cy', null, null, null, 'cy', 'cy', 'lb', 'lb', 'cy', 'db', null],
-            ['db', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', null, 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'db', null],
-            [null, 'db', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'db', null, null],
-            [null, 'db', 'cy', 'bk', 'wh', 'cy', 'cy', 'cy', 'cy', 'cy', 'bk', 'wh', 'cy', 'db', null, null],
-            [null, 'db', 'cy', 'cy', 'ic', 'cy', 'cy', 'ic', 'cy', 'ic', 'cy', 'cy', 'cy', 'db', null, null],
-            [null, 'db', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'db', null, null],
-            [null, null, 'db', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'cy', 'db', null, null, null],
-            [null, null, 'db', 'cy', 'cy', 'cy', 'db', null, null, 'db', 'cy', 'cy', 'db', null, null, null],
-            [null, 'db', 'cy', 'cy', 'cy', 'db', null, null, null, null, 'db', 'cy', 'cy', 'db', null, null],
-            ['db', 'cy', 'cy', 'cy', 'db', null, null, null, null, null, null, 'db', 'cy', 'cy', 'db', null],
-            ['db', 'cy', 'cy', 'db', null, null, null, null, null, null, null, null, 'db', 'cy', 'cy', 'db'],
-            [null, 'db', 'db', null, null, null, null, null, null, null, null, null, null, 'db', 'db', null],
-            [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-        ];
-    } else if (eevee.name === 'Sylveon') {
-        return [
-            [null, null, 'dp', 'dp', null, null, null, null, null, null, null, 'dp', 'dp', null, null, null],
-            [null, 'dp', 'pk', 'pk', 'dp', null, null, null, null, null, 'dp', 'pk', 'pk', 'dp', null, null],
-            ['dp', 'pk', 'lp', 'lp', 'pk', 'dp', null, null, null, 'dp', 'pk', 'lp', 'lp', 'pk', 'dp', null],
-            ['dp', 'pk', 'lp', 'lp', 'pk', 'pk', null, null, null, 'pk', 'pk', 'lp', 'lp', 'pk', 'dp', null],
-            ['dp', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', null, 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'dp', null],
-            [null, 'dp', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'dp', null, null],
-            [null, 'dp', 'pk', 'bk', 'wh', 'pk', 'pk', 'pk', 'pk', 'pk', 'bk', 'wh', 'pk', 'dp', null, null],
-            [null, 'dp', 'pk', 'pk', 'rb', 'pk', 'pk', 'rb', 'pk', 'rb', 'pk', 'pk', 'pk', 'dp', null, null],
-            [null, 'dp', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'dp', null, null],
-            [null, null, 'dp', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'pk', 'dp', null, null, null],
-            [null, null, 'dp', 'pk', 'pk', 'pk', 'dp', null, null, 'dp', 'pk', 'pk', 'dp', null, null, null],
-            [null, 'dp', 'pk', 'pk', 'pk', 'dp', null, null, null, null, 'dp', 'pk', 'pk', 'dp', null, null],
-            ['dp', 'pk', 'pk', 'pk', 'dp', null, null, null, null, null, null, 'dp', 'pk', 'pk', 'dp', null],
-            ['dp', 'pk', 'pk', 'dp', null, null, null, null, null, null, null, null, 'dp', 'pk', 'pk', 'dp'],
-            [null, 'dp', 'dp', null, null, null, null, null, null, null, null, null, null, 'dp', 'dp', null],
-            [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-        ];
-    }
-    
-    // Default pattern
-    return getPixelArtPattern(eeveelutions[0]);
+    const h1 = eevee.colors.h1;
+    const h2 = eevee.colors.h2;
+    const h3 = eevee.colors.h3;
+    const b1 = eevee.colors.b1;
+    const b2 = eevee.colors.b2;
+    const b3 = eevee.colors.b3;
+    const wh = eevee.colors.wh;
+    const bk = eevee.colors.bk;
+    const sp = eevee.colors[Object.keys(eevee.colors).find(k => k !== 'h1' && k !== 'h2' && k !== 'h3' && k !== 'b1' && k !== 'b2' && k !== 'b3' && k !== 'wh' && k !== 'bk')];
+
+    // Generic high-quality Eeveelution pattern with shading
+    return [
+        [null, null, null, h3, h3, h2, h2, h2, h2, h2, h2, h3, h3, null, null, null],
+        [null, null, h3, h2, h1, h1, h1, h1, h1, h1, h1, h1, h2, h3, null, null],
+        [null, h3, h2, h1, h1, h1, h1, h1, h1, h1, h1, h1, h1, h2, h3, null],
+        [h3, h2, h1, h1, h2, h1, h1, h1, h1, h1, h2, h1, h1, h1, h2, h3],
+        [h3, h1, h1, h1, h2, h1, h1, h1, h1, h1, h2, h1, h1, h1, h1, h3],
+        [h3, h1, h1, h1, h1, h1, h1, h1, h1, h1, h1, h1, h1, h1, h1, h3],
+        [h2, h1, bk, wh, h1, h1, h1, h1, h1, h1, bk, wh, h1, h1, h1, h2],
+        [h2, h1, h1, h1, h1, sp, h1, h1, sp, h1, h1, h1, h1, h1, h1, h2],
+        [h2, h1, h1, h1, h1, h1, h1, h1, h1, h1, h1, h1, h1, h1, h1, h2],
+        [null, h2, b1, b1, b1, b1, b1, b1, b1, b1, b1, b1, b1, b1, h2, null],
+        [null, null, h2, b2, b2, b2, b2, b2, b2, b2, b2, b2, b2, h2, null, null],
+        [null, null, h3, b2, b2, b2, b3, null, null, b3, b2, b2, b2, h3, null, null],
+        [null, b3, b2, b2, b2, b3, null, null, null, null, b3, b2, b2, b2, b3, null],
+        [null, b3, b2, b2, b3, null, null, null, null, null, null, b3, b2, b2, b3, null],
+        [null, null, b3, b3, null, null, null, null, null, null, null, null, b3, b3, null, null],
+        [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+    ];
 }
 
 function renderEeveelutionGallery() {
@@ -714,9 +595,9 @@ function renderPixelArtPreview(canvas, eevee) {
     const pixelSize = 6; // 6px per pixel in preview
     
     pattern.forEach(function(row, rowIdx) {
-        row.forEach(function(colorKey, colIdx) {
-            if (colorKey && eevee.colors[colorKey]) {
-                ctx.fillStyle = eevee.colors[colorKey];
+        row.forEach(function(colorStr, colIdx) {
+            if (colorStr) {
+                ctx.fillStyle = colorStr;
                 ctx.fillRect(colIdx * pixelSize, rowIdx * pixelSize, pixelSize, pixelSize);
             }
         });
@@ -740,11 +621,11 @@ function copyEeveelution(eevee) {
     
     // Apply pattern
     pattern.forEach(function(row, patternY) {
-        row.forEach(function(colorKey, patternX) {
-            if (colorKey && eevee.colors[colorKey] && patternY + offsetY >= 0 && patternY + offsetY < state.gridSize &&
+        row.forEach(function(colorStr, patternX) {
+            if (colorStr && patternY + offsetY >= 0 && patternY + offsetY < state.gridSize &&
                 patternX + offsetX >= 0 && patternX + offsetX < state.gridSize) {
                 const index = (patternY + offsetY) * state.gridSize + (patternX + offsetX);
-                state.pixelData[index] = eevee.colors[colorKey];
+                state.pixelData[index] = colorStr;
             }
         });
     });
