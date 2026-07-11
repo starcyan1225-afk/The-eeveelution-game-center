@@ -617,10 +617,35 @@ function loadSavedArtworks() {
         const artwork = entry[1];
         const item = document.createElement('div');
         item.className = 'saved-artwork-item';
-        item.innerHTML = '<div class="artwork-name">' + artwork.name + '</div><div class="artwork-date">' + artwork.date + '</div>';
-        item.addEventListener('click', function() {
+        
+        // Create wrapper with info
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'artwork-info';
+        infoDiv.innerHTML = '<div class="artwork-name">' + artwork.name + '</div><div class="artwork-date">' + artwork.date + '</div>';
+        
+        // Create delete button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-artwork-btn';
+        deleteBtn.textContent = '🗑️';
+        deleteBtn.title = 'Delete this artwork';
+        deleteBtn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent loading artwork when clicking delete
+            if (confirm('Are you sure you want to delete "' + artwork.name + '"?')) {
+                delete state.savedArtworks[id];
+                localStorage.setItem(`pixelart_artworks_${state.currentUser}`, JSON.stringify(state.savedArtworks));
+                loadSavedArtworks();
+                alert('✨ Artwork deleted!');
+            }
+        });
+        
+        item.appendChild(infoDiv);
+        item.appendChild(deleteBtn);
+        
+        // Click to load artwork
+        infoDiv.addEventListener('click', function() {
             loadArtwork(id, artwork);
         });
+        
         list.appendChild(item);
     });
 }
