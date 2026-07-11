@@ -46,19 +46,7 @@ function setupAllListeners() {
     // LOGIN BUTTON
     const loginBtn = document.getElementById('loginBtn');
     if (loginBtn) {
-        loginBtn.addEventListener('click', function() {
-            const username = document.getElementById('usernameInput').value.trim();
-            if (username) {
-                state.currentUser = username;
-                localStorage.setItem('pixelart_currentUser', username);
-                state.savedArtworks = JSON.parse(localStorage.getItem(`pixelart_artworks_${username}`) || '{}');
-                state.pixelData = JSON.parse(localStorage.getItem(`pixelart_current_${username}`) || '[]');
-                updateLoginUI();
-                document.getElementById('usernameInput').value = '';
-            } else {
-                alert('Please enter a username!');
-            }
-        });
+        loginBtn.addEventListener('click', handleLogin);
     }
 
     // LOGOUT BUTTON
@@ -70,7 +58,21 @@ function setupAllListeners() {
             localStorage.removeItem('pixelart_currentUser');
             state.pixelData = [];
             state.history = [];
+            document.getElementById('usernameInput').value = '';
+            document.getElementById('passwordInput').value = '';
             updateLoginUI();
+        });
+    }
+
+    // Enter key for login
+    const usernameInput = document.getElementById('usernameInput');
+    const passwordInput = document.getElementById('passwordInput');
+    if (usernameInput && passwordInput) {
+        usernameInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') handleLogin();
+        });
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') handleLogin();
         });
     }
 
@@ -187,6 +189,51 @@ function setupAllListeners() {
             }
         });
     }
+}
+
+// ===== HANDLE LOGIN WITH PASSWORD =====
+function handleLogin() {
+    const username = document.getElementById('usernameInput').value.trim();
+    const password = document.getElementById('passwordInput').value.trim();
+    
+    if (!username) {
+        alert('Please enter a username!');
+        return;
+    }
+    
+    if (!password) {
+        alert('Please enter a password!');
+        return;
+    }
+    
+    if (password.length < 3) {
+        alert('Password must be at least 3 characters!');
+        return;
+    }
+    
+    // Get stored credentials
+    const storedPassword = localStorage.getItem(`pixelart_password_${username}`);
+    
+    if (storedPassword && storedPassword !== password) {
+        // User exists but wrong password
+        alert('❌ Wrong password! Try again.');
+        document.getElementById('passwordInput').value = '';
+        return;
+    }
+    
+    // Store password for this user (only if new account)
+    if (!storedPassword) {
+        localStorage.setItem(`pixelart_password_${username}`, password);
+    }
+    
+    // Login successful
+    state.currentUser = username;
+    localStorage.setItem('pixelart_currentUser', username);
+    state.savedArtworks = JSON.parse(localStorage.getItem(`pixelart_artworks_${username}`) || '{}');
+    state.pixelData = JSON.parse(localStorage.getItem(`pixelart_current_${username}`) || '[]');
+    updateLoginUI();
+    document.getElementById('usernameInput').value = '';
+    document.getElementById('passwordInput').value = '';
 }
 
 // ===== CREATOR INITIALIZATION =====
