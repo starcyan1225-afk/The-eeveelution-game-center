@@ -340,9 +340,9 @@ const eeveelutions = [
         name: 'Eevee', 
         emoji: '🐹',
         colors: {
-            body: 'rgb(200, 150, 100)',
-            dark: 'rgb(150, 100, 50)',
-            light: 'rgb(255, 200, 150)',
+            body: 'rgb(180, 140, 90)',
+            dark: 'rgb(120, 80, 40)',
+            light: 'rgb(220, 180, 130)',
             eyes: 'rgb(0, 0, 0)',
             white: 'rgb(255, 255, 255)'
         }
@@ -351,8 +351,8 @@ const eeveelutions = [
         name: 'Vaporeon', 
         emoji: '💧',
         colors: {
-            body: 'rgb(100, 150, 220)',
-            dark: 'rgb(50, 100, 180)',
+            body: 'rgb(100, 160, 240)',
+            dark: 'rgb(60, 110, 180)',
             light: 'rgb(150, 200, 255)',
             eyes: 'rgb(0, 0, 0)',
             white: 'rgb(255, 255, 255)'
@@ -362,9 +362,9 @@ const eeveelutions = [
         name: 'Jolteon', 
         emoji: '⚡',
         colors: {
-            body: 'rgb(255, 220, 100)',
-            dark: 'rgb(200, 170, 50)',
-            light: 'rgb(255, 255, 200)',
+            body: 'rgb(255, 220, 80)',
+            dark: 'rgb(200, 160, 40)',
+            light: 'rgb(255, 255, 150)',
             eyes: 'rgb(0, 0, 0)',
             white: 'rgb(255, 255, 255)'
         }
@@ -373,8 +373,8 @@ const eeveelutions = [
         name: 'Flareon', 
         emoji: '🔥',
         colors: {
-            body: 'rgb(255, 150, 100)',
-            dark: 'rgb(200, 80, 0)',
+            body: 'rgb(255, 140, 80)',
+            dark: 'rgb(200, 80, 20)',
             light: 'rgb(255, 200, 150)',
             eyes: 'rgb(0, 0, 0)',
             white: 'rgb(255, 255, 255)'
@@ -384,9 +384,9 @@ const eeveelutions = [
         name: 'Espeon', 
         emoji: '✨',
         colors: {
-            body: 'rgb(200, 150, 255)',
+            body: 'rgb(200, 140, 240)',
             dark: 'rgb(150, 80, 200)',
-            light: 'rgb(220, 180, 255)',
+            light: 'rgb(230, 190, 255)',
             eyes: 'rgb(255, 0, 255)',
             white: 'rgb(255, 255, 255)'
         }
@@ -395,9 +395,9 @@ const eeveelutions = [
         name: 'Umbreon', 
         emoji: '🌙',
         colors: {
-            body: 'rgb(50, 50, 100)',
+            body: 'rgb(50, 50, 80)',
             dark: 'rgb(20, 20, 40)',
-            light: 'rgb(100, 100, 150)',
+            light: 'rgb(100, 100, 140)',
             eyes: 'rgb(255, 200, 0)',
             white: 'rgb(255, 255, 255)'
         }
@@ -406,9 +406,9 @@ const eeveelutions = [
         name: 'Leafeon', 
         emoji: '🍃',
         colors: {
-            body: 'rgb(100, 200, 100)',
-            dark: 'rgb(50, 150, 50)',
-            light: 'rgb(150, 255, 150)',
+            body: 'rgb(100, 180, 100)',
+            dark: 'rgb(50, 140, 50)',
+            light: 'rgb(150, 220, 150)',
             eyes: 'rgb(0, 0, 0)',
             white: 'rgb(255, 255, 255)'
         }
@@ -417,8 +417,8 @@ const eeveelutions = [
         name: 'Glaceon', 
         emoji: '❄️',
         colors: {
-            body: 'rgb(150, 200, 255)',
-            dark: 'rgb(100, 150, 200)',
+            body: 'rgb(150, 210, 255)',
+            dark: 'rgb(100, 160, 220)',
             light: 'rgb(200, 240, 255)',
             eyes: 'rgb(0, 0, 100)',
             white: 'rgb(255, 255, 255)'
@@ -428,8 +428,8 @@ const eeveelutions = [
         name: 'Sylveon', 
         emoji: '🎀',
         colors: {
-            body: 'rgb(255, 150, 200)',
-            dark: 'rgb(200, 100, 150)',
+            body: 'rgb(255, 140, 200)',
+            dark: 'rgb(200, 80, 150)',
             light: 'rgb(255, 200, 230)',
             eyes: 'rgb(0, 0, 0)',
             white: 'rgb(255, 255, 255)'
@@ -437,41 +437,41 @@ const eeveelutions = [
     }
 ];
 
-// Pixel art pattern - 16x16 size for all Eeveelutions
+// Improved Pixel art pattern - realistic Pokemon shapes!
 function getPixelArtPattern(colors) {
     return [
-        // Row 0
-        [null, null, null, null, 'dark', 'dark', 'dark', 'dark', 'dark', 'dark', null, null, null, null, null, null],
-        // Row 1
-        [null, null, null, 'dark', 'body', 'body', 'body', 'body', 'body', 'body', 'dark', null, null, null, null, null],
-        // Row 2
-        [null, null, 'dark', 'body', 'body', 'light', 'body', 'body', 'body', 'body', 'body', 'dark', null, null, null, null],
-        // Row 3
-        [null, 'dark', 'body', 'body', 'light', 'light', 'light', 'body', 'body', 'light', 'body', 'body', 'dark', null, null, null],
-        // Row 4
-        ['dark', 'body', 'body', 'light', 'light', 'eyes', 'eyes', 'light', 'light', 'light', 'eyes', 'light', 'body', 'dark', null, null],
-        // Row 5
-        ['dark', 'body', 'body', 'light', 'eyes', 'white', 'white', 'eyes', 'light', 'light', 'white', 'white', 'body', 'dark', null, null],
-        // Row 6
-        ['dark', 'body', 'body', 'light', 'light', 'eyes', 'eyes', 'light', 'light', 'light', 'eyes', 'light', 'body', 'dark', null, null],
-        // Row 7
-        [null, 'dark', 'body', 'body', 'light', 'light', 'light', 'body', 'body', 'light', 'body', 'body', 'dark', null, null, null],
-        // Row 8
-        [null, null, 'dark', 'body', 'body', 'body', 'body', 'body', 'body', 'body', 'body', 'dark', null, null, null, null],
-        // Row 9
-        [null, null, null, 'dark', 'body', 'body', 'body', 'body', 'body', 'body', 'dark', null, null, null, null, null],
-        // Row 10
-        [null, null, null, null, 'dark', 'dark', 'dark', 'dark', 'dark', 'dark', null, null, null, null, null, null],
-        // Row 11
+        // Row 0: Top of head
         [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
-        // Row 12
-        [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
-        // Row 13
-        [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
-        // Row 14
-        [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
-        // Row 15
-        [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+        // Row 1: Ears/head top
+        [null, null, null, 'dark', 'body', 'body', 'dark', null, 'dark', 'body', 'body', 'dark', null, null, null, null],
+        // Row 2: Head
+        [null, null, 'dark', 'body', 'light', 'body', 'body', 'dark', 'body', 'body', 'light', 'body', 'dark', null, null, null],
+        // Row 3: Head/eyes area
+        [null, 'dark', 'body', 'light', 'light', 'light', 'body', 'body', 'body', 'light', 'light', 'light', 'body', 'dark', null, null],
+        // Row 4: Eyes
+        ['dark', 'body', 'light', 'eyes', 'white', 'light', 'light', 'body', 'light', 'light', 'eyes', 'white', 'light', 'body', 'dark', null],
+        // Row 5: Eyes/nose
+        ['dark', 'body', 'light', 'eyes', 'white', 'light', 'body', 'dark', 'body', 'light', 'eyes', 'white', 'light', 'body', 'dark', null],
+        // Row 6: Face
+        ['dark', 'body', 'light', 'light', 'light', 'light', 'body', 'body', 'body', 'light', 'light', 'light', 'light', 'body', 'dark', null],
+        // Row 7: Body/chin
+        [null, 'dark', 'body', 'body', 'light', 'body', 'body', 'body', 'body', 'body', 'light', 'body', 'body', 'dark', null, null],
+        // Row 8: Body
+        [null, null, 'dark', 'body', 'body', 'body', 'body', 'body', 'body', 'body', 'body', 'body', 'dark', null, null, null],
+        // Row 9: Body/tail base
+        [null, null, 'dark', 'body', 'body', 'body', 'dark', null, null, 'dark', 'body', 'body', 'dark', null, null, null],
+        // Row 10: Tail start
+        [null, null, null, 'dark', 'body', 'body', 'dark', null, null, null, 'dark', 'body', 'body', 'dark', null, null],
+        // Row 11: Tail
+        [null, null, null, null, 'dark', 'body', 'body', 'body', 'body', 'dark', null, null, 'dark', 'body', 'dark', null],
+        // Row 12: Tail
+        [null, null, null, null, null, 'dark', 'body', 'body', 'body', 'body', 'dark', null, null, 'dark', 'body', 'dark'],
+        // Row 13: Tail end
+        [null, null, null, null, null, null, 'dark', 'body', 'body', 'body', 'body', 'dark', null, null, 'dark', 'body'],
+        // Row 14: Tail end
+        [null, null, null, null, null, null, null, 'dark', 'body', 'body', 'dark', null, null, null, null, 'dark'],
+        // Row 15: Bottom
+        [null, null, null, null, null, null, null, null, 'dark', 'dark', null, null, null, null, null, null]
     ];
 }
 
@@ -485,15 +485,15 @@ function renderEeveelutionGallery() {
         
         // Create a small preview canvas
         const previewCanvas = document.createElement('canvas');
-        previewCanvas.width = 80;
-        previewCanvas.height = 80;
+        previewCanvas.width = 100;
+        previewCanvas.height = 100;
         previewCanvas.className = 'eeveelution-preview-canvas';
         
         renderPixelArtPreview(previewCanvas, eevee.colors);
         
         const nameDiv = document.createElement('div');
         nameDiv.className = 'eeveelution-name';
-        nameDiv.textContent = eevee.name;
+        nameDiv.textContent = eevee.name + ' ' + eevee.emoji;
         
         item.appendChild(previewCanvas);
         item.appendChild(nameDiv);
@@ -510,9 +510,11 @@ function renderEeveelutionGallery() {
 function renderPixelArtPreview(canvas, colors) {
     const ctx = canvas.getContext('2d');
     ctx.imageSmoothingEnabled = false;
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     
     const pattern = getPixelArtPattern(colors);
-    const pixelSize = 5; // 5px per pixel in preview
+    const pixelSize = 6; // 6px per pixel in preview
     
     pattern.forEach(function(row, rowIdx) {
         row.forEach(function(colorKey, colIdx) {
@@ -551,6 +553,7 @@ function copyEeveelution(eevee) {
     });
     
     createPixelCanvas();
+    alert('✨ ' + eevee.name + ' added to your canvas! You can now edit it! ✨');
 }
 
 function loadSavedArtworks() {
