@@ -632,13 +632,27 @@ function loadSavedArtworks() {
         infoDiv.className = 'artwork-info';
         infoDiv.innerHTML = '<div class="artwork-name">' + artwork.name + '</div><div class="artwork-date">' + artwork.date + '</div>';
         
+        // Create button container
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.className = 'artwork-buttons';
+        
+        // Create rename button
+        const renameBtn = document.createElement('button');
+        renameBtn.className = 'rename-artwork-btn';
+        renameBtn.textContent = '✏️';
+        renameBtn.title = 'Rename this artwork';
+        renameBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            renameArtwork(id, artwork);
+        });
+        
         // Create delete button
         const deleteBtn = document.createElement('button');
         deleteBtn.className = 'delete-artwork-btn';
         deleteBtn.textContent = '🗑️';
         deleteBtn.title = 'Delete this artwork';
         deleteBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent loading artwork when clicking delete
+            e.stopPropagation();
             if (confirm('Are you sure you want to delete "' + artwork.name + '"?')) {
                 delete state.savedArtworks[id];
                 localStorage.setItem(`pixelart_artworks_${state.currentUser}`, JSON.stringify(state.savedArtworks));
@@ -647,8 +661,11 @@ function loadSavedArtworks() {
             }
         });
         
+        buttonsDiv.appendChild(renameBtn);
+        buttonsDiv.appendChild(deleteBtn);
+        
         item.appendChild(infoDiv);
-        item.appendChild(deleteBtn);
+        item.appendChild(buttonsDiv);
         
         // Click to load artwork
         infoDiv.addEventListener('click', function() {
@@ -657,6 +674,18 @@ function loadSavedArtworks() {
         
         list.appendChild(item);
     });
+}
+
+function renameArtwork(id, artwork) {
+    const newName = prompt('Enter new name for "' + artwork.name + '":', artwork.name);
+    
+    if (newName && newName.trim()) {
+        artwork.name = newName.trim();
+        state.savedArtworks[id] = artwork;
+        localStorage.setItem(`pixelart_artworks_${state.currentUser}`, JSON.stringify(state.savedArtworks));
+        loadSavedArtworks();
+        alert('✨ Artwork renamed!');
+    }
 }
 
 function loadArtwork(id, artwork) {
