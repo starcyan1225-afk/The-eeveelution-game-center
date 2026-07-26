@@ -18,6 +18,8 @@
       border:2px solid #dbe7ff;
       border-radius:12px;
       padding:20px;
+      position:relative;
+      z-index:2;
     }
     h1{margin-top:0;color:#3f51b5;}
     .question{font-size:20px;margin:12px 0;}
@@ -42,15 +44,41 @@
       cursor:pointer;
       display:none;
     }
+    #backBtn{
+      margin-top:10px;
+      margin-left:8px;
+      padding:10px 14px;
+      border:0;
+      border-radius:8px;
+      background:#607d8b;
+      color:#fff;
+      cursor:pointer;
+      display:none;
+    }
+    #backBtn:hover{background:#546e7a;}
+
+    /* Fireworks canvas on top */
+    #fireworks{
+      position:fixed;
+      inset:0;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+      z-index:1;
+      display:none;
+    }
   </style>
 </head>
 <body>
+  <canvas id="fireworks"></canvas>
+
   <div class="quiz">
     <h1>Pokemon Quiz</h1>
     <div id="question" class="question"></div>
     <div id="answers" class="answers"></div>
     <p id="meta"></p>
     <button id="nextBtn">Next</button>
+    <button id="backBtn" onclick="window.location.href='./index.html'">Back to Game Center</button>
   </div>
 
   <script>
@@ -68,6 +96,7 @@
     const answersEl = document.getElementById("answers");
     const metaEl = document.getElementById("meta");
     const nextBtn = document.getElementById("nextBtn");
+    const backBtn = document.getElementById("backBtn");
 
     function renderQuestion(){
       locked = false;
@@ -111,8 +140,84 @@
         answersEl.innerHTML = "";
         metaEl.textContent = "";
         nextBtn.style.display = "none";
+        backBtn.style.display = "inline-block";
+
+        if (score === quizData.length) {
+          questionEl.textContent = "Perfect Score! 100%! 🎉";
+          startFireworks(3500); // 3.5 seconds
+        }
       }
     };
+
+    // ---------- Simple Fireworks ----------
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    let animId = null;
+
+    function resizeCanvas(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    function random(min,max){ return Math.random()*(max-min)+min; }
+
+    function burst(x,y){
+      const colors = ["#ff5252","#ffd740","#69f0ae","#40c4ff","#b388ff","#ff80ab"];
+      for(let i=0;i<70;i++){
+        particles.push({
+          x, y,
+          vx: random(-4,4),
+          vy: random(-4,4),
+          life: random(40,70),
+          color: colors[Math.floor(Math.random()*colors.length)],
+          size: random(2,4)
+        });
+      }
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+
+      // occasional new bursts
+      if (Math.random() < 0.12) {
+        burst(random(100, canvas.width-100), random(80, canvas.height*0.55));
+      }
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.04; // gravity
+        p.life -= 1;
+
+        ctx.globalAlpha = Math.max(p.life / 70, 0);
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fill();
+      });
+
+      particles = particles.filter(p => p.life > 0);
+      ctx.globalAlpha = 1;
+      animId = requestAnimationFrame(draw);
+    }
+
+    function startFireworks(durationMs){
+      canvas.style.display = "block";
+      particles = [];
+      for(let i=0;i<4;i++){
+        burst(random(100, canvas.width-100), random(80, canvas.height*0.5));
+      }
+      draw();
+
+      setTimeout(() => {
+        cancelAnimationFrame(animId);
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        canvas.style.display = "none";
+      }, durationMs);
+    }
 
     renderQuestion();
   </script>
