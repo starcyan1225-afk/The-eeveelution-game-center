@@ -5,63 +5,143 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Eeveelution Game Center</title>
   <style>
-    body{
-      margin:0;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-family:Arial, sans-serif;
-      background: linear-gradient(135deg, #ffe082 0%, #81d4fa 45%, #b39ddb 100%);
-      padding:24px;
-      text-align:center;
+    * {
+      box-sizing: border-box;
     }
 
-    .card{
-      width:100%;
-      max-width:720px;
-      background:rgba(255,255,255,0.96);
-      border:4px solid #ffca28;
-      border-radius:18px;
-      padding:28px;
-      box-shadow:0 12px 30px rgba(0,0,0,.18);
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, #ffd1dc 0%, #ffc0cb 45%, #ffb6c1 100%);
     }
 
-    h1{
-      margin:0 0 10px;
-      color:#4a148c;
+    /* soft glow background circles */
+    .bg-glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    p{
-      margin:0 0 24px;
-      color:#263238;
-      font-size:18px;
+    .g1 { width: 280px; height: 280px; background: #fff0f5; top: 8%; left: 6%; }
+    .g2 { width: 340px; height: 340px; background: #ffe4ec; bottom: 5%; right: 8%; }
+    .g3 { width: 220px; height: 220px; background: #ffdbe8; top: 20%; right: 24%; }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      width: min(760px, 92%);
+      background: rgba(255, 255, 255, 0.9);
+      border: 3px solid #f8a5c2;
+      border-radius: 24px;
+      padding: 34px 24px;
+      text-align: center;
+      box-shadow: 0 14px 35px rgba(164, 74, 108, 0.25);
+      backdrop-filter: blur(3px);
     }
 
-    .quiz-btn{
-      display:inline-block;
-      padding:14px 22px;
-      border-radius:12px;
-      background:linear-gradient(135deg,#7c4dff,#29b6f6);
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-      box-shadow:0 8px 18px rgba(0,0,0,.18);
-      transition:transform .15s ease, box-shadow .2s ease;
+    h1 {
+      margin: 0 0 10px;
+      color: #b03060;
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      text-shadow: 1px 1px 0 #fff;
     }
 
-    .quiz-btn:hover{
-      transform:translateY(-2px);
-      box-shadow:0 12px 24px rgba(0,0,0,.22);
+    p {
+      margin: 0 0 24px;
+      color: #7a3b55;
+      font-size: 1.05rem;
+    }
+
+    .quiz-btn {
+      display: inline-block;
+      text-decoration: none;
+      background: linear-gradient(135deg, #ff6fa1, #ff8fb8);
+      color: #fff;
+      font-weight: 700;
+      padding: 13px 22px;
+      border-radius: 14px;
+      border: 2px solid #ffc2d6;
+      box-shadow: 0 8px 20px rgba(255, 105, 145, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .quiz-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(255, 105, 145, 0.45);
+      filter: brightness(1.04);
+    }
+
+    /* Falling petals */
+    .petals {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .petal {
+      position: absolute;
+      top: -10%;
+      width: 14px;
+      height: 10px;
+      background: radial-gradient(circle at 30% 30%, #fff7fb 0%, #ffd6e7 55%, #ffc1d9 100%);
+      border-radius: 70% 40% 70% 40%;
+      opacity: 0.8;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 0.85; }
+      100% {
+        transform: translateY(110vh) translateX(60px) rotate(360deg);
+        opacity: 0.15;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="bg-glow g1"></div>
+  <div class="bg-glow g2"></div>
+  <div class="bg-glow g3"></div>
+
+  <div class="petals" id="petals"></div>
+
   <main class="card">
     <h1>Welcome to The Eeveelution Game Center</h1>
     <p>Pick a game:</p>
 
-    <a class="quiz-btn" href="./pokemon-quiz.html">⚡ Play Pokemon Quiz</a>
+    <!-- Eeveelution button removed, only Pokemon Quiz -->
+    <a class="quiz-btn" href="./pokemon-quiz.html">🌸 Play Pokémon Quiz</a>
   </main>
+
+  <script>
+    const petalsWrap = document.getElementById("petals");
+    const count = 24;
+
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement("span");
+      p.className = "petal";
+      p.style.left = Math.random() * 100 + "vw";
+      p.style.animationDuration = (7 + Math.random() * 8) + "s";
+      p.style.animationDelay = (-Math.random() * 12) + "s";
+      p.style.transform = "scale(" + (0.7 + Math.random() * 0.9) + ")";
+      petalsWrap.appendChild(p);
+    }
+  </script>
 </body>
 </html>
