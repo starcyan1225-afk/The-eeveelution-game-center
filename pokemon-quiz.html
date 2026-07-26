@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokémon Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f7f7ff; margin:0; padding:24px; }
+    .quiz { max-width:700px; margin:auto; background:white; border-radius:12px; padding:20px; box-shadow:0 8px 24px rgba(0,0,0,.08);}
+    h1 { margin-top:0; }
+    .question { font-size:1.2rem; margin-bottom:12px; }
+    .answers button {
+      display:block; width:100%; margin:8px 0; padding:12px;
+      border:1px solid #ddd; border-radius:8px; cursor:pointer; background:#fff;
+    }
+    .answers button:hover { background:#f1f5ff; }
+    .meta { margin-top:14px; color:#555; }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+  <div class="quiz">
+    <h1>Pokémon Quiz</h1>
+    <div id="question" class="question"></div>
+    <div id="answers" class="answers"></div>
+    <div class="meta">
+      <span id="progress"></span> · <span id="score"></span>
+    </div>
+    <button id="nextBtn" class="hidden">Next</button>
+  </div>
 
+  <script>
+    const quizData = [
+      { q: "What type is Pikachu?", options: ["Fire", "Electric", "Water", "Grass"], correct: 1 },
+      { q: "Which Pokémon is known as the Seed Pokémon?", options: ["Charmander", "Bulbasaur", "Squirtle", "Eevee"], correct: 1 },
+      { q: "What does Magikarp evolve into?", options: ["Gyarados", "Dragonite", "Lapras", "Golduck"], correct: 0 },
+      { q: "Which Eeveelution is Water-type?", options: ["Jolteon", "Flareon", "Vaporeon", "Espeon"], correct: 2 },
+      { q: "Who is #001 in the Pokédex?", options: ["Pikachu", "Mew", "Bulbasaur", "Charmander"], correct: 2 }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let locked = false;
+
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+    const progressEl = document.getElementById("progress");
+    const scoreEl = document.getElementById("score");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function renderQuestion() {
+      locked = false;
+      nextBtn.classList.add("hidden");
+      const item = quizData[current];
+      questionEl.textContent = item.q;
+      answersEl.innerHTML = "";
+
+      item.options.forEach((text, index) => {
+        const btn = document.createElement("button");
+        btn.textContent = text;
+        btn.onclick = () => chooseAnswer(index);
+        answersEl.appendChild(btn);
+      });
+
+      progressEl.textContent = `Question ${current + 1}/${quizData.length}`;
+      scoreEl.textContent = `Score: ${score}`;
+    }
+
+    function chooseAnswer(index) {
+      if (locked) return;
+      locked = true;
+
+      const item = quizData[current];
+      const buttons = answersEl.querySelectorAll("button");
+
+      buttons.forEach((b, i) => {
+        if (i === item.correct) b.style.background = "#d1fae5";
+        if (i === index && i !== item.correct) b.style.background = "#fee2e2";
+        b.disabled = true;
+      });
+
+      if (index === item.correct) score++;
+      scoreEl.textContent = `Score: ${score}`;
+      nextBtn.classList.remove("hidden");
+    }
+
+    nextBtn.onclick = () => {
+      current++;
+      if (current < quizData.length) renderQuestion();
+      else showResult();
+    };
+
+    function showResult() {
+      questionEl.textContent = `Quiz complete! Final score: ${score}/${quizData.length}`;
+      answersEl.innerHTML = "";
+      nextBtn.classList.add("hidden");
+      progressEl.textContent = "Done!";
+    }
+
+    renderQuestion();
+  </script>
+</body>
+</html>
