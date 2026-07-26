@@ -103,7 +103,6 @@
 
   <div class="top-buttons">
     <a href="./index.html">← Back to Game Center</a>
-    <a href="#" id="eeveeBtn">Play Eeveelution Game</a>
   </div>
 
   <div id="grid"></div>
@@ -115,7 +114,6 @@
   </div>
 
   <script>
-    // ---- Pixel art logic ----
     const grid = document.getElementById("grid");
     const colorPicker = document.getElementById("colorPicker");
     const clearBtn = document.getElementById("clearBtn");
@@ -134,7 +132,9 @@
         });
 
         cell.addEventListener("mouseover", () => {
-          if (isDrawing) cell.style.backgroundColor = colorPicker.value;
+          if (isDrawing) {
+            cell.style.backgroundColor = colorPicker.value;
+          }
         });
 
         grid.appendChild(cell);
@@ -152,32 +152,6 @@
     });
 
     createGrid();
-
-    // ---- Eeveelution button fallback logic ----
-    // Put your real file name first in this list if different.
-    const possibleFiles = [
-      "./eeveelution.html",
-      "./the-eeveelution-game-center.html",
-      "./The-eeveelution-game-center.html",
-      "./eeveelution-game.html",
-      "./eevee.html"
-    ];
-
-    document.getElementById("eeveeBtn").addEventListener("click", async function (e) {
-      e.preventDefault();
-
-      for (const file of possibleFiles) {
-        try {
-          const res = await fetch(file, { method: "HEAD" });
-          if (res.ok) {
-            window.location.href = file;
-            return;
-          }
-        } catch (_) {}
-      }
-
-      alert("Eeveelution game file not found yet. Tell me your exact filename and I’ll wire it perfectly.");
-    });
   </script>
 </body>
 </html>
