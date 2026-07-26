@@ -5,17 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pokémon Quiz</title>
   <style>
-    body { font-family: Arial, sans-serif; background:#f7f7ff; margin:0; padding:24px; }
-    .quiz { max-width:700px; margin:auto; background:white; border-radius:12px; padding:20px; box-shadow:0 8px 24px rgba(0,0,0,.08);}
-    h1 { margin-top:0; }
-    .question { font-size:1.2rem; margin-bottom:12px; }
-    .answers button {
-      display:block; width:100%; margin:8px 0; padding:12px;
-      border:1px solid #ddd; border-radius:8px; cursor:pointer; background:#fff;
+    body {
+      font-family: 'Trebuchet MS', Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+      background: linear-gradient(135deg, #ffe082 0%, #81d4fa 45%, #b39ddb 100%);
+      min-height: 100vh;
     }
-    .answers button:hover { background:#f1f5ff; }
-    .meta { margin-top:14px; color:#555; }
-    .hidden { display:none; }
+
+    .quiz {
+      max-width: 760px;
+      margin: auto;
+      background: rgba(255,255,255,0.96);
+      border: 4px solid #ffca28;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.18);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      color: #5e35b1;
+      text-shadow: 1px 1px 0 #fff176;
+    }
+
+    .question {
+      font-size: 1.25rem;
+      margin: 10px 0 14px;
+      color: #263238;
+      font-weight: 700;
+    }
+
+    .answers button {
+      display: block;
+      width: 100%;
+      margin: 9px 0;
+      padding: 12px;
+      border: 2px solid #90caf9;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #e3f2fd;
+      color: #0d47a1;
+      font-weight: 700;
+      transition: transform .08s ease, background .2s ease;
+    }
+
+    .answers button:hover {
+      background: #bbdefb;
+      transform: translateY(-1px);
+    }
+
+    .meta {
+      margin-top: 14px;
+      color: #4e342e;
+      font-weight: 700;
+    }
+
+    #nextBtn {
+      margin-top: 14px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 10px;
+      background: #ff7043;
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    #nextBtn:hover {
+      background: #f4511e;
+    }
+
+    .hidden { display: none; }
   </style>
 </head>
 <body>
@@ -51,6 +112,7 @@
     function renderQuestion() {
       locked = false;
       nextBtn.classList.add("hidden");
+
       const item = quizData[current];
       questionEl.textContent = item.q;
       answersEl.innerHTML = "";
@@ -74,8 +136,8 @@
       const buttons = answersEl.querySelectorAll("button");
 
       buttons.forEach((b, i) => {
-        if (i === item.correct) b.style.background = "#d1fae5";
-        if (i === index && i !== item.correct) b.style.background = "#fee2e2";
+        if (i === item.correct) b.style.background = "#c8e6c9";   // green
+        if (i === index && i !== item.correct) b.style.background = "#ffcdd2"; // red
         b.disabled = true;
       });
 
@@ -86,8 +148,11 @@
 
     nextBtn.onclick = () => {
       current++;
-      if (current < quizData.length) renderQuestion();
-      else showResult();
+      if (current < quizData.length) {
+        renderQuestion();
+      } else {
+        showResult();
+      }
     };
 
     function showResult() {
