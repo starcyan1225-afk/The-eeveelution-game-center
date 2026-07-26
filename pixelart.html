@@ -1,142 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pixel Art Creator 🌈</title>
-    <link rel="stylesheet" href="pixelart.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixel Art Creator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffd1dc;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #b03060;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #6d214f;
+      margin-top: 0;
+    }
+
+    .top-buttons {
+      margin: 15px 0 20px;
+    }
+
+    .top-buttons a,
+    .top-buttons button {
+      display: inline-block;
+      margin: 6px;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 10px;
+      background: #ff6fa1;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .top-buttons a:hover,
+    .top-buttons button:hover {
+      background: #ff4f8b;
+    }
+
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(16, 24px);
+      grid-template-rows: repeat(16, 24px);
+      gap: 1px;
+      justify-content: center;
+      margin: 0 auto 20px;
+      width: max-content;
+      background: #e0e0e0;
+      padding: 6px;
+      border-radius: 10px;
+    }
+
+    .cell {
+      width: 24px;
+      height: 24px;
+      background: #fff;
+      border: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    .controls {
+      margin-top: 10px;
+    }
+
+    .controls input[type="color"] {
+      width: 48px;
+      height: 36px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      vertical-align: middle;
+    }
+
+    .controls button {
+      margin: 0 6px;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 10px;
+      background: #7c4dff;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .controls button:hover {
+      background: #6937f0;
+    }
+  </style>
 </head>
 <body>
-    <!-- LOGIN SCREEN -->
-    <div id="loginScreen" class="screen active">
-        <div class="login-container">
-            <h1>🌈 Pixel Art Creator 🌈</h1>
-            <p>Create, save, and share your pixel art!</p>
-            
-            <div class="login-form">
-                <input type="text" id="usernameInput" placeholder="Enter username" maxlength="20">
-                <input type="password" id="passwordInput" placeholder="Enter password" maxlength="20">
-                <button type="button" id="loginBtn" class="btn-primary">Login / Create Account</button>
-                <p class="info-text">✨ Just pick a username and password!</p>
-            </div>
-        </div>
-    </div>
-    
-    <!-- MAIN PIXEL ART CREATOR -->
-    <div id="creatorScreen" class="screen">
-        <!-- HEADER -->
-        <header class="creator-header">
-            <div class="header-left">
-                <h1>🌈 Pixel Art Creator</h1>
-                <span id="userDisplay" class="user-display"></span>
-            </div>
-            <div class="header-right">
-                <button type="button" id="logoutBtn" class="btn-secondary">Logout</button>
-                <a href="index.html" class="btn-secondary">Back to Home</a>
-            </div>
-        </header>
-        
-        <div class="creator-container">
-            <!-- LEFT SIDEBAR - TOOLS -->
-            <div class="sidebar left-sidebar">
-                <div class="tool-section">
-                    <h3>🎨 Grid Size</h3>
-                    <select id="gridSizeSelect" class="tool-input">
-                        <option value="16">16x16</option>
-                        <option value="24" selected>24x24</option>
-                        <option value="32">32x32</option>
-                        <option value="48">48x48</option>
-                    </select>
-                </div>
-                
-                <div class="tool-section">
-                    <h3>🎨 Brush Mode</h3>
-                    <select id="brushMode" class="tool-input">
-                        <option value="normal">Normal Brush</option>
-                        <option value="sparkle">✨ Sparkle Brush</option>
-                        <option value="heart">💕 Heart Brush</option>
-                    </select>
-                </div>
-                
-                <div class="tool-section">
-                    <h3>🎨 Color Picker</h3>
-                    <div class="color-sliders">
-                        <div class="slider-group">
-                            <label>Red</label>
-                            <input type="range" id="redSlider" min="0" max="255" value="255">
-                            <span id="redValue">255</span>
-                        </div>
-                        <div class="slider-group">
-                            <label>Green</label>
-                            <input type="range" id="greenSlider" min="0" max="255" value="100">
-                            <span id="greenValue">100</span>
-                        </div>
-                        <div class="slider-group">
-                            <label>Blue</label>
-                            <input type="range" id="blueSlider" min="0" max="255" value="200">
-                            <span id="blueValue">200</span>
-                        </div>
-                    </div>
-                    <div id="colorPreview" class="color-preview"></div>
-                </div>
-                
-                <div class="tool-section">
-                    <h3>🎮 Tools</h3>
-                    <button type="button" id="clearBtn" class="btn-warning">🗑️ Clear</button>
-                    <button type="button" id="undoBtn" class="btn-secondary">↶ Undo</button>
-                    <button type="button" id="eeveelutionBtn" class="btn-primary">🐹 Eeveelutions</button>
-                </div>
-                
-                <div class="tool-section">
-                    <h3>💾 Save/Load</h3>
-                    <button type="button" id="saveBtn" class="btn-primary">💾 Save Artwork</button>
-                    <button type="button" id="loadBtn" class="btn-secondary">📂 Load Artwork</button>
-                </div>
-            </div>
-            
-            <!-- CENTER - CANVAS -->
-            <div class="canvas-area">
-                <div id="pixelCanvas" class="pixel-canvas"></div>
-            </div>
-            
-            <!-- RIGHT SIDEBAR - SAVED ARTWORKS -->
-            <div class="sidebar right-sidebar">
-                <h3>📚 My Artworks</h3>
-                <div id="savedArtworksList" class="saved-artworks-list">
-                    <p class="empty-message">No saved artworks yet!</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- EEVEELUTION GALLERY -->
-    <div id="eeveelutionGallery" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>🐹 Choose an Eeveelution to Copy</h2>
-                <button type="button" id="closeGalleryBtn" class="btn-close">✕</button>
-            </div>
-            <div id="eeveelutionGrid" class="eeveelution-grid">
-                <!-- Eeveelutions will be generated here -->
-            </div>
-        </div>
-    </div>
-    
-    <!-- SAVE ARTWORK DIALOG -->
-    <div id="saveDialog" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>💾 Save Your Artwork</h2>
-                <button type="button" id="closeSaveDialogBtn" class="btn-close">✕</button>
-            </div>
-            <input type="text" id="artworkNameInput" placeholder="Give your artwork a name..." maxlength="30">
-            <div class="modal-buttons">
-                <button type="button" id="confirmSaveBtn" class="btn-primary">Save</button>
-                <button type="button" id="cancelSaveBtn" class="btn-secondary">Cancel</button>
-            </div>
-        </div>
-    </div>
-    
-    <script src="pixelart.js"></script>
+  <h1>🌈 Pixel Art Creator</h1>
+  <p>Create your own pixel art!</p>
+
+  <div class="top-buttons">
+    <a href="./index.html">← Back to Game Center</a>
+    <a href="./eeveelution.html">Play Eeveelution Game</a>
+  </div>
+
+  <div id="grid"></div>
+
+  <div class="controls">
+    <label for="colorPicker"><strong>Color:</strong></label>
+    <input type="color" id="colorPicker" value="#000000" />
+    <button id="clearBtn" type="button">Clear</button>
+  </div>
+
+  <script>
+    const grid = document.getElementById("grid");
+    const colorPicker = document.getElementById("colorPicker");
+    const clearBtn = document.getElementById("clearBtn");
+
+    const size = 16;
+    let isDrawing = false;
+
+    function createGrid() {
+      for (let i = 0; i < size * size; i++) {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+
+        cell.addEventListener("mousedown", () => {
+          isDrawing = true;
+          cell.style.backgroundColor = colorPicker.value;
+        });
+
+        cell.addEventListener("mouseover", () => {
+          if (isDrawing) {
+            cell.style.backgroundColor = colorPicker.value;
+          }
+        });
+
+        grid.appendChild(cell);
+      }
+    }
+
+    document.addEventListener("mouseup", () => {
+      isDrawing = false;
+    });
+
+    clearBtn.addEventListener("click", () => {
+      document.querySelectorAll(".cell").forEach(cell => {
+        cell.style.backgroundColor = "#ffffff";
+      });
+    });
+
+    createGrid();
+  </script>
 </body>
 </html>
