@@ -431,29 +431,37 @@ const GREY = 'rgb(80, 80, 80)'; // Grey
 
 function getPixelArtPattern(index) {
     const patterns = [
-       // Replace the first pattern in getPixelArtPattern() (Eevee) with this:
-[
-    [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-    [null,null,null,BK,BK,BK,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-    [null,null,BK,'rgb(236,190,95)','rgb(236,190,95)',BK,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-    [null,BK,'rgb(236,190,95)',BROWN,'rgb(236,190,95)',GREY,null,null,null,null,BK,BK,BK,null,null,BK,null,null,null,null,null,null],
-    [null,BK,'rgb(236,190,95)',BROWN,'rgb(205,140,70)',GREY,GREY,null,BK,GREY,'rgb(245,235,170)','rgb(245,235,170)',BK,GREY,GREY,'rgb(245,235,170)',BK,null,null,null,null,null],
-    [null,BK,DKBROWN,GREY,GREY,'rgb(245,235,170)',GREY,GREY,'rgb(210,155,70)','rgb(245,235,170)',DKBROWN,'rgb(236,190,95)',GREY,'rgb(210,155,70)','rgb(245,235,170)','rgb(245,235,170)',GREY,null,null,null,null,null],
-    [null,BK,GREY,'rgb(236,190,95)','rgb(245,235,170)','rgb(236,190,95)','rgb(245,235,170)',DKBROWN,'rgb(236,190,95)',DKBROWN,DKBROWN,'rgb(236,190,95)',GREY,'rgb(210,155,70)','rgb(245,235,170)','rgb(245,235,170)',GREY,null,null,null,null,null],
-    [BK,'rgb(210,155,70)','rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)','rgb(210,155,70)',DKBROWN,DKBROWN,'rgb(236,190,95)',GREY,'rgb(210,155,70)','rgb(210,155,70)','rgb(210,155,70)','rgb(245,235,170)',GREY,null,null,null,null,null,null],
-    [BK,null,'rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)','rgb(210,155,70)','rgb(236,190,95)',GREY,DKBROWN,'rgb(210,155,70)','rgb(210,155,70)',GREY,null,null,null,null,null,null,null,null],
-    [GREY,GREY,'rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)','rgb(210,155,70)',DKBROWN,'rgb(236,190,95)','rgb(236,190,95)',GREY,DKBROWN,'rgb(210,155,70)',DKBROWN,BK,GREY,null,null,null,null,null,null,null],
-    [GREY,'rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)',BROWN,null,GREY,'rgb(236,190,95)',DKBROWN,'rgb(245,235,170)',DKBROWN,'rgb(210,155,70)','rgb(210,155,70)',GREY,null,null,null,null,null,null,null,null],
-    [null,GREY,DKBROWN,'rgb(236,190,95)','rgb(236,190,95)',DKBROWN,GREY,'rgb(210,155,70)',DKBROWN,'rgb(245,235,170)','rgb(245,235,170)',DKBROWN,'rgb(210,155,70)',GREY,null,null,null,null,null,null,null,null],
-    [GREY,'rgb(245,235,170)',DKBROWN,DKBROWN,'rgb(210,155,70)','rgb(210,155,70)','rgb(210,155,70)',DKBROWN,'rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)',DKBROWN,'rgb(210,155,70)',BK,null,null,null,null,null,null,null,null],
-    [GREY,'rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)',GREY,DKBROWN,'rgb(210,155,70)',GREY,null,null,null,null,null,null,null,null],
-    [null,GREY,'rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)',DKBROWN,GREY,GREY,DKBROWN,'rgb(210,155,70)',GREY,null,null,null,null,null,null,null],
-    [null,null,GREY,GREY,'rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)',DKBROWN,'rgb(210,155,70)',GREY,null,null,GREY,GREY,null,null,null,null,null,null,null,null],
-    [null,null,null,GREY,'rgb(210,155,70)',GREY,GREY,'rgb(210,155,70)',BK,null,null,null,null,null,null,null,null,null,null,null,null,null],
-    [null,null,null,null,GREY,BK,'rgb(236,190,95)','rgb(210,155,70)',GREY,null,null,null,null,null,null,null,null,null,null,null,null,null],
-    [null,null,null,null,null,GREY,BK,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-    [null,null,null,null,null,null,GREY,BK,null,null,null,null,null,null,null,null,null,null,null,null,null,null]
-]
+       function getPixelArtPattern(character) {
+    const patterns = {
+        eevee: {
+            size: 20,
+            pixels: [
+                [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+                [null,null,null,BK,BK,BK,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+                [null,null,BK,'rgb(236,190,95)','rgb(236,190,95)',BK,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+                [null,BK,'rgb(236,190,95)',BROWN,'rgb(236,190,95)',GREY,null,null,null,null,BK,BK,BK,null,null,BK,null,null,null,null,null,null],
+                [null,BK,'rgb(236,190,95)',BROWN,'rgb(205,140,70)',GREY,GREY,null,BK,GREY,'rgb(245,235,170)','rgb(245,235,170)',BK,GREY,GREY,'rgb(245,235,170)',BK,null,null,null,null,null],
+                [null,BK,DKBROWN,GREY,GREY,'rgb(245,235,170)',GREY,GREY,'rgb(210,155,70)','rgb(245,235,170)',DKBROWN,'rgb(236,190,95)',GREY,'rgb(210,155,70)','rgb(245,235,170)','rgb(245,235,170)',GREY,null,null,null,null,null],
+                [null,BK,GREY,'rgb(236,190,95)','rgb(245,235,170)','rgb(236,190,95)','rgb(245,235,170)',DKBROWN,'rgb(236,190,95)',DKBROWN,DKBROWN,'rgb(236,190,95)',GREY,'rgb(210,155,70)','rgb(245,235,170)','rgb(245,235,170)',GREY,null,null,null,null,null],
+                [BK,'rgb(210,155,70)','rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)','rgb(210,155,70)',DKBROWN,DKBROWN,'rgb(236,190,95)',GREY,'rgb(210,155,70)','rgb(210,155,70)','rgb(210,155,70)','rgb(245,235,170)',GREY,null,null,null,null,null,null],
+                [BK,null,'rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)','rgb(210,155,70)','rgb(236,190,95)',GREY,DKBROWN,'rgb(210,155,70)','rgb(210,155,70)',GREY,null,null,null,null,null,null,null,null],
+                [GREY,GREY,'rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)','rgb(210,155,70)',DKBROWN,'rgb(236,190,95)','rgb(236,190,95)',GREY,DKBROWN,'rgb(210,155,70)',DKBROWN,BK,GREY,null,null,null,null,null,null,null],
+                [GREY,'rgb(236,190,95)','rgb(236,190,95)','rgb(236,190,95)',BROWN,null,GREY,'rgb(236,190,95)',DKBROWN,'rgb(245,235,170)',DKBROWN,'rgb(210,155,70)','rgb(210,155,70)',GREY,null,null,null,null,null,null,null,null],
+                [null,GREY,DKBROWN,'rgb(236,190,95)','rgb(236,190,95)',DKBROWN,GREY,'rgb(210,155,70)',DKBROWN,'rgb(245,235,170)','rgb(245,235,170)',DKBROWN,'rgb(210,155,70)',GREY,null,null,null,null,null,null,null,null],
+                [GREY,'rgb(245,235,170)',DKBROWN,DKBROWN,'rgb(210,155,70)','rgb(210,155,70)','rgb(210,155,70)',DKBROWN,'rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)',DKBROWN,'rgb(210,155,70)',BK,null,null,null,null,null,null,null,null],
+                [GREY,'rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)',GREY,DKBROWN,'rgb(210,155,70)',GREY,null,null,null,null,null,null,null,null],
+                [null,GREY,'rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)',DKBROWN,GREY,GREY,DKBROWN,'rgb(210,155,70)',GREY,null,null,null,null,null,null,null],
+                [null,null,GREY,GREY,'rgb(245,235,170)','rgb(245,235,170)','rgb(245,235,170)',DKBROWN,'rgb(210,155,70)',GREY,null,null,GREY,GREY,null,null,null,null,null,null,null,null],
+                [null,null,null,GREY,'rgb(210,155,70)',GREY,GREY,'rgb(210,155,70)',BK,null,null,null,null,null,null,null,null,null,null,null,null,null],
+                [null,null,null,null,GREY,BK,'rgb(236,190,95)','rgb(210,155,70)',GREY,null,null,null,null,null,null,null,null,null,null,null,null,null],
+                [null,null,null,null,null,GREY,BK,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+                [null,null,null,null,null,null,GREY,BK,null,null,null,null,null,null,null,null,null,null,null,null,null,null]
+            ]
+        }
+    };
+
+    return patterns[character] || null;
+}
         // Vaporeon
         [
             [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
