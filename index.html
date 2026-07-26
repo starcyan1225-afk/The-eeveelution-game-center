@@ -1,173 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shelley's World</title>
-  <style>
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: "Trebuchet MS", Arial, sans-serif;
-      background: linear-gradient(180deg, #ffd1dc 0%, #ffc0cb 45%, #ffb6c1 100%);
-      color: #6d214f;
-      overflow-x: hidden;
-    }
-
-    header {
-      text-align: center;
-      padding: 40px 20px 20px;
-      position: relative;
-      z-index: 2;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: clamp(2rem, 5vw, 3rem);
-      color: #b03060;
-      text-shadow: 1px 1px 0 #fff;
-    }
-
-    header p {
-      margin-top: 10px;
-      font-size: 1.1rem;
-      color: #7a3b55;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 10px 20px 50px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .section {
-      background: rgba(255, 255, 255, 0.88);
-      border: 2px solid #f8a5c2;
-      border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 8px 22px rgba(164, 74, 108, 0.18);
-    }
-
-    .section h2 {
-      margin-top: 0;
-      color: #b03060;
-    }
-
-    .games {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(135deg, #ff6fa1, #ff8fb8);
-      color: #fff;
-      font-weight: 700;
-      padding: 12px 18px;
-      border-radius: 12px;
-      border: 2px solid #ffc2d6;
-      box-shadow: 0 8px 18px rgba(255, 105, 145, 0.28);
-      transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(255, 105, 145, 0.4);
-      filter: brightness(1.04);
-    }
-
-    /* soft glows */
-    .bg-glow {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(40px);
-      opacity: 0.35;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .g1 { width: 280px; height: 280px; background: #fff0f5; top: 8%; left: 6%; }
-    .g2 { width: 340px; height: 340px; background: #ffe4ec; bottom: 5%; right: 8%; }
-    .g3 { width: 220px; height: 220px; background: #ffdbe8; top: 20%; right: 24%; }
-
-    /* petals */
-    .petals {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .petal {
-      position: absolute;
-      top: -10%;
-      width: 14px;
-      height: 10px;
-      background: radial-gradient(circle at 30% 30%, #fff7fb 0%, #ffd6e7 55%, #ffc1d9 100%);
-      border-radius: 70% 40% 70% 40%;
-      opacity: 0.8;
-      animation: fall linear infinite;
-    }
-
-    @keyframes fall {
-      0%   { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
-      10%  { opacity: 0.85; }
-      100% { transform: translateY(110vh) translateX(60px) rotate(360deg); opacity: 0.15; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelley - Pokemon Enthusiast</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="bg-glow g1"></div>
-  <div class="bg-glow g2"></div>
-  <div class="bg-glow g3"></div>
-  <div class="petals" id="petals"></div>
-
-  <header>
-    <h1>Welcome to Shelley's World</h1>
-    <p>A cozy pink place with games and fun 🌸</p>
-  </header>
-
-  <main class="container">
-    <section class="section">
-      <h2>About</h2>
-      <p>Hi! This is Shelley’s cute game corner. Pick a section below and enjoy!</p>
+    <!-- HERO SECTION - Your introduction at the top -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🌟 Welcome to Shelley's World! 🌟</h1>
+            <p class="intro-text">A 5th grader who loves Pokemon and making games</p>
+            <p class="tagline">✨ Proud to be a girl who codes and creates ✨</p>
+        </div>
     </section>
 
-    <section class="section">
-      <h2>Games</h2>
-      <div class="games">
-        <a class="btn" href="./pokemon-quiz.html">🌸 Play Pokémon Quiz</a>
-      </div>
+    <!-- ABOUT ME SECTION - Tell people about yourself -->
+    <section class="about">
+        <h2>👋 About Me</h2>
+        <div class="about-content">
+            <p>Hi! I'm Shelley, a 5th grader with a passion for Pokemon! I love creating games and exploring the amazing world of coding. Every day, I'm learning new things and having fun while doing it!</p>
+            <p>I believe that being a girl who loves technology is super cool, and I'm proud to inspire others to follow their dreams too!</p>
+        </div>
     </section>
 
-    <section class="section">
-      <h2>More</h2>
-      <p>More sections can go here (favorites, links, updates, etc.).</p>
+    <!-- INTERESTS SECTION - What you love -->
+    <section class="interests">
+        <h2>❤️ My Interests</h2>
+        <div class="interests-grid">
+            <div class="interest-card">
+                <span class="interest-icon">🐾</span>
+                <h3>Pokemon</h3>
+                <p>All things Pokemon! My favorite games, characters, and adventures</p>
+            </div>
+            <div class="interest-card">
+                <span class="interest-icon">🎮</span>
+                <h3>Game Making</h3>
+                <p>Creating fun and interactive games for others to enjoy</p>
+            </div>
+            <div class="interest-card">
+                <span class="interest-icon">💻</span>
+                <h3>Coding</h3>
+                <p>Learning to code and build amazing things on the computer</p>
+            </div>
+            <div class="interest-card">
+                <span class="interest-icon">✨</span>
+                <h3>Creativity</h3>
+                <p>Using my imagination to create art, games, and stories</p>
+            </div>
+        </div>
     </section>
-  </main>
 
-  <script>
-    const petalsWrap = document.getElementById("petals");
-    const count = 28;
-
-    for (let i = 0; i < count; i++) {
-      const p = document.createElement("span");
-      p.className = "petal";
-      p.style.left = Math.random() * 100 + "vw";
-      p.style.animationDuration = (7 + Math.random() * 8) + "s";
-      p.style.animationDelay = (-Math.random() * 12) + "s";
-      p.style.transform = "scale(" + (0.7 + Math.random() * 0.9) + ")";
-      petalsWrap.appendChild(p);
-    }
-  </script>
+    <!-- PROJECTS SECTION - What you've made -->
+    <section class="projects">
+        <h2>🎮 My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-icon">🐹</div>
+                <h3>Eevee Evolution Game</h3>
+                <p>An interactive game about Pokemon evolutions. Click to evolve Eevee into different forms!</p>
+                <span class="status">In Progress</span>
+            </div>
+            <div class="project-card">
+                <div class="project-icon">🎯</div>
+                <h3>Pokemon Quiz</h3>
+                <p>Test your Pokemon knowledge with fun questions and earn badges!</p>
+                <span class="status">Coming Soon</span>
+                <span class="status">Play now!</span>
+                <button onclick="window.location.href='/The-eeveelution-game-center/pokemon-quiz.html'">
+  Play Pokémon Quiz
+</button>
+            </div>
+            <div class="project-card">
+                <a href="pixelart.html" style="text-decoration: none; color: inherit;">
+@@ -118,4 +121,4 @@
+    <!-- Link to JavaScript file for interactive features -->
+    <script src="script.js"></script>
 </body>
+</html>
 </html>
