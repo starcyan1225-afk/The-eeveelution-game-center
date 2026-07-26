@@ -1,102 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pokémon Quiz</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pokemon Quiz</title>
   <style>
-    body {
-      font-family: 'Trebuchet MS', Arial, sans-serif;
-      margin: 0;
-      padding: 24px;
-      background: linear-gradient(135deg, #ffe082 0%, #81d4fa 45%, #b39ddb 100%);
-      min-height: 100vh;
+    body{
+      margin:0;
+      padding:24px;
+      font-family:Arial,sans-serif;
+      background:#f2f7ff;
     }
-
-    .quiz {
-      max-width: 760px;
-      margin: auto;
-      background: rgba(255,255,255,0.96);
-      border: 4px solid #ffca28;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 12px 30px rgba(0,0,0,.18);
+    .quiz{
+      max-width:700px;
+      margin:0 auto;
+      background:#fff;
+      border:2px solid #dbe7ff;
+      border-radius:12px;
+      padding:20px;
     }
-
-    h1 {
-      margin: 0 0 12px;
-      color: #5e35b1;
-      text-shadow: 1px 1px 0 #fff176;
+    h1{margin-top:0;color:#3f51b5;}
+    .question{font-size:20px;margin:12px 0;}
+    .answers button{
+      display:block;
+      width:100%;
+      margin:8px 0;
+      padding:10px;
+      border:1px solid #ccc;
+      border-radius:8px;
+      background:#fafafa;
+      cursor:pointer;
     }
-
-    .question {
-      font-size: 1.25rem;
-      margin: 10px 0 14px;
-      color: #263238;
-      font-weight: 700;
+    .answers button:hover{background:#eef4ff;}
+    #nextBtn{
+      margin-top:10px;
+      padding:10px 14px;
+      border:0;
+      border-radius:8px;
+      background:#3f51b5;
+      color:#fff;
+      cursor:pointer;
+      display:none;
     }
-
-    .answers button {
-      display: block;
-      width: 100%;
-      margin: 9px 0;
-      padding: 12px;
-      border: 2px solid #90caf9;
-      border-radius: 12px;
-      cursor: pointer;
-      background: #e3f2fd;
-      color: #0d47a1;
-      font-weight: 700;
-      transition: transform .08s ease, background .2s ease;
-    }
-
-    .answers button:hover {
-      background: #bbdefb;
-      transform: translateY(-1px);
-    }
-
-    .meta {
-      margin-top: 14px;
-      color: #4e342e;
-      font-weight: 700;
-    }
-
-    #nextBtn {
-      margin-top: 14px;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 10px;
-      background: #ff7043;
-      color: white;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    #nextBtn:hover {
-      background: #f4511e;
-    }
-
-    .hidden { display: none; }
   </style>
 </head>
 <body>
   <div class="quiz">
-    <h1>Pokémon Quiz</h1>
+    <h1>Pokemon Quiz</h1>
     <div id="question" class="question"></div>
     <div id="answers" class="answers"></div>
-    <div class="meta">
-      <span id="progress"></span> · <span id="score"></span>
-    </div>
-    <button id="nextBtn" class="hidden">Next</button>
+    <p id="meta"></p>
+    <button id="nextBtn">Next</button>
   </div>
 
   <script>
     const quizData = [
-      { q: "What type is Pikachu?", options: ["Fire", "Electric", "Water", "Grass"], correct: 1 },
-      { q: "Which Pokémon is known as the Seed Pokémon?", options: ["Charmander", "Bulbasaur", "Squirtle", "Eevee"], correct: 1 },
-      { q: "What does Magikarp evolve into?", options: ["Gyarados", "Dragonite", "Lapras", "Golduck"], correct: 0 },
-      { q: "Which Eeveelution is Water-type?", options: ["Jolteon", "Flareon", "Vaporeon", "Espeon"], correct: 2 },
-      { q: "Who is #001 in the Pokédex?", options: ["Pikachu", "Mew", "Bulbasaur", "Charmander"], correct: 2 }
+      { q:"What type is Pikachu?", options:["Fire","Electric","Water","Grass"], correct:1 },
+      { q:"Who is #001 in the Pokedex?", options:["Bulbasaur","Charmander","Squirtle","Pikachu"], correct:0 },
+      { q:"What does Eevee evolve into with a Water Stone?", options:["Jolteon","Vaporeon","Flareon","Espeon"], correct:1 }
     ];
 
     let current = 0;
@@ -105,62 +66,53 @@
 
     const questionEl = document.getElementById("question");
     const answersEl = document.getElementById("answers");
-    const progressEl = document.getElementById("progress");
-    const scoreEl = document.getElementById("score");
+    const metaEl = document.getElementById("meta");
     const nextBtn = document.getElementById("nextBtn");
 
-    function renderQuestion() {
+    function renderQuestion(){
       locked = false;
-      nextBtn.classList.add("hidden");
-
+      nextBtn.style.display = "none";
       const item = quizData[current];
       questionEl.textContent = item.q;
       answersEl.innerHTML = "";
+      metaEl.textContent = "Question " + (current + 1) + "/" + quizData.length + " | Score: " + score;
 
-      item.options.forEach((text, index) => {
-        const btn = document.createElement("button");
-        btn.textContent = text;
-        btn.onclick = () => chooseAnswer(index);
-        answersEl.appendChild(btn);
+      item.options.forEach((opt, i) => {
+        const b = document.createElement("button");
+        b.textContent = opt;
+        b.onclick = function(){ chooseAnswer(i); };
+        answersEl.appendChild(b);
       });
-
-      progressEl.textContent = `Question ${current + 1}/${quizData.length}`;
-      scoreEl.textContent = `Score: ${score}`;
     }
 
-    function chooseAnswer(index) {
-      if (locked) return;
+    function chooseAnswer(i){
+      if(locked) return;
       locked = true;
-
       const item = quizData[current];
       const buttons = answersEl.querySelectorAll("button");
 
-      buttons.forEach((b, i) => {
-        if (i === item.correct) b.style.background = "#c8e6c9";   // green
-        if (i === index && i !== item.correct) b.style.background = "#ffcdd2"; // red
+      buttons.forEach((b, idx) => {
+        if(idx === item.correct) b.style.background = "#c8f7c5";
+        if(idx === i && idx !== item.correct) b.style.background = "#ffd0d0";
         b.disabled = true;
       });
 
-      if (index === item.correct) score++;
-      scoreEl.textContent = `Score: ${score}`;
-      nextBtn.classList.remove("hidden");
+      if(i === item.correct) score++;
+      metaEl.textContent = "Question " + (current + 1) + "/" + quizData.length + " | Score: " + score;
+      nextBtn.style.display = "inline-block";
     }
 
-    nextBtn.onclick = () => {
+    nextBtn.onclick = function(){
       current++;
-      if (current < quizData.length) {
+      if(current < quizData.length){
         renderQuestion();
       } else {
-        showResult();
+        questionEl.textContent = "Done! Final Score: " + score + "/" + quizData.length;
+        answersEl.innerHTML = "";
+        metaEl.textContent = "";
+        nextBtn.style.display = "none";
       }
     };
-
-    function showResult() {
-      questionEl.textContent = `Quiz complete! Final score: ${score}/${quizData.length}`;
-      answersEl.innerHTML = "";
-      nextBtn.classList.add("hidden");
-      progressEl.textContent = "Done!";
-    }
 
     renderQuestion();
   </script>
