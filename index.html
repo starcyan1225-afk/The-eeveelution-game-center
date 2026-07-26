@@ -1,133 +1,149 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shelley - Pokemon Enthusiast</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pokemon Quiz</title>
+  <style>
+    body{
+      margin:0; padding:24px; min-height:100vh;
+      font-family:'Trebuchet MS', Arial, sans-serif;
+      background: linear-gradient(135deg, #ffe082 0%, #81d4fa 45%, #b39ddb 100%);
+    }
+    .quiz{
+      max-width:760px; margin:0 auto; padding:22px;
+      background:rgba(255,255,255,0.96);
+      border:4px solid #ffca28; border-radius:18px;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+      position:relative; z-index:2;
+    }
+    h1{margin-top:0;color:#5e35b1;text-shadow:1px 1px 0 #fff176;}
+    .question{font-size:1.25rem;margin:10px 0 14px;color:#263238;font-weight:700;}
+    .answers button{
+      display:block; width:100%; margin:9px 0; padding:12px;
+      border:2px solid #90caf9; border-radius:12px; cursor:pointer;
+      background:#e3f2fd; color:#0d47a1; font-weight:700;
+    }
+    .answers button:hover{background:#bbdefb;}
+    .meta{margin-top:14px;color:#4e342e;font-weight:700;}
+    #nextBtn{
+      margin-top:14px; padding:10px 16px; border:none; border-radius:10px;
+      color:#fff; font-weight:800; cursor:pointer;
+      background:#ff7043; display:none;
+    }
+    #fireworks{
+      position:fixed; inset:0; width:100%; height:100%;
+      pointer-events:none; z-index:9999; display:none;
+    }
+  </style>
 </head>
 <body>
-    <!-- HERO SECTION - Your introduction at the top -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>🌟 Welcome to Shelley's World! 🌟</h1>
-            <p class="intro-text">A 5th grader who loves Pokemon and making games</p>
-            <p class="tagline">✨ Proud to be a girl who codes and creates ✨</p>
-        </div>
-    </section>
+  <canvas id="fireworks"></canvas>
+  <div class="quiz">
+    <h1>Pokémon Quiz</h1>
+    <div id="question" class="question"></div>
+    <div id="answers" class="answers"></div>
+    <p id="meta" class="meta"></p>
+    <button id="nextBtn">Next</button>
+  </div>
 
-    <!-- ABOUT ME SECTION - Tell people about yourself -->
-    <section class="about">
-        <h2>👋 About Me</h2>
-        <div class="about-content">
-            <p>Hi! I'm Shelley, a 5th grader with a passion for Pokemon! I love creating games and exploring the amazing world of coding. Every day, I'm learning new things and having fun while doing it!</p>
-            <p>I believe that being a girl who loves technology is super cool, and I'm proud to inspire others to follow their dreams too!</p>
-        </div>
-    </section>
+  <script>
+    const quizData = [
+      { q:"What type is Pikachu?", options:["Fire","Electric","Water","Grass"], correct:1 },
+      { q:"Which Pokémon is known as the Seed Pokémon?", options:["Charmander","Bulbasaur","Squirtle","Eevee"], correct:1 },
+      { q:"What does Magikarp evolve into?", options:["Gyarados","Dragonite","Lapras","Golduck"], correct:0 },
+      { q:"Which Eeveelution is Water-type?", options:["Jolteon","Flareon","Vaporeon","Espeon"], correct:2 },
+      { q:"Who is #001 in the Pokédex?", options:["Pikachu","Mew","Bulbasaur","Charmander"], correct:2 }
+    ];
 
-    <!-- INTERESTS SECTION - What you love -->
-    <section class="interests">
-        <h2>❤️ My Interests</h2>
-        <div class="interests-grid">
-            <div class="interest-card">
-                <span class="interest-icon">🐾</span>
-                <h3>Pokemon</h3>
-                <p>All things Pokemon! My favorite games, characters, and adventures</p>
-            </div>
-            <div class="interest-card">
-                <span class="interest-icon">🎮</span>
-                <h3>Game Making</h3>
-                <p>Creating fun and interactive games for others to enjoy</p>
-            </div>
-            <div class="interest-card">
-                <span class="interest-icon">💻</span>
-                <h3>Coding</h3>
-                <p>Learning to code and build amazing things on the computer</p>
-            </div>
-            <div class="interest-card">
-                <span class="interest-icon">✨</span>
-                <h3>Creativity</h3>
-                <p>Using my imagination to create art, games, and stories</p>
-            </div>
-        </div>
-    </section>
+    let current = 0, score = 0, locked = false;
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+    const metaEl = document.getElementById("meta");
+    const nextBtn = document.getElementById("nextBtn");
 
-    <!-- PROJECTS SECTION - What you've made -->
-    <section class="projects">
-        <h2>🎮 My Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-icon">🐹</div>
-                <h3>Eevee Evolution Game</h3>
-                <p>An interactive game about Pokemon evolutions. Click to evolve Eevee into different forms!</p>
-                <span class="status">In Progress</span>
-            </div>
-            <a href="./pokemon-quiz.html" class="quiz-btn">Play Pokémon Quiz</a>
+    function renderQuestion(){
+      locked = false;
+      nextBtn.style.display = "none";
+      const item = quizData[current];
+      questionEl.textContent = item.q;
+      answersEl.innerHTML = "";
+      metaEl.textContent = `Question ${current+1}/${quizData.length} | Score: ${score}`;
+      item.options.forEach((opt,i)=>{
+        const b = document.createElement("button");
+        b.textContent = opt;
+        b.onclick = ()=>chooseAnswer(i);
+        answersEl.appendChild(b);
+      });
+    }
 
-<style>
-  .quiz-btn{
-    display:inline-block;
-    padding:12px 18px;
-    border-radius:10px;
-    background:#7c4dff;
-    color:#fff;
-    text-decoration:none;
-    font-weight:700;
-    font-family:Arial, sans-serif;
-  }
-  .quiz-btn:hover{
-    background:#673de6;
-  }
-</style>
-            </div>
-            <div class="project-card">
-                <a href="pixelart.html" style="text-decoration: none; color: inherit;">
-                    <div class="project-icon">🌈</div>
-                    <h3>Pixel Art Creator 🌈</h3>
-                    <p>A tool to create your own pixel art Pokemon characters.</p>
-                    <span class="status">Live Now!</span>
-                </a>
-            </div>
-        </div>
-    </section>
+    function chooseAnswer(i){
+      if(locked) return;
+      locked = true;
+      const item = quizData[current];
+      const buttons = answersEl.querySelectorAll("button");
+      buttons.forEach((b,idx)=>{
+        if(idx===item.correct) b.style.background="#c8e6c9";
+        if(idx===i && idx!==item.correct) b.style.background="#ffcdd2";
+        b.disabled = true;
+      });
+      if(i===item.correct) score++;
+      metaEl.textContent = `Question ${current+1}/${quizData.length} | Score: ${score}`;
+      nextBtn.style.display = "inline-block";
+    }
 
-    <!-- LEARNING JOURNAL SECTION - Track your progress -->
-    <section class="learning-journal">
-        <h2>📚 My Learning Journey</h2>
-        <div class="journal-entry">
-            <h3>Week 1: Welcome to Coding!</h3>
-            <p>🎉 I started my coding journey this week! I created my first HTML file and learned about tags. It was so cool to see text appear on the screen!</p>
-            <span class="date">July 2026</span>
-        </div>
-        <div class="journal-entry">
-            <h3>My Goals</h3>
-            <p>✨ Finish my first Pokemon game<br>
-               ✨ Learn JavaScript to make games interactive<br>
-               ✨ Create a game library<br>
-               ✨ Help other kids learn to code</p>
-        </div>
-    </section>
+    nextBtn.onclick = ()=>{
+      current++;
+      if(current < quizData.length){
+        renderQuestion();
+      } else {
+        questionEl.textContent = `Done! Final Score: ${score}/${quizData.length}`;
+        answersEl.innerHTML = "";
+        metaEl.textContent = "";
+        nextBtn.style.display = "none";
+        if(score===quizData.length){
+          questionEl.textContent = "Perfect Score! 100%! 🎉";
+          startFireworks(3500);
+        }
+      }
+    };
 
-    <!-- CONTACT & LINKS SECTION - How to reach you safely -->
-    <section class="contact">
-        <h2>💌 Safe Contact & Links</h2>
-        <div class="contact-content">
-            <p><strong>Note:</strong> I keep my online safety a priority! You can reach me through:</p>
-            <div class="contact-links">
-                <a href="mailto:parent@email.com" class="contact-btn">📧 Email My Parent/Guardian</a>
-                <a href="#" class="contact-btn">🎮 Check Out My Games</a>
-                <a href="#" class="contact-btn">🐙 GitHub Profile (Coming Soon)</a>
-            </div>
-            <p class="safety-note">💡 <strong>Safety Tip:</strong> Always ask a parent or guardian before sharing personal information online!</p>
-        </div>
-    </section>
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
+    let particles = [], animId = null;
+    function resizeCanvas(){ canvas.width=innerWidth; canvas.height=innerHeight; }
+    addEventListener("resize", resizeCanvas); resizeCanvas();
+    const rand=(a,b)=>Math.random()*(b-a)+a;
 
-    <!-- FOOTER - Bottom of the page -->
-    <footer>
-        <p>✨ Made with love by Shelley ✨ | © 2026 | All things Pokemon! 🐾</p>
-    </footer>
+    function burst(x,y){
+      const colors=["#ff5252","#ffd740","#69f0ae","#40c4ff","#b388ff","#ff80ab"];
+      for(let i=0;i<70;i++){
+        particles.push({x,y,vx:rand(-4,4),vy:rand(-4,4),life:rand(40,70),color:colors[(Math.random()*colors.length)|0],size:rand(2,4)});
+      }
+    }
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      if(Math.random()<0.12) burst(rand(100,canvas.width-100), rand(80,canvas.height*0.55));
+      particles.forEach(p=>{
+        p.x+=p.vx; p.y+=p.vy; p.vy+=0.04; p.life-=1;
+        ctx.globalAlpha=Math.max(p.life/70,0);
+        ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill();
+      });
+      particles = particles.filter(p=>p.life>0);
+      ctx.globalAlpha=1;
+      animId = requestAnimationFrame(draw);
+    }
+    function startFireworks(ms){
+      canvas.style.display="block";
+      particles=[];
+      for(let i=0;i<4;i++) burst(rand(100,canvas.width-100), rand(80,canvas.height*0.5));
+      draw();
+      setTimeout(()=>{ cancelAnimationFrame(animId); ctx.clearRect(0,0,canvas.width,canvas.height); canvas.style.display="none"; }, ms);
+    }
 
-    <!-- Link to JavaScript file for interactive features -->
-    <script src="script.js"></script>
+    renderQuestion();
+  </script>
 </body>
 </html>
+```
