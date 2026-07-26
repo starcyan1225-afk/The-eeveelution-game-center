@@ -3,21 +3,89 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Eeveelution Game Center</title>
+  <title>Shelley's World</title>
   <style>
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      min-height: 100vh;
       font-family: "Trebuchet MS", Arial, sans-serif;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       background: linear-gradient(180deg, #ffd1dc 0%, #ffc0cb 45%, #ffb6c1 100%);
+      color: #6d214f;
+      overflow-x: hidden;
     }
 
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: #b03060;
+      text-shadow: 1px 1px 0 #fff;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: #7a3b55;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 10px 20px 50px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.88);
+      border: 2px solid #f8a5c2;
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 8px 22px rgba(164, 74, 108, 0.18);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      color: #b03060;
+    }
+
+    .games {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff6fa1, #ff8fb8);
+      color: #fff;
+      font-weight: 700;
+      padding: 12px 18px;
+      border-radius: 12px;
+      border: 2px solid #ffc2d6;
+      box-shadow: 0 8px 18px rgba(255, 105, 145, 0.28);
+      transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(255, 105, 145, 0.4);
+      filter: brightness(1.04);
+    }
+
+    /* soft glows */
     .bg-glow {
       position: fixed;
       border-radius: 50%;
@@ -30,51 +98,7 @@
     .g2 { width: 340px; height: 340px; background: #ffe4ec; bottom: 5%; right: 8%; }
     .g3 { width: 220px; height: 220px; background: #ffdbe8; top: 20%; right: 24%; }
 
-    .card {
-      position: relative;
-      z-index: 2;
-      width: min(760px, 92%);
-      background: rgba(255, 255, 255, 0.9);
-      border: 3px solid #f8a5c2;
-      border-radius: 24px;
-      padding: 34px 24px;
-      text-align: center;
-      box-shadow: 0 14px 35px rgba(164, 74, 108, 0.25);
-      backdrop-filter: blur(3px);
-    }
-
-    h1 {
-      margin: 0 0 10px;
-      color: #b03060;
-      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-      text-shadow: 1px 1px 0 #fff;
-    }
-
-    p {
-      margin: 0 0 24px;
-      color: #7a3b55;
-      font-size: 1.05rem;
-    }
-
-    .quiz-btn {
-      display: inline-block;
-      background: linear-gradient(135deg, #ff6fa1, #ff8fb8);
-      color: #fff;
-      font-weight: 700;
-      padding: 13px 22px;
-      border-radius: 14px;
-      border: 2px solid #ffc2d6;
-      box-shadow: 0 8px 20px rgba(255, 105, 145, 0.35);
-      transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
-      cursor: pointer;
-    }
-
-    .quiz-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(255, 105, 145, 0.45);
-      filter: brightness(1.04);
-    }
-
+    /* petals */
     .petals {
       position: fixed;
       inset: 0;
@@ -91,14 +115,12 @@
       background: radial-gradient(circle at 30% 30%, #fff7fb 0%, #ffd6e7 55%, #ffc1d9 100%);
       border-radius: 70% 40% 70% 40%;
       opacity: 0.8;
-      animation-name: fall;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
+      animation: fall linear infinite;
     }
 
     @keyframes fall {
-      0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
-      10% { opacity: 0.85; }
+      0%   { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+      10%  { opacity: 0.85; }
       100% { transform: translateY(110vh) translateX(60px) rotate(360deg); opacity: 0.15; }
     }
   </style>
@@ -107,20 +129,36 @@
   <div class="bg-glow g1"></div>
   <div class="bg-glow g2"></div>
   <div class="bg-glow g3"></div>
-
   <div class="petals" id="petals"></div>
 
-  <main class="card">
-    <h1>Welcome to The Eeveelution Game Center</h1>
-    <p>Pick a game:</p>
+  <header>
+    <h1>Welcome to Shelley's World</h1>
+    <p>A cozy pink place with games and fun 🌸</p>
+  </header>
 
-    <!-- Button does NOT navigate -->
-    <button class="quiz-btn" type="button">🌸 Pokémon Quiz</button>
+  <main class="container">
+    <section class="section">
+      <h2>About</h2>
+      <p>Hi! This is Shelley’s cute game corner. Pick a section below and enjoy!</p>
+    </section>
+
+    <section class="section">
+      <h2>Games</h2>
+      <div class="games">
+        <a class="btn" href="./pokemon-quiz.html">🌸 Play Pokémon Quiz</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>More</h2>
+      <p>More sections can go here (favorites, links, updates, etc.).</p>
+    </section>
   </main>
 
   <script>
     const petalsWrap = document.getElementById("petals");
-    const count = 24;
+    const count = 28;
+
     for (let i = 0; i < count; i++) {
       const p = document.createElement("span");
       p.className = "petal";
