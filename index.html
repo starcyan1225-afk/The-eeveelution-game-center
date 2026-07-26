@@ -1,4 +1,3 @@
-```html name=index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shelley - Pokemon Enthusiast</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .idea-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .idea-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    .idea-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .idea-card p {
+      margin: 8px 4px 2px;
+      font-weight: 600;
+    }
+  </style>
 </head>
 <body>
   <!-- HERO SECTION - Your introduction at the top -->
@@ -21,15 +47,8 @@
   <section class="about">
     <h2>👋 About Me</h2>
     <div class="about-content">
-      <p>
-        Hi! I'm Shelley, a 5th grader with a passion for Pokemon! I love creating games and
-        exploring the amazing world of coding. Every day, I'm learning new things and having
-        fun while doing it!
-      </p>
-      <p>
-        I believe that being a girl who loves technology is super cool, and I'm proud to
-        inspire others to follow their dreams too!
-      </p>
+      <p>Hi! I'm Shelley, a 5th grader with a passion for Pokemon! I love creating games and exploring the amazing world of coding. Every day, I'm learning new things and having fun while doing it!</p>
+      <p>I believe that being a girl who loves technology is super cool, and I'm proud to inspire others to follow their dreams too!</p>
     </div>
   </section>
 
@@ -94,25 +113,41 @@
     </div>
   </section>
 
+  <!-- PIXEL ART IDEAS -->
+  <section class="projects">
+    <h2>🖼️ Pixel Art Ideas</h2>
+    <div class="idea-gallery">
+      <div class="idea-card">
+        <img src="./images/pixel-art-finished.jpg" alt="Finished pixel art examples" />
+        <p>Finished Pixel Art Examples</p>
+      </div>
+
+      <div class="idea-card">
+        <img src="./images/pixel-art-color-codes.jpg" alt="Pixel art color code guides" />
+        <p>Color Code Guides</p>
+      </div>
+
+      <div class="idea-card">
+        <img src="./images/pixel-art-more-ideas.jpg" alt="More cute pixel art templates" />
+        <p>More Cute Pixel Art Ideas</p>
+      </div>
+    </div>
+  </section>
+
   <!-- LEARNING JOURNAL SECTION - Track your progress -->
   <section class="learning-journal">
     <h2>📚 My Learning Journey</h2>
     <div class="journal-entry">
       <h3>Week 1: Welcome to Coding!</h3>
-      <p>
-        🎉 I started my coding journey this week! I created my first HTML file and learned
-        about tags. It was so cool to see text appear on the screen!
-      </p>
+      <p>🎉 I started my coding journey this week! I created my first HTML file and learned about tags. It was so cool to see text appear on the screen!</p>
       <span class="date">July 2026</span>
     </div>
     <div class="journal-entry">
       <h3>My Goals</h3>
-      <p>
-        ✨ Finish my first Pokemon game<br />
-        ✨ Learn JavaScript to make games interactive<br />
-        ✨ Create a game library<br />
-        ✨ Help other kids learn to code
-      </p>
+      <p>✨ Finish my first Pokemon game<br>
+         ✨ Learn JavaScript to make games interactive<br>
+         ✨ Create a game library<br>
+         ✨ Help other kids learn to code</p>
     </div>
   </section>
 
@@ -126,9 +161,7 @@
         <a href="#" class="contact-btn">🎮 Check Out My Games</a>
         <a href="#" class="contact-btn">🐙 GitHub Profile (Coming Soon)</a>
       </div>
-      <p class="safety-note">
-        💡 <strong>Safety Tip:</strong> Always ask a parent or guardian before sharing personal information online!
-      </p>
+      <p class="safety-note">💡 <strong>Safety Tip:</strong> Always ask a parent or guardian before sharing personal information online!</p>
     </div>
   </section>
 
@@ -137,8 +170,6 @@
     <p>✨ Made with love by Shelley ✨ | © 2026 | All things Pokemon! 🐾</p>
   </footer>
 
-  <!-- Link to JavaScript file for interactive features -->
   <script src="script.js"></script>
 </body>
 </html>
-```
