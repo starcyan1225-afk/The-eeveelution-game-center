@@ -6,111 +6,59 @@
   <title>Pokemon Quiz</title>
   <style>
     body{
-      margin:0;
-      padding:24px;
+      margin:0; padding:24px; min-height:100vh;
       font-family:'Trebuchet MS', Arial, sans-serif;
       background: linear-gradient(135deg, #ffe082 0%, #81d4fa 45%, #b39ddb 100%);
-      min-height:100vh;
     }
     .quiz{
-      max-width:760px;
-      margin:0 auto;
+      max-width:760px; margin:0 auto; padding:22px;
       background:rgba(255,255,255,0.96);
-      border:4px solid #ffca28;
-      border-radius:18px;
-      padding:22px;
+      border:4px solid #ffca28; border-radius:18px;
       box-shadow:0 12px 30px rgba(0,0,0,.18);
-      position:relative;
-      z-index:2;
+      position:relative; z-index:2;
     }
-    h1{
-      margin-top:0;
-      color:#5e35b1;
-      text-shadow:1px 1px 0 #fff176;
-    }
-    .question{
-      font-size:1.25rem;
-      margin:10px 0 14px;
-      color:#263238;
-      font-weight:700;
-    }
+    h1{margin-top:0;color:#5e35b1;text-shadow:1px 1px 0 #fff176;}
+    .question{font-size:1.25rem;margin:10px 0 14px;color:#263238;font-weight:700;}
     .answers button{
-      display:block;
-      width:100%;
-      margin:9px 0;
-      padding:12px;
-      border:2px solid #90caf9;
-      border-radius:12px;
-      cursor:pointer;
-      background:#e3f2fd;
-      color:#0d47a1;
-      font-weight:700;
-      transition:transform .08s ease, background .2s ease;
+      display:block; width:100%; margin:9px 0; padding:12px;
+      border:2px solid #90caf9; border-radius:12px; cursor:pointer;
+      background:#e3f2fd; color:#0d47a1; font-weight:700;
     }
-    .answers button:hover{
-      background:#bbdefb;
-      transform:translateY(-1px);
+    .answers button:hover{background:#bbdefb;}
+    .meta{margin-top:14px;color:#4e342e;font-weight:700;}
+    #nextBtn,#backBtn{
+      margin-top:14px; padding:10px 16px; border:none; border-radius:10px;
+      color:#fff; font-weight:800; cursor:pointer;
     }
-    .meta{
-      margin-top:14px;
-      color:#4e342e;
-      font-weight:700;
-    }
-    #nextBtn, #backBtn{
-      margin-top:14px;
-      padding:10px 16px;
-      border:none;
-      border-radius:10px;
-      color:white;
-      font-weight:800;
-      cursor:pointer;
-    }
-    #nextBtn{ background:#ff7043; }
-    #nextBtn:hover{ background:#f4511e; }
-
-    #backBtn{
-      background:#607d8b;
-      margin-left:8px;
-      display:none;
-    }
-    #backBtn:hover{ background:#546e7a; }
-
+    #nextBtn{background:#ff7043; display:none;}
+    #backBtn{background:#607d8b; margin-left:8px; display:none;}
     #fireworks{
-      position:fixed;
-      inset:0;
-      width:100%;
-      height:100%;
-      pointer-events:none;
-      z-index:9999;
-      display:none;
+      position:fixed; inset:0; width:100%; height:100%;
+      pointer-events:none; z-index:9999; display:none;
     }
   </style>
 </head>
 <body>
   <canvas id="fireworks"></canvas>
-
   <div class="quiz">
     <h1>Pokémon Quiz</h1>
     <div id="question" class="question"></div>
     <div id="answers" class="answers"></div>
     <p id="meta" class="meta"></p>
-    <button id="nextBtn" style="display:none;">Next</button>
+    <button id="nextBtn">Next</button>
     <button id="backBtn" onclick="window.location.href='./index.html'">Back to Game Center</button>
   </div>
 
   <script>
     const quizData = [
-      { q: "What type is Pikachu?", options: ["Fire", "Electric", "Water", "Grass"], correct: 1 },
-      { q: "Which Pokémon is known as the Seed Pokémon?", options: ["Charmander", "Bulbasaur", "Squirtle", "Eevee"], correct: 1 },
-      { q: "What does Magikarp evolve into?", options: ["Gyarados", "Dragonite", "Lapras", "Golduck"], correct: 0 },
-      { q: "Which Eeveelution is Water-type?", options: ["Jolteon", "Flareon", "Vaporeon", "Espeon"], correct: 2 },
-      { q: "Who is #001 in the Pokédex?", options: ["Pikachu", "Mew", "Bulbasaur", "Charmander"], correct: 2 }
+      { q:"What type is Pikachu?", options:["Fire","Electric","Water","Grass"], correct:1 },
+      { q:"Which Pokémon is known as the Seed Pokémon?", options:["Charmander","Bulbasaur","Squirtle","Eevee"], correct:1 },
+      { q:"What does Magikarp evolve into?", options:["Gyarados","Dragonite","Lapras","Golduck"], correct:0 },
+      { q:"Which Eeveelution is Water-type?", options:["Jolteon","Flareon","Vaporeon","Espeon"], correct:2 },
+      { q:"Who is #001 in the Pokédex?", options:["Pikachu","Mew","Bulbasaur","Charmander"], correct:2 }
     ];
 
-    let current = 0;
-    let score = 0;
-    let locked = false;
-
+    let current = 0, score = 0, locked = false;
     const questionEl = document.getElementById("question");
     const answersEl = document.getElementById("answers");
     const metaEl = document.getElementById("meta");
@@ -123,12 +71,11 @@
       const item = quizData[current];
       questionEl.textContent = item.q;
       answersEl.innerHTML = "";
-      metaEl.textContent = "Question " + (current + 1) + "/" + quizData.length + " | Score: " + score;
-
-      item.options.forEach((opt, i) => {
+      metaEl.textContent = `Question ${current+1}/${quizData.length} | Score: ${score}`;
+      item.options.forEach((opt,i)=>{
         const b = document.createElement("button");
         b.textContent = opt;
-        b.onclick = () => chooseAnswer(i);
+        b.onclick = ()=>chooseAnswer(i);
         answersEl.appendChild(b);
       });
     }
@@ -138,30 +85,27 @@
       locked = true;
       const item = quizData[current];
       const buttons = answersEl.querySelectorAll("button");
-
-      buttons.forEach((b, idx) => {
-        if(idx === item.correct) b.style.background = "#c8e6c9";
-        if(idx === i && idx !== item.correct) b.style.background = "#ffcdd2";
+      buttons.forEach((b,idx)=>{
+        if(idx===item.correct) b.style.background="#c8e6c9";
+        if(idx===i && idx!==item.correct) b.style.background="#ffcdd2";
         b.disabled = true;
       });
-
-      if(i === item.correct) score++;
-      metaEl.textContent = "Question " + (current + 1) + "/" + quizData.length + " | Score: " + score;
+      if(i===item.correct) score++;
+      metaEl.textContent = `Question ${current+1}/${quizData.length} | Score: ${score}`;
       nextBtn.style.display = "inline-block";
     }
 
-    nextBtn.onclick = () => {
+    nextBtn.onclick = ()=>{
       current++;
       if(current < quizData.length){
         renderQuestion();
       } else {
-        questionEl.textContent = "Done! Final Score: " + score + "/" + quizData.length;
+        questionEl.textContent = `Done! Final Score: ${score}/${quizData.length}`;
         answersEl.innerHTML = "";
         metaEl.textContent = "";
         nextBtn.style.display = "none";
         backBtn.style.display = "inline-block";
-
-        if(score === quizData.length){
+        if(score===quizData.length){
           questionEl.textContent = "Perfect Score! 100%! 🎉";
           startFireworks(3500);
         }
@@ -170,70 +114,35 @@
 
     const canvas = document.getElementById("fireworks");
     const ctx = canvas.getContext("2d");
-    let particles = [];
-    let animId = null;
-
-    function resizeCanvas(){
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-
-    function random(min,max){ return Math.random()*(max-min)+min; }
+    let particles = [], animId = null;
+    function resizeCanvas(){ canvas.width=innerWidth; canvas.height=innerHeight; }
+    addEventListener("resize", resizeCanvas); resizeCanvas();
+    const rand=(a,b)=>Math.random()*(b-a)+a;
 
     function burst(x,y){
-      const colors = ["#ff5252","#ffd740","#69f0ae","#40c4ff","#b388ff","#ff80ab"];
+      const colors=["#ff5252","#ffd740","#69f0ae","#40c4ff","#b388ff","#ff80ab"];
       for(let i=0;i<70;i++){
-        particles.push({
-          x,y,
-          vx: random(-4,4),
-          vy: random(-4,4),
-          life: random(40,70),
-          color: colors[Math.floor(Math.random()*colors.length)],
-          size: random(2,4)
-        });
+        particles.push({x,y,vx:rand(-4,4),vy:rand(-4,4),life:rand(40,70),color:colors[(Math.random()*colors.length)|0],size:rand(2,4)});
       }
     }
-
     function draw(){
       ctx.clearRect(0,0,canvas.width,canvas.height);
-
-      if(Math.random() < 0.12){
-        burst(random(100, canvas.width-100), random(80, canvas.height*0.55));
-      }
-
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.04;
-        p.life -= 1;
-
-        ctx.globalAlpha = Math.max(p.life/70, 0);
-        ctx.fillStyle = p.color;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-        ctx.fill();
+      if(Math.random()<0.12) burst(rand(100,canvas.width-100), rand(80,canvas.height*0.55));
+      particles.forEach(p=>{
+        p.x+=p.vx; p.y+=p.vy; p.vy+=0.04; p.life-=1;
+        ctx.globalAlpha=Math.max(p.life/70,0);
+        ctx.fillStyle=p.color; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill();
       });
-
-      particles = particles.filter(p => p.life > 0);
-      ctx.globalAlpha = 1;
+      particles = particles.filter(p=>p.life>0);
+      ctx.globalAlpha=1;
       animId = requestAnimationFrame(draw);
     }
-
-    function startFireworks(durationMs){
-      canvas.style.display = "block";
-      particles = [];
-      for(let i=0;i<4;i++){
-        burst(random(100, canvas.width-100), random(80, canvas.height*0.5));
-      }
+    function startFireworks(ms){
+      canvas.style.display="block";
+      particles=[];
+      for(let i=0;i<4;i++) burst(rand(100,canvas.width-100), rand(80,canvas.height*0.5));
       draw();
-
-      setTimeout(() => {
-        cancelAnimationFrame(animId);
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        canvas.style.display = "none";
-      }, durationMs);
+      setTimeout(()=>{ cancelAnimationFrame(animId); ctx.clearRect(0,0,canvas.width,canvas.height); canvas.style.display="none"; }, ms);
     }
 
     renderQuestion();
