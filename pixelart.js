@@ -772,14 +772,78 @@ function loadArtwork(id, artwork) {
     createPixelCanvas();
 }
 
-function saveCurrentArtwork() {
-    if (state.currentUser) {
-        localStorage.setItem('pixelart_current_' + state.currentUser, JSON.stringify(state.pixelData));
-    }
+// SAVE BUTTON
+const saveBtn = document.getElementById('saveBtn');
+if (saveBtn) {
+    saveBtn.addEventListener('click', function() {
+        const dialog = document.getElementById('saveDialog');
+        const input = document.getElementById('artworkNameInput');
+        dialog.classList.add('active');
+        setTimeout(() => input?.focus(), 0);
+    });
 }
 
-window.addEventListener('beforeunload', function() {
-    if (state.currentUser) {
-        saveCurrentArtwork();
+// CLOSE SAVE DIALOG
+const closeSaveDialogBtn = document.getElementById('closeSaveDialogBtn');
+if (closeSaveDialogBtn) {
+    closeSaveDialogBtn.addEventListener('click', closeSaveDialog);
+}
+
+// CANCEL SAVE
+const cancelSaveBtn = document.getElementById('cancelSaveBtn');
+if (cancelSaveBtn) {
+    cancelSaveBtn.addEventListener('click', closeSaveDialog);
+}
+
+function closeSaveDialog() {
+    document.getElementById('saveDialog').classList.remove('active');
+}
+
+// CONFIRM SAVE
+const confirmSaveBtn = document.getElementById('confirmSaveBtn');
+if (confirmSaveBtn) {
+    confirmSaveBtn.addEventListener('click', saveArtworkFromDialog);
+}
+
+// Press Enter in input to save
+const artworkNameInput = document.getElementById('artworkNameInput');
+if (artworkNameInput) {
+    artworkNameInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') saveArtworkFromDialog();
+    });
+}
+
+function saveArtworkFromDialog() {
+    const input = document.getElementById('artworkNameInput');
+    const name = input.value.trim();
+
+    if (!name) {
+        alert('Please enter a name for your artwork before saving!');
+        input.focus();
+        return;
     }
-});
+
+    if (!state.pixelData || state.pixelData.length === 0) {
+        alert('Your canvas is empty. Draw something first!');
+        return;
+    }
+
+    const id = Date.now();
+    state.savedArtworks[id] = {
+        name: name,
+        data: [...state.pixelData],
+        date: new Date().toLocaleDateString(),
+        gridSize: state.gridSize
+    };
+
+    try {
+        localStorage.setItem(`pixelart_artworks_${state.currentUser}`, JSON.stringify(state.savedArtworks));
+        loadSavedArtworks();
+        closeSaveDialog();
+        input.value = '';
+        alert('✨ Artwork saved!');
+    } catch (err) {
+        console.error('Save failed:', err);
+        alert('Could not save artwork. Storage may be full or unavailable.');
+    }
+}
